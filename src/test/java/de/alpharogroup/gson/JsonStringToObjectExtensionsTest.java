@@ -1,8 +1,8 @@
 /**
  * The MIT License
- * <p>
+ *
  * Copyright (C) 2015 Asterios Raptis
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -81,11 +81,8 @@ public class JsonStringToObjectExtensionsTest
 	/**
 	 * Test method for
 	 * {@link JsonStringToObjectExtensions#toMapObject(String, Class, Class)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test public void testToMapObjectStringTypeReferenceObjectMapper()
+	@Test public void testToMapObject()
 	{
 		Map<Integer, Integer> actual;
 		Map<Integer, Integer> expected;
@@ -102,11 +99,8 @@ public class JsonStringToObjectExtensionsTest
 
 	/**
 	 * Test method for {@link JsonStringToObjectExtensions#toObject(String, Class)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test public void testToObject() throws IOException
+	@Test public void testToObject()
 	{
 		Employee actual;
 		Employee expected;
@@ -122,11 +116,8 @@ public class JsonStringToObjectExtensionsTest
 
 	/**
 	 * Test method for {@link JsonStringToObjectExtensions#toObjectCollection(String, Class, Class)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
 	 */
-	@Test public void testToObjectCollection() throws IOException
+	@Test public void testToObjectCollection()
 	{
 		boolean actual;
 		boolean expected;
@@ -159,11 +150,8 @@ public class JsonStringToObjectExtensionsTest
 
 	/**
 	 * Test method for {@link JsonStringToObjectExtensions#toObject(String, Class)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test public void testToObjectList() throws IOException
+	@Test public void testToObjectList()
 	{
 		boolean actual;
 		boolean expected;
@@ -198,11 +186,8 @@ public class JsonStringToObjectExtensionsTest
 	 * Test method for
 	 * {@link JsonStringToObjectExtensions#toObject(String, Class)}
 	 * This method shows also how to map a json string created from the org.json library.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test public void testToObjectWithModules() throws IOException
+	@Test public void testToObjectWithModules()
 	{
 		final Employee expected = Employee.builder().person(
 			Person.builder().gender(Gender.FEMALE).name("Anna").married(true).about("Ha ha ha...")
@@ -216,11 +201,8 @@ public class JsonStringToObjectExtensionsTest
 	/**
 	 * Test method for
 	 * {@link JsonStringToObjectExtensions#toObject(String, Class)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test public void testToObjectWithSignin() throws IOException
+	@Test public void testToObjectWithSignin()
 	{
 		Signin actual;
 		Signin expected;
