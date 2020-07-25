@@ -11,7 +11,7 @@
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 </div>
 
-Useful extensions methods and utilities for transform json string to java object and back to json string
+Useful extensions methods and utilities for transform json string to java object and back to json string with gson library
 
 If you like this project put a ⭐ and donate
 
