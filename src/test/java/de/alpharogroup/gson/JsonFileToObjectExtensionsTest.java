@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -49,8 +49,7 @@ public class JsonFileToObjectExtensionsTest
 	File jsonFile;
 	File jsonListFile;
 
-	@BeforeMethod
-	protected void setUp()
+	@BeforeMethod protected void setUp()
 	{
 		jsonDir = new File(PathFinder.getSrcTestResourcesDir(), "json");
 		jsonFile = new File(jsonDir, "person.json");
@@ -63,14 +62,14 @@ public class JsonFileToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
 	 */
-	@Test
-	public void testToObjectFileClassOfT() throws IOException
+	@Test public void testToObjectFileClassOfT() throws IOException
 	{
 		Employee actual;
 		Employee expected;
 		actual = JsonFileToObjectExtensions.toObject(jsonFile, Employee.class);
-		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-			.nickname("beast").married(true).about("Ha ha ha...").build()).id("23").build();
+		expected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").nickname("beast").married(true)
+				.about("Ha ha ha...").build()).id("23").build();
 		assertEquals(expected, actual);
 	}
 
@@ -80,8 +79,7 @@ public class JsonFileToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
 	 */
-	@Test
-	public void testToObjectList() throws IOException
+	@Test public void testToObjectList() throws IOException
 	{
 		List<Employee> actual;
 		List<Employee> expected;
@@ -89,14 +87,17 @@ public class JsonFileToObjectExtensionsTest
 		actual = JsonFileToObjectExtensions.toObjectList(jsonListFile, Employee.class);
 		expected = ListFactory.newArrayList();
 
-		expected.add(Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-			.nickname("beast").married(true).about("Ha ha ha...").build()).id("23").build());
+		expected.add(Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").nickname("beast").married(true)
+				.about("Ha ha ha...").build()).id("23").build());
 
-		expected.add(Employee.builder().person(Person.builder().gender(Gender.MALE).name("Andreas")
-			.nickname("cute").married(false).about("fine person").build()).id("24").build());
+		expected.add(Employee.builder().person(
+			Person.builder().gender(Gender.MALE).name("Andreas").nickname("cute").married(false)
+				.about("fine person").build()).id("24").build());
 
-		expected.add(Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Tatjana")
-			.nickname("beautiful").married(false).about("Im hot").build()).id("25").build());
+		expected.add(Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Tatjana").nickname("beautiful")
+				.married(false).about("Im hot").build()).id("25").build());
 
 		assertEquals(expected, actual);
 	}
@@ -104,8 +105,7 @@ public class JsonFileToObjectExtensionsTest
 	/**
 	 * Test method for {@link JsonFileToObjectExtensions}
 	 */
-	@Test
-	public void testWithBeanTester()
+	@Test public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(JsonFileToObjectExtensions.class);

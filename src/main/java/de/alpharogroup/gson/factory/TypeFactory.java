@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,7 +24,6 @@
  */
 package de.alpharogroup.gson.factory;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -42,7 +41,8 @@ public final class TypeFactory
 	 * @param listType the list type
 	 * @return the new {@link Type} object
 	 */
-	public static<T> Type newListTypeToken(Class<T> listType){
+	public static <T> Type newListTypeToken(Class<T> listType)
+	{
 		return newCollectionTypeToken(List.class, listType);
 	}
 
@@ -53,8 +53,9 @@ public final class TypeFactory
 	 *
 	 * @return the new {@link Type} object
 	 */
-	public static<T extends Collection, E> Type newCollectionTypeToken(
-		Class<T> collectionClass, final Class<E> elementClass){
+	public static <T extends Collection, E> Type newCollectionTypeToken(Class<T> collectionClass,
+		final Class<E> elementClass)
+	{
 		return TypeToken.getParameterized(collectionClass, elementClass).getType();
 	}
 
@@ -63,7 +64,8 @@ public final class TypeFactory
 	 * @param collectionType the collection type
 	 * @return the new {@link Type} object
 	 */
-	public static<T> Type newCollectionTypeToken(Class<T> collectionType) {
+	public static <T> Type newCollectionTypeToken(Class<T> collectionType)
+	{
 		return newCollectionTypeToken(Collection.class, collectionType);
 	}
 
@@ -75,7 +77,9 @@ public final class TypeFactory
 	 *
 	 * @return the new {@link Type} object
 	 */
-	public static<M, K, V> Type newMapTypeToken(Class<M> mapClass, Class<K> keyType, Class<V> valueType){
+	public static <M, K, V> Type newMapTypeToken(Class<M> mapClass, Class<K> keyType,
+		Class<V> valueType)
+	{
 		return TypeToken.getParameterized(mapClass, keyType, valueType).getType();
 	}
 
@@ -86,7 +90,8 @@ public final class TypeFactory
 	 *
 	 * @return the new {@link Type} object
 	 */
-	public static<K, V> Type newMapTypeToken(Class<K> keyType, Class<V> valueType){
+	public static <K, V> Type newMapTypeToken(Class<K> keyType, Class<V> valueType)
+	{
 		return newMapTypeToken(Map.class, keyType, valueType);
 	}
 }

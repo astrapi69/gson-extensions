@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,19 +24,6 @@
  */
 package de.alpharogroup.gson;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import de.alpharogroup.collections.CollectionExtensions;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
@@ -45,6 +32,18 @@ import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.test.objects.Employee;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.enums.Gender;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * The unit test class for the class {@link JsonStringToObjectExtensions}
@@ -56,8 +55,7 @@ public class JsonStringToObjectExtensionsTest
 
 	File jsonFile;
 
-	@BeforeMethod
-	protected void setUp()
+	@BeforeMethod protected void setUp()
 	{
 		jsonDir = new File(PathFinder.getSrcTestResourcesDir(), "json");
 		jsonFile = new File(jsonDir, "signin.json");
@@ -66,8 +64,7 @@ public class JsonStringToObjectExtensionsTest
 	/**
 	 * Test method for {@link JsonStringToObjectExtensions#toMapObject(String, Class, Class)}
 	 */
-	@Test
-	public void testToMapObjectStringTypeReference()
+	@Test public void testToMapObjectStringTypeReference()
 	{
 		Map<Integer, Integer> actual;
 		Map<Integer, Integer> expected;
@@ -88,8 +85,7 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test
-	public void testToMapObjectStringTypeReferenceObjectMapper()
+	@Test public void testToMapObjectStringTypeReferenceObjectMapper()
 	{
 		Map<Integer, Integer> actual;
 		Map<Integer, Integer> expected;
@@ -110,15 +106,15 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test
-	public void testToObject() throws IOException
+	@Test public void testToObject() throws IOException
 	{
 		Employee actual;
 		Employee expected;
 		String jsonString;
 
-		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
+		expected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").married(true).about("Ha ha ha...")
+				.nickname("beast").build()).id("23").build();
 		jsonString = "{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}";
 		actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
 		assertEquals(expected, actual);
@@ -130,8 +126,7 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
 	 */
-	@Test
-	public void testToObjectCollection() throws IOException
+	@Test public void testToObjectCollection() throws IOException
 	{
 		boolean actual;
 		boolean expected;
@@ -142,21 +137,19 @@ public class JsonStringToObjectExtensionsTest
 		Employee thirdExpected;
 		String jsonString;
 
-		jsonString = "[{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"},"
-			+ "{\"person\":{\"name\":\"Andreas\",\"nickname\":\"cute\",\"gender\":\"MALE\",\"about\":\"fine person\",\"married\":false},\"id\":\"24\"},"
-			+ "{\"person\":{\"name\":\"Tatjana\",\"nickname\":\"beautiful\",\"gender\":\"FEMALE\",\"about\":\"Im hot\",\"married\":false},\"id\":\"25\"}]";
+		jsonString = "[{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}," + "{\"person\":{\"name\":\"Andreas\",\"nickname\":\"cute\",\"gender\":\"MALE\",\"about\":\"fine person\",\"married\":false},\"id\":\"24\"}," + "{\"person\":{\"name\":\"Tatjana\",\"nickname\":\"beautiful\",\"gender\":\"FEMALE\",\"about\":\"Im hot\",\"married\":false},\"id\":\"25\"}]";
 
-		jsonList = (Set<Employee>)JsonStringToObjectExtensions.toObjectCollection(jsonString,
-			LinkedHashSet.class, Employee.class);
-		firstExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").nickname("beast").married(true).about("Ha ha ha...").build()).id("23")
-			.build();
-		secondExpected = Employee.builder().person(Person.builder().gender(Gender.MALE)
-			.name("Andreas").nickname("cute").married(false).about("fine person").build()).id("24")
-			.build();
-		thirdExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Tatjana").nickname("beautiful").married(false).about("Im hot").build()).id("25")
-			.build();
+		jsonList = (Set<Employee>)JsonStringToObjectExtensions
+			.toObjectCollection(jsonString, LinkedHashSet.class, Employee.class);
+		firstExpected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").nickname("beast").married(true)
+				.about("Ha ha ha...").build()).id("23").build();
+		secondExpected = Employee.builder().person(
+			Person.builder().gender(Gender.MALE).name("Andreas").nickname("cute").married(false)
+				.about("fine person").build()).id("24").build();
+		thirdExpected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Tatjana").nickname("beautiful")
+				.married(false).about("Im hot").build()).id("25").build();
 		objectList = SetFactory.newLinkedHashSet(firstExpected, secondExpected, thirdExpected);
 
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
@@ -170,8 +163,7 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test
-	public void testToObjectList() throws IOException
+	@Test public void testToObjectList() throws IOException
 	{
 		boolean actual;
 		boolean expected;
@@ -182,20 +174,18 @@ public class JsonStringToObjectExtensionsTest
 		Employee thirdExpected;
 		String jsonString;
 
-		jsonString = "[{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"},"
-			+ "{\"person\":{\"name\":\"Andreas\",\"nickname\":\"cute\",\"gender\":\"MALE\",\"about\":\"fine person\",\"married\":false},\"id\":\"24\"},"
-			+ "{\"person\":{\"name\":\"Tatjana\",\"nickname\":\"beautiful\",\"gender\":\"FEMALE\",\"about\":\"Im hot\",\"married\":false},\"id\":\"25\"}]";
+		jsonString = "[{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}," + "{\"person\":{\"name\":\"Andreas\",\"nickname\":\"cute\",\"gender\":\"MALE\",\"about\":\"fine person\",\"married\":false},\"id\":\"24\"}," + "{\"person\":{\"name\":\"Tatjana\",\"nickname\":\"beautiful\",\"gender\":\"FEMALE\",\"about\":\"Im hot\",\"married\":false},\"id\":\"25\"}]";
 
 		jsonList = JsonStringToObjectExtensions.toObjectList(jsonString, Employee.class);
-		firstExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").nickname("beast").married(true).about("Ha ha ha...").build()).id("23")
-			.build();
-		secondExpected = Employee.builder().person(Person.builder().gender(Gender.MALE)
-			.name("Andreas").nickname("cute").married(false).about("fine person").build()).id("24")
-			.build();
-		thirdExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Tatjana").nickname("beautiful").married(false).about("Im hot").build()).id("25")
-			.build();
+		firstExpected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").nickname("beast").married(true)
+				.about("Ha ha ha...").build()).id("23").build();
+		secondExpected = Employee.builder().person(
+			Person.builder().gender(Gender.MALE).name("Andreas").nickname("cute").married(false)
+				.about("fine person").build()).id("24").build();
+		thirdExpected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Tatjana").nickname("beautiful")
+				.married(false).about("Im hot").build()).id("25").build();
 		objectList = ListFactory.newArrayList(firstExpected, secondExpected, thirdExpected);
 
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
@@ -212,13 +202,11 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test
-	public void testToObjectWithModules()
-		throws IOException
+	@Test public void testToObjectWithModules() throws IOException
 	{
-		final Employee expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").married(true).about("Ha ha ha...").nickname("beast").build()).id("23")
-			.build();
+		final Employee expected = Employee.builder().person(
+			Person.builder().gender(Gender.FEMALE).name("Anna").married(true).about("Ha ha ha...")
+				.nickname("beast").build()).id("23").build();
 		final String jsonString = "{\"id\":\"23\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		final Employee actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
 		assertEquals(expected, actual);
@@ -232,9 +220,7 @@ public class JsonStringToObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test
-	public void testToObjectWithSignin()
-		throws IOException
+	@Test public void testToObjectWithSignin() throws IOException
 	{
 		Signin actual;
 		Signin expected;
@@ -249,8 +235,7 @@ public class JsonStringToObjectExtensionsTest
 	/**
 	 * Test method for {@link JsonStringToObjectExtensions}
 	 */
-	@Test
-	public void testWithBeanTester()
+	@Test public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(JsonStringToObjectExtensions.class);

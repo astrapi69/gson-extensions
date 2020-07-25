@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,6 +42,10 @@ public final class JsonStringToObjectExtensions
 
 	private static final Gson DEFAULT_GSON = new Gson();
 
+	private JsonStringToObjectExtensions()
+	{
+	}
+
 	/**
 	 * Transforms the given json string into a java map object
 	 *
@@ -53,7 +57,8 @@ public final class JsonStringToObjectExtensions
 	 *            the json string
 	 * @return the map
 	 */
-	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType, Class<V> valueType)
+	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
+		Class<V> valueType)
 	{
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(keyType);
@@ -103,7 +108,8 @@ public final class JsonStringToObjectExtensions
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(collectionClass);
 		Objects.requireNonNull(elementClass);
-		return DEFAULT_GSON.fromJson(jsonString, TypeFactory.newCollectionTypeToken(collectionClass, elementClass));
+		return DEFAULT_GSON.fromJson(jsonString,
+			TypeFactory.newCollectionTypeToken(collectionClass, elementClass));
 	}
 
 	/**
@@ -125,10 +131,6 @@ public final class JsonStringToObjectExtensions
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(elementClass);
 		return (List<T>)toObjectCollection(jsonString, List.class, elementClass);
-	}
-
-	private JsonStringToObjectExtensions()
-	{
 	}
 
 }

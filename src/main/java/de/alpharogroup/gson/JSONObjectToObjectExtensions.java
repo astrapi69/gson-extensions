@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,13 +24,13 @@
  */
 package de.alpharogroup.gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * The class {@link JSONObjectToObjectExtensions} converts json strings to java object and java
@@ -38,6 +38,10 @@ import org.json.JSONObject;
  */
 public final class JSONObjectToObjectExtensions
 {
+
+	private JSONObjectToObjectExtensions()
+	{
+	}
 
 	/**
 	 * Transforms the given json object into a java object
@@ -52,7 +56,8 @@ public final class JSONObjectToObjectExtensions
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
 	 */
-	public static <T> T toObject(final JSONObject jsonObject, final Class<T> clazz) throws IOException
+	public static <T> T toObject(final JSONObject jsonObject, final Class<T> clazz)
+		throws IOException
 	{
 		Objects.requireNonNull(jsonObject);
 		Objects.requireNonNull(clazz);
@@ -89,10 +94,6 @@ public final class JSONObjectToObjectExtensions
 			result.add(JsonStringToObjectExtensions.toObject(list.get(i), elementClass));
 		}
 		return result;
-	}
-
-	private JSONObjectToObjectExtensions()
-	{
 	}
 
 }

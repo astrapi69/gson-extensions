@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,47 +26,7 @@ package de.alpharogroup.gson;
 
 public class Signin
 {
-	public static class SigninBuilder
-	{
-		private String password;
-		private String username;
-
-		SigninBuilder()
-		{
-		}
-
-		public Signin build()
-		{
-			return new Signin(password, username);
-		}
-
-		public Signin.SigninBuilder password(String password)
-		{
-			this.password = password;
-			return this;
-		}
-
-		@Override
-		public String toString()
-		{
-			return "Signin.SigninBuilder(password=" + this.password + ", username=" + this.username
-				+ ")";
-		}
-
-		public Signin.SigninBuilder username(String username)
-		{
-			this.username = username;
-			return this;
-		}
-	}
-
-	public static SigninBuilder builder()
-	{
-		return new SigninBuilder();
-	}
-
 	private String password;
-
 	private String username;
 
 	public Signin()
@@ -79,13 +39,17 @@ public class Signin
 		this.username = username;
 	}
 
+	public static SigninBuilder builder()
+	{
+		return new SigninBuilder();
+	}
+
 	protected boolean canEqual(final Object other)
 	{
 		return other instanceof Signin;
 	}
 
-	@Override
-	public boolean equals(final Object o)
+	@Override public boolean equals(final Object o)
 	{
 		if (o == this)
 			return true;
@@ -110,13 +74,22 @@ public class Signin
 		return this.password;
 	}
 
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
 	public String getUsername()
 	{
 		return this.username;
 	}
 
-	@Override
-	public int hashCode()
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+
+	@Override public int hashCode()
 	{
 		final int PRIME = 59;
 		int result = 1;
@@ -127,19 +100,40 @@ public class Signin
 		return result;
 	}
 
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-
-	public void setUsername(String username)
-	{
-		this.username = username;
-	}
-
-	@Override
-	public String toString()
+	@Override public String toString()
 	{
 		return "Signin(password=" + this.getPassword() + ", username=" + this.getUsername() + ")";
+	}
+
+	public static class SigninBuilder
+	{
+		private String password;
+		private String username;
+
+		SigninBuilder()
+		{
+		}
+
+		public Signin build()
+		{
+			return new Signin(password, username);
+		}
+
+		public Signin.SigninBuilder password(String password)
+		{
+			this.password = password;
+			return this;
+		}
+
+		@Override public String toString()
+		{
+			return "Signin.SigninBuilder(password=" + this.password + ", username=" + this.username + ")";
+		}
+
+		public Signin.SigninBuilder username(String username)
+		{
+			this.username = username;
+			return this;
+		}
 	}
 }

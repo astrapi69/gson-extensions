@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,11 +24,11 @@
  */
 package de.alpharogroup.gson;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import org.json.JSONException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * The unit test class for the class {@link JsonToXmlExtensions}
@@ -38,12 +38,11 @@ public class JsonToXmlExtensionsTest
 
 	/**
 	 * Test method for {@link JsonToXmlExtensions#toXml(String)}
-	 * 
+	 *
 	 * @throws JSONException
 	 *             if there is a syntax error in the source string or a duplicated key
 	 */
-	@Test
-	public void testToXmlString() throws JSONException
+	@Test public void testToXmlString() throws JSONException
 	{
 		String expected;
 		String actual;
@@ -57,8 +56,7 @@ public class JsonToXmlExtensionsTest
 	/**
 	 * Test method for {@link JsonToXmlExtensions}
 	 */
-	@Test
-	public void testWithBeanTester()
+	@Test public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(JsonToXmlExtensions.class);

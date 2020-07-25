@@ -46,8 +46,9 @@ public class GsonFactory
 
 	/**
 	 * Factory method for create a new {@link Gson}
+	 *
 	 * @param exclusionStrategy the exclusion strategy
-	 * @param pattern the date pattern
+	 * @param pattern           the date pattern
 	 * @return the new {@link Gson} object
 	 */
 	public static Gson newGson(ExclusionStrategy exclusionStrategy, String pattern)
