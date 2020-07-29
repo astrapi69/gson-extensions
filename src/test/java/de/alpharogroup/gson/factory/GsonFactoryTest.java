@@ -27,6 +27,8 @@ package de.alpharogroup.gson.factory;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import de.alpharogroup.gson.JsonFileToObjectExtensions;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertNotNull;
@@ -64,6 +66,15 @@ public class GsonFactoryTest
 			}
 		}, "yyyy-MM-dd");
 		assertNotNull(gson);
+	}
+
+	/**
+	 * Test method for {@link GsonFactory}
+	 */
+	@Test public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(GsonFactory.class);
 	}
 
 }

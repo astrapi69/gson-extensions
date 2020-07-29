@@ -31,6 +31,8 @@ import com.google.gson.stream.JsonWriter;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.gson.JsonFileToObjectExtensions;
 import de.alpharogroup.gson.Signin;
+import de.alpharogroup.gson.factory.TypeFactory;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -98,5 +100,14 @@ public class BigDecimalMoneyScaledAdapterTest
 		actual = gson.fromJson(jsonString, Signin.class);
 		expected = Signin.builder().password("bar").username("foo").points(null).build();
 		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link BigDecimalMoneyScaledAdapter}
+	 */
+	@Test public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(BigDecimalMoneyScaledAdapter.class);
 	}
 }

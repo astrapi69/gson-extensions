@@ -3,6 +3,7 @@ package de.alpharogroup.gson.factory;
 import com.google.gson.stream.JsonReader;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.test.objects.Employee;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -44,4 +45,14 @@ public class TypeFactoryTest
 		assertNotNull(actual);
 		assertTrue(actual.size() == 3);
 	}
+
+	/**
+	 * Test method for {@link TypeFactory}
+	 */
+	@Test public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(TypeFactory.class);
+	}
+
 }
