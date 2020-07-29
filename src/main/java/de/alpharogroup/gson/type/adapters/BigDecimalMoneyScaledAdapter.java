@@ -22,35 +22,42 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.gson;
+package de.alpharogroup.gson.type.adapters;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.XML;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 
-/**
- * The class {@link JsonToXmlExtensions} helps to transform a given json string to an xml string.
- */
-public final class JsonToXmlExtensions
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class BigDecimalMoneyScaledAdapter extends TypeAdapter<BigDecimal>
 {
-
-	private JsonToXmlExtensions()
+	@Override public void write(JsonWriter out, BigDecimal value) throws IOException
 	{
+		out.value(value == null ? null : value.setScale(2, RoundingMode.DOWN));
 	}
 
-	/**
-	 * Transform the given json as {@link String} object to an xml as {@link String} object.
-	 *
-	 * @param jsonString
-	 *            the json as {@link String} object
-	 * @return the transformed xml as {@link String} object
-	 * @throws JSONException
-	 *             if there is a syntax error in the source string or a duplicated key.
-	 */
-	public static String toXml(final String jsonString) throws JSONException
+	@Override public BigDecimal read(JsonReader in) throws IOException
 	{
-		final JSONObject json = new JSONObject(jsonString);
-		return XML.toString(json);
+		if (in.peek() == JsonToken.NULL)
+		{
+			in.nextNull();
+			return null;
+		}
+		return deserializeToBigDecimal(in.nextString());
 	}
 
+	private synchronized BigDecimal deserializeToBigDecimal(String json)
+	{
+		BigDecimal bigDecimal = new BigDecimal(json);
+		NumberFormat nf = NumberFormat.getInstance(Locale.US);
+		nf.setMinimumFractionDigits(2);
+		nf.setMaximumFractionDigits(2);
+		return new BigDecimal(nf.format(bigDecimal));
+	}
 }

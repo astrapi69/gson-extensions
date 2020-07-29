@@ -24,10 +24,25 @@
  */
 package de.alpharogroup.gson;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 public class Signin
 {
 	private String password;
 	private String username;
+
+	public BigDecimal getPoints()
+	{
+		return points;
+	}
+
+	public void setPoints(BigDecimal points)
+	{
+		this.points = points;
+	}
+
+	private BigDecimal points;
 
 	public Signin()
 	{
@@ -38,6 +53,12 @@ public class Signin
 		this.password = password;
 		this.username = username;
 	}
+	public Signin(String password, String username, BigDecimal points)
+	{
+		this.password = password;
+		this.username = username;
+		this.points = points;
+	}
 
 	public static SigninBuilder builder()
 	{
@@ -47,26 +68,6 @@ public class Signin
 	protected boolean canEqual(final Object other)
 	{
 		return other instanceof Signin;
-	}
-
-	@Override public boolean equals(final Object o)
-	{
-		if (o == this)
-			return true;
-		if (!(o instanceof Signin))
-			return false;
-		final Signin other = (Signin)o;
-		if (!other.canEqual(this))
-			return false;
-		final Object this$password = this.getPassword();
-		final Object other$password = other.getPassword();
-		if (this$password == null ? other$password != null : !this$password.equals(other$password))
-			return false;
-		final Object this$username = this.getUsername();
-		final Object other$username = other.getUsername();
-		if (this$username == null ? other$username != null : !this$username.equals(other$username))
-			return false;
-		return true;
 	}
 
 	public String getPassword()
@@ -89,26 +90,32 @@ public class Signin
 		this.username = username;
 	}
 
-	@Override public int hashCode()
-	{
-		final int PRIME = 59;
-		int result = 1;
-		final Object $password = this.getPassword();
-		result = result * PRIME + ($password == null ? 43 : $password.hashCode());
-		final Object $username = this.getUsername();
-		result = result * PRIME + ($username == null ? 43 : $username.hashCode());
-		return result;
-	}
-
 	@Override public String toString()
 	{
-		return "Signin(password=" + this.getPassword() + ", username=" + this.getUsername() + ")";
+		return "Signin(password=" + this.getPassword() + ", username=" + this.getUsername() + ", points=" + this.points + ")";
+	}
+
+	@Override public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Signin signin = (Signin)o;
+		return Objects.equals(password, signin.password) && Objects
+			.equals(username, signin.username) && Objects.equals(points, signin.points);
+	}
+
+	@Override public int hashCode()
+	{
+		return Objects.hash(password, username, points);
 	}
 
 	public static class SigninBuilder
 	{
 		private String password;
 		private String username;
+		private BigDecimal points;
 
 		SigninBuilder()
 		{
@@ -116,7 +123,13 @@ public class Signin
 
 		public Signin build()
 		{
-			return new Signin(password, username);
+			return new Signin(password, username, points);
+		}
+
+		public Signin.SigninBuilder points(BigDecimal points)
+		{
+			this.points = points;
+			return this;
 		}
 
 		public Signin.SigninBuilder password(String password)
@@ -127,7 +140,7 @@ public class Signin
 
 		@Override public String toString()
 		{
-			return "Signin.SigninBuilder(password=" + this.password + ", username=" + this.username + ")";
+			return "Signin.SigninBuilder(password=" + this.password + ", username=" + this.username + ", points=" + this.points + ")";
 		}
 
 		public Signin.SigninBuilder username(String username)
