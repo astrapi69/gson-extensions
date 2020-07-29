@@ -11,6 +11,7 @@ ADDED:
 CHANGED:
 
 - removed dependency org.json:json
+- code coverage increased to 100%
 
 Version 1
 -------------

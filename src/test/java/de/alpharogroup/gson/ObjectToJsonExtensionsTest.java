@@ -1,8 +1,8 @@
 /**
  * The MIT License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -10,10 +10,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,6 @@ import de.alpharogroup.test.objects.enums.Gender;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.*;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -115,7 +114,12 @@ public class ObjectToJsonExtensionsTest
 	 */
 	@Test public void testToJsonList()
 	{
-		final List<Employee> employees = new ArrayList<>();
+
+		String expected;
+		String actual;
+		List<Employee> employees;
+
+		employees = new ArrayList<>();
 		employees.add(Employee.builder().person(
 			Person.builder().gender(Gender.FEMALE).name("Anna").married(true).about("Ha ha ha...")
 				.nickname("beast").build()).id("23").build());
@@ -125,9 +129,14 @@ public class ObjectToJsonExtensionsTest
 		employees.add(Employee.builder().person(
 			Person.builder().gender(Gender.FEMALE).name("Tatjana").married(false).about("Im hot")
 				.nickname("beautiful").build()).id("25").build());
-		final String actual = ObjectToJsonExtensions.toJson(employees);
+		actual = ObjectToJsonExtensions.toJson(employees);
 
-		final String expected = "[{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}},{\"id\":\"24\",\"person\":{\"about\":\"fine person\",\"gender\":\"MALE\",\"married\":false,\"name\":\"Andreas\",\"nickname\":\"cute\"}},{\"id\":\"25\",\"person\":{\"about\":\"Im hot\",\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Tatjana\",\"nickname\":\"beautiful\"}}]";
+		expected = "[{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}},{\"id\":\"24\",\"person\":{\"about\":\"fine person\",\"gender\":\"MALE\",\"married\":false,\"name\":\"Andreas\",\"nickname\":\"cute\"}},{\"id\":\"25\",\"person\":{\"about\":\"Im hot\",\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Tatjana\",\"nickname\":\"beautiful\"}}]";
+		assertEquals(expected, actual);
+
+		employees = new ArrayList<>();
+		actual = ObjectToJsonExtensions.toJson(employees);
+		expected = "";
 		assertEquals(expected, actual);
 	}
 
