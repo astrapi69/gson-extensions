@@ -13,6 +13,7 @@ CHANGED:
 
 - removed dependency org.json:json
 - code coverage increased to 100%
+- extended jar task for build manifest file
 
 Version 1
 -------------
