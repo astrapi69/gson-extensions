@@ -38,6 +38,9 @@ public final class TypeFactory
 {
 	/**
 	 * Factory method for create a new {@link Type} for convert {@link List} objects
+	 *
+	 * @param <T>
+	 *            the generic type of the list elements
 	 * @param listType the list type
 	 * @return the new {@link Type} object
 	 */
@@ -48,6 +51,11 @@ public final class TypeFactory
 
 	/**
 	 * Factory method for create a new {@link Type} for convert json objects from all derived {@link Collection} objects
+	 *
+	 * @param <T>
+	 *            the generic type of the collection
+	 * @param <E>
+	 *            the generic type of the collection elements
 	 * @param collectionClass the collection class
 	 * @param elementClass the element class
 	 *
@@ -61,23 +69,33 @@ public final class TypeFactory
 
 	/**
 	 * Factory method for create a new {@link Type} for convert all derived {@link Collection} objects
-	 * @param collectionType the collection type
+	 *
+	 * @param <T>
+	 *            the generic type of the collection elements
+	 * @param elementClass the element class
 	 * @return the new {@link Type} object
 	 */
-	public static <T> Type newCollectionTypeToken(Class<T> collectionType)
+	public static <T> Type newCollectionTypeToken(Class<T> elementClass)
 	{
-		return newCollectionTypeToken(Collection.class, collectionType);
+		return newCollectionTypeToken(Collection.class, elementClass);
 	}
 
 	/**
 	 * Factory method for create a new {@link Type} for convert json objects from all derived {@link Map} objects
+	 *
+	 * @param <M>
+	 *            the generic type of the map
+	 * @param <K>
+	 *            the generic type of keys
+	 * @param <V>
+	 *            the generic type of values
 	 * @param mapClass the map class
 	 * @param keyType the key type class
 	 * @param valueType the value type class
 	 *
 	 * @return the new {@link Type} object
 	 */
-	public static <M, K, V> Type newMapTypeToken(Class<M> mapClass, Class<K> keyType,
+	public static <M extends Map, K, V> Type newMapTypeToken(Class<M> mapClass, Class<K> keyType,
 		Class<V> valueType)
 	{
 		return TypeToken.getParameterized(mapClass, keyType, valueType).getType();
@@ -85,6 +103,11 @@ public final class TypeFactory
 
 	/**
 	 * Factory method for create a new {@link Type} for convert json objects from all derived {@link Map} objects
+	 *
+	 * @param <K>
+	 *            the generic type of keys
+	 * @param <V>
+	 *            the generic type of values
 	 * @param keyType the key type class
 	 * @param valueType the value type class
 	 *

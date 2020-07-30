@@ -53,6 +53,10 @@ public final class JsonStringToObjectExtensions
 	 *            the generic type of values
 	 * @param jsonString
 	 *            the json string
+	 * @param keyType
+	 *            the class type of the key
+	 * @param valueType
+	 *            the class type of the value
 	 * @return the map
 	 */
 	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
@@ -73,6 +77,12 @@ public final class JsonStringToObjectExtensions
 	 *            the generic type of values
 	 * @param jsonString
 	 *            the json string
+	 * @param keyType
+	 *            the class type of the key
+	 * @param valueType
+	 *            the class type of the value
+	 * @param gson
+	 *            the gson object
 	 * @return the map
 	 */
 	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
@@ -112,6 +122,8 @@ public final class JsonStringToObjectExtensions
 	 *            the json string
 	 * @param clazz
 	 *            the clazz of the generic type
+	 * @param gson
+	 *            the gson object
 	 * @return the object
 	 */
 	public static <T> T toObject(final String jsonString, final Class<T> clazz, final Gson gson)
