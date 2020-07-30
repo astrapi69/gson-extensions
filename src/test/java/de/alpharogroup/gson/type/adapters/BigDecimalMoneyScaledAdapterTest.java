@@ -73,11 +73,18 @@ public class BigDecimalMoneyScaledAdapterTest
 	{
 		String actual;
 		String expected;
+		Signin signin;
 
-		Signin signin = JsonFileToObjectExtensions.toObject(jsonFile, Signin.class);
+		signin = JsonFileToObjectExtensions.toObject(jsonFile, Signin.class);
 		actual = gson.toJson(signin);
 
 		expected = "{\"password\":\"bar\",\"username\":\"foo\",\"points\":111.00}";
+		assertEquals(actual, expected);
+
+		signin.setPoints(null);
+		actual = gson.toJson(signin);
+
+		expected = "{\"password\":\"bar\",\"username\":\"foo\"}";
 		assertEquals(actual, expected);
 	}
 
