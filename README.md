@@ -54,7 +54,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- gson-extensions version -->
-		<gson-extensions.version>1</gson-extensions.version>
+		<gson-extensions.version>1.1</gson-extensions.version>
 			...
 	</properties>
 			...
@@ -77,7 +77,7 @@ You can first define the version in the ext section and add than the following g
 ```
 ext {
 			...
-    gsonExtensionsVersion = "1"
+    gsonExtensionsVersion = "1.1"
 			...
 }
 dependencies {
