@@ -7,6 +7,7 @@ Version 1.1-SNAPSHOT
 ADDED: 
 
 - new TypeAdapter class BigDecimalMoneyScaledAdapter for BigDecimal that is indented for money values created
+- new methods with gson object argument created
 
 CHANGED:
 

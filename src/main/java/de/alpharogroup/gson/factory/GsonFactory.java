@@ -33,6 +33,20 @@ import com.google.gson.GsonBuilder;
  */
 public class GsonFactory
 {
+	/**
+	 * The default {@link Gson} object for transformations
+	 */
+	public static final Gson DEFAULT_GSON = GsonFactory.newGson();
+
+	/**
+	 * Factory method for create a new {@link GsonBuilder}
+	 *
+	 * @return the new {@link GsonBuilder} object
+	 */
+	public static GsonBuilder newGsonBuilder()
+	{
+		return new GsonBuilder();
+	}
 
 	/**
 	 * Factory method for create a new {@link Gson}
@@ -41,7 +55,7 @@ public class GsonFactory
 	 */
 	public static Gson newGson()
 	{
-		return new GsonBuilder().create();
+		return newGsonBuilder().create();
 	}
 
 	/**
@@ -51,9 +65,9 @@ public class GsonFactory
 	 * @param pattern           the date pattern
 	 * @return the new {@link Gson} object
 	 */
-	public static Gson newGson(ExclusionStrategy exclusionStrategy, String pattern)
+	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy, String pattern)
 	{
-		return new GsonBuilder().addDeserializationExclusionStrategy(exclusionStrategy)
+		return newGsonBuilder().addDeserializationExclusionStrategy(exclusionStrategy)
 			.setDateFormat(pattern).create();
 	}
 }

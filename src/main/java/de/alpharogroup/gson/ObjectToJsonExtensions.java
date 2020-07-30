@@ -25,6 +25,7 @@
 package de.alpharogroup.gson;
 
 import com.google.gson.Gson;
+import de.alpharogroup.gson.factory.GsonFactory;
 import de.alpharogroup.gson.factory.TypeFactory;
 
 import java.util.List;
@@ -35,7 +36,6 @@ import java.util.Objects;
  */
 public final class ObjectToJsonExtensions
 {
-	private static final Gson DEFAULT_GSON = new Gson();
 
 	private ObjectToJsonExtensions()
 	{
@@ -47,17 +47,35 @@ public final class ObjectToJsonExtensions
 	 * @param <T>
 	 *            the generic type
 	 * @param list
-	 *            the list
-	 * @return the json string.
+	 *            the list to transform
+	 * @return the json string
 	 */
 	public static <T> String toJson(final List<T> list)
 	{
 		Objects.requireNonNull(list);
+		return toJson(list, GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Creates from the given {@link List} a json string
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param list
+	 *            the list to transform
+	 * @param gson
+	 *            the gson object
+	 * @return the json string
+	 */
+	public static <T> String toJson(final List<T> list, final Gson gson)
+	{
+		Objects.requireNonNull(list);
+		Objects.requireNonNull(gson);
 		if (list.isEmpty())
 		{
 			return "";
 		}
-		return DEFAULT_GSON.toJson(list, TypeFactory.newListTypeToken(list.get(0).getClass()));
+		return gson.toJson(list, TypeFactory.newListTypeToken(list.get(0).getClass()));
 	}
 
 	/**
@@ -66,13 +84,31 @@ public final class ObjectToJsonExtensions
 	 * @param <T>
 	 *            the generic type of the given argument object
 	 * @param object
-	 *            the object.
-	 * @return the json string.
+	 *            the object to transform
+	 * @return the json string
 	 */
 	public static <T> String toJson(final T object)
 	{
 		Objects.requireNonNull(object);
-		return DEFAULT_GSON.toJson(object, object.getClass());
+		return toJson(object, GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Creates a json {@link String} from the given argument object
+	 *
+	 * @param <T>
+	 *            the generic type of the given argument object
+	 * @param object
+	 *            the object to transform
+	 * @param gson
+	 *            the gson object
+	 * @return the json string
+	 */
+	public static <T> String toJson(final T object, final Gson gson)
+	{
+		Objects.requireNonNull(object);
+		Objects.requireNonNull(gson);
+		return gson.toJson(object, object.getClass());
 	}
 
 }

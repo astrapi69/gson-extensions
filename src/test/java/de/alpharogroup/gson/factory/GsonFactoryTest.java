@@ -27,7 +27,7 @@ package de.alpharogroup.gson.factory;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
-import de.alpharogroup.gson.JsonFileToObjectExtensions;
+import com.google.gson.GsonBuilder;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
@@ -49,11 +49,20 @@ public class GsonFactoryTest
 	}
 
 	/**
-	 * Test method for {@link GsonFactory#newGson(ExclusionStrategy, String)}
+	 * Test method for {@link GsonFactory#newGsonBuilder()}
+	 */
+	@Test public void testNewGsonBuilder()
+	{
+		GsonBuilder gson = GsonFactory.newGsonBuilder();
+		assertNotNull(gson);
+	}
+
+	/**
+	 * Test method for {@link GsonFactory#newGsonBuilder(ExclusionStrategy, String)}
 	 */
 	@Test public void testTestNewGson()
 	{
-		Gson gson = GsonFactory.newGson(new ExclusionStrategy()
+		Gson gson = GsonFactory.newGsonBuilder(new ExclusionStrategy()
 		{
 			@Override public boolean shouldSkipField(FieldAttributes f)
 			{

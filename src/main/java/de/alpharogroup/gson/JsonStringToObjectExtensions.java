@@ -25,6 +25,7 @@
 package de.alpharogroup.gson;
 
 import com.google.gson.Gson;
+import de.alpharogroup.gson.factory.GsonFactory;
 import de.alpharogroup.gson.factory.TypeFactory;
 
 import java.util.Collection;
@@ -38,8 +39,6 @@ import java.util.Objects;
  */
 public final class JsonStringToObjectExtensions
 {
-
-	private static final Gson DEFAULT_GSON = new Gson();
 
 	private JsonStringToObjectExtensions()
 	{
@@ -62,7 +61,28 @@ public final class JsonStringToObjectExtensions
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(keyType);
 		Objects.requireNonNull(valueType);
-		return DEFAULT_GSON.fromJson(jsonString, TypeFactory.newMapTypeToken(keyType, valueType));
+		return toMapObject(jsonString, keyType, valueType, GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Transforms the given json string into a java map object
+	 *
+	 * @param <K>
+	 *            the generic type of keys
+	 * @param <V>
+	 *            the generic type of values
+	 * @param jsonString
+	 *            the json string
+	 * @return the map
+	 */
+	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
+		Class<V> valueType, final Gson gson)
+	{
+		Objects.requireNonNull(jsonString);
+		Objects.requireNonNull(keyType);
+		Objects.requireNonNull(valueType);
+		Objects.requireNonNull(gson);
+		return gson.fromJson(jsonString, TypeFactory.newMapTypeToken(keyType, valueType));
 	}
 
 	/**
@@ -80,7 +100,26 @@ public final class JsonStringToObjectExtensions
 	{
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(clazz);
-		return DEFAULT_GSON.fromJson(jsonString, clazz);
+		return toObject(jsonString, clazz, GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Transforms the given json string into a java object.
+	 *
+	 * @param <T>
+	 *            the generic type of the return type
+	 * @param jsonString
+	 *            the json string
+	 * @param clazz
+	 *            the clazz of the generic type
+	 * @return the object
+	 */
+	public static <T> T toObject(final String jsonString, final Class<T> clazz, final Gson gson)
+	{
+		Objects.requireNonNull(jsonString);
+		Objects.requireNonNull(clazz);
+		Objects.requireNonNull(gson);
+		return gson.fromJson(jsonString, clazz);
 	}
 
 	/**
@@ -103,7 +142,33 @@ public final class JsonStringToObjectExtensions
 		Objects.requireNonNull(jsonString);
 		Objects.requireNonNull(collectionClass);
 		Objects.requireNonNull(elementClass);
-		return DEFAULT_GSON.fromJson(jsonString,
+		return toObjectCollection(jsonString, collectionClass, elementClass,
+			GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Transforms the given json string into a java object {@link Collection}
+	 *
+	 * @param <T>
+	 *            the generic type of the return type
+	 * @param jsonString
+	 *            the json string
+	 * @param collectionClass
+	 *            the collection class
+	 * @param elementClass
+	 *            the element class
+	 * @param gson
+	 *            the gson object
+	 * @return the list with the java objects
+	 */
+	public static <T> Collection<T> toObjectCollection(final String jsonString,
+		@SuppressWarnings("rawtypes") final Class<? extends Collection> collectionClass,
+		final Class<T> elementClass, final Gson gson)
+	{
+		Objects.requireNonNull(jsonString);
+		Objects.requireNonNull(collectionClass);
+		Objects.requireNonNull(elementClass);
+		return gson.fromJson(jsonString,
 			TypeFactory.newCollectionTypeToken(collectionClass, elementClass));
 	}
 

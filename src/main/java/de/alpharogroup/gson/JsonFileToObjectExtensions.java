@@ -34,6 +34,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The class {@link JsonFileToObjectExtensions} converts json strings to java object and java
@@ -41,10 +42,27 @@ import java.util.List;
  */
 public final class JsonFileToObjectExtensions
 {
-	private static final Gson DEFAULT_GSON = GsonFactory.newGson();
 
 	private JsonFileToObjectExtensions()
 	{
+	}
+
+	/**
+	 * Transforms the given json file into a java object
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param jsonFile
+	 *            the json file
+	 * @param clazz
+	 *            the class
+	 * @return the java object
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred
+	 */
+	public static <T> T toObject(final File jsonFile, final Class<T> clazz) throws IOException
+	{
+		return toObject(jsonFile, clazz, GsonFactory.DEFAULT_GSON);
 	}
 
 	/**
@@ -55,25 +73,31 @@ public final class JsonFileToObjectExtensions
 	 * @param jsonFile
 	 *            the json file
 	 * @param clazz
-	 *            the clazz
-	 * @return the t
+	 *            the class
+	 * @param gson
+	 *            the gson object
+	 * @return the java object
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
 	 */
-	public static <T> T toObject(final File jsonFile, final Class<T> clazz) throws IOException
+	public static <T> T toObject(final File jsonFile, final Class<T> clazz, final Gson gson)
+		throws IOException
 	{
-		return DEFAULT_GSON.fromJson(new FileReader(jsonFile), clazz);
+		Objects.requireNonNull(jsonFile);
+		Objects.requireNonNull(clazz);
+		Objects.requireNonNull(gson);
+		return gson.fromJson(new FileReader(jsonFile), clazz);
 	}
 
 	/**
-	 * Transforms the given json file into a java List object.
+	 * Transforms the given json file into a java List object
 	 *
 	 * @param <T>
 	 *            the generic type
 	 * @param jsonListFile
 	 *            the json file with an array
 	 * @param clazz
-	 *            the clazz
+	 *            the class
 	 * @return the list
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
@@ -81,10 +105,36 @@ public final class JsonFileToObjectExtensions
 	public static <T> List<T> toObjectList(final File jsonListFile, final Class<T> clazz)
 		throws IOException
 	{
+		Objects.requireNonNull(jsonListFile);
+		Objects.requireNonNull(clazz);
+		return toObjectList(jsonListFile, clazz, GsonFactory.DEFAULT_GSON);
+	}
+
+	/**
+	 * Transforms the given json file into a java List object
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param jsonListFile
+	 *            the json file with an array
+	 * @param clazz
+	 *            the class
+	 * @param gson
+	 *            the gson object
+	 * @return the list
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred
+	 */
+	public static <T> List<T> toObjectList(final File jsonListFile, final Class<T> clazz,
+		final Gson gson) throws IOException
+	{
+		Objects.requireNonNull(jsonListFile);
+		Objects.requireNonNull(clazz);
+		Objects.requireNonNull(gson);
 		Type listType = TypeFactory.newListTypeToken(clazz);
 
 		JsonReader reader = new JsonReader(new FileReader(jsonListFile));
-		return DEFAULT_GSON.fromJson(reader, listType);
+		return gson.fromJson(reader, listType);
 	}
 
 }
