@@ -31,7 +31,6 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:$gsonVersion")
-    implementation("de.alpharogroup:jobj-core:$jobjCoreVersion")
 
     testImplementation("de.alpharogroup:silly-collections:$sillyCollectionsVersion")
     testImplementation("de.alpharogroup:silly-beans:$sillyBeansVersion")

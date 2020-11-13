@@ -1,13 +1,20 @@
 ## Change log
 ----------------------
 
-Version 1.2-SNAPSHOT
+Version 1.2
 -------------
 
 ADDED: 
 
 - new abstract class for the interface ExclusionStrategy created
 - new generic class for the interface ExclusionStrategy created
+
+CHANGED:
+
+- update of gradle to new version 6.7
+- update of com.github.ben-manes.versions.gradle.plugin to new version 0.36.0
+- update of test dependency testng to new version 7.3.0
+- update of test dependency silly-collections to new version 8.4
 
 Version 1.1
 -------------
