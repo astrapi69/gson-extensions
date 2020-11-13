@@ -39,7 +39,6 @@ public class GenericExclusionStrategyTest
 	{
 		String expected;
 		String actual;
-		GenericExclusionStrategy<FooExclusion> exclusionStrategy;
 		TestPerson testPerson;
 		Gson gson;
 
@@ -50,8 +49,7 @@ public class GenericExclusionStrategyTest
 		testPerson.setName("Afrodite");
 		testPerson.setNickname("gorgeous");
 
-		exclusionStrategy = new GenericExclusionStrategy<>(FooExclusion.class);
-		gson = GsonFactory.newGsonBuilder(exclusionStrategy);
+		gson = GsonFactory.newGsonBuilder(new GenericExclusionStrategy<>(FooExclusion.class));
 		actual = ObjectToJsonExtensions.toJson(testPerson, gson);
 		expected = "{\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Afrodite\"}";
 		assertEquals(actual, expected);
