@@ -62,12 +62,23 @@ public class GsonFactory
 	 * Factory method for create a new {@link Gson}
 	 *
 	 * @param exclusionStrategy the exclusion strategy
-	 * @param pattern           the date pattern
 	 * @return the new {@link Gson} object
 	 */
-	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy, String pattern)
+	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy)
 	{
-		return newGsonBuilder().addDeserializationExclusionStrategy(exclusionStrategy)
-			.setDateFormat(pattern).create();
+		return newGsonBuilder().addSerializationExclusionStrategy(exclusionStrategy).create();
+	}
+
+	/**
+	 * Factory method for create a new {@link Gson}
+	 *
+	 * @param exclusionStrategy the exclusion strategy
+	 * @param datePattern       the date pattern
+	 * @return the new {@link Gson} object
+	 */
+	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy, String datePattern)
+	{
+		return newGsonBuilder().addSerializationExclusionStrategy(exclusionStrategy)
+			.setDateFormat(datePattern).create();
 	}
 }

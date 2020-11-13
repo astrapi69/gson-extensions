@@ -59,8 +59,7 @@ public class JsonFileToObjectExtensionsTest
 	/**
 	 * Test method for {@link JsonFileToObjectExtensions#toObject(File, Class)}
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	@Test public void testToObjectFileClassOfT() throws IOException
 	{
@@ -76,8 +75,7 @@ public class JsonFileToObjectExtensionsTest
 	/**
 	 * Test method for {@link JsonFileToObjectExtensions#toObjectList(File, Class)}
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	@Test public void testToObjectList() throws IOException
 	{

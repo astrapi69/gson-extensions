@@ -44,10 +44,8 @@ public final class ObjectToJsonExtensions
 	/**
 	 * Creates from the given {@link List} a json string
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param list
-	 *            the list to transform
+	 * @param <T>  the generic type
+	 * @param list the list to transform
 	 * @return the json string
 	 */
 	public static <T> String toJson(final List<T> list)
@@ -59,12 +57,9 @@ public final class ObjectToJsonExtensions
 	/**
 	 * Creates from the given {@link List} a json string
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param list
-	 *            the list to transform
-	 * @param gson
-	 *            the gson object
+	 * @param <T>  the generic type
+	 * @param list the list to transform
+	 * @param gson the gson object
 	 * @return the json string
 	 */
 	public static <T> String toJson(final List<T> list, final Gson gson)
@@ -81,10 +76,8 @@ public final class ObjectToJsonExtensions
 	/**
 	 * Creates a json {@link String} from the given argument object
 	 *
-	 * @param <T>
-	 *            the generic type of the given argument object
-	 * @param object
-	 *            the object to transform
+	 * @param <T>    the generic type of the given argument object
+	 * @param object the object to transform
 	 * @return the json string
 	 */
 	public static <T> String toJson(final T object)
@@ -96,12 +89,9 @@ public final class ObjectToJsonExtensions
 	/**
 	 * Creates a json {@link String} from the given argument object
 	 *
-	 * @param <T>
-	 *            the generic type of the given argument object
-	 * @param object
-	 *            the object to transform
-	 * @param gson
-	 *            the gson object
+	 * @param <T>    the generic type of the given argument object
+	 * @param object the object to transform
+	 * @param gson   the gson object
 	 * @return the json string
 	 */
 	public static <T> String toJson(final T object, final Gson gson)

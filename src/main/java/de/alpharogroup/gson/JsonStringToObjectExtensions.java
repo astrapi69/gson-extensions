@@ -47,16 +47,11 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java map object
 	 *
-	 * @param <K>
-	 *            the generic type of keys
-	 * @param <V>
-	 *            the generic type of values
-	 * @param jsonString
-	 *            the json string
-	 * @param keyType
-	 *            the class type of the key
-	 * @param valueType
-	 *            the class type of the value
+	 * @param <K>        the generic type of keys
+	 * @param <V>        the generic type of values
+	 * @param jsonString the json string
+	 * @param keyType    the class type of the key
+	 * @param valueType  the class type of the value
 	 * @return the map
 	 */
 	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
@@ -71,18 +66,12 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java map object
 	 *
-	 * @param <K>
-	 *            the generic type of keys
-	 * @param <V>
-	 *            the generic type of values
-	 * @param jsonString
-	 *            the json string
-	 * @param keyType
-	 *            the class type of the key
-	 * @param valueType
-	 *            the class type of the value
-	 * @param gson
-	 *            the gson object
+	 * @param <K>        the generic type of keys
+	 * @param <V>        the generic type of values
+	 * @param jsonString the json string
+	 * @param keyType    the class type of the key
+	 * @param valueType  the class type of the value
+	 * @param gson       the gson object
 	 * @return the map
 	 */
 	public static <K, V> Map<K, V> toMapObject(final String jsonString, Class<K> keyType,
@@ -98,12 +87,9 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java object.
 	 *
-	 * @param <T>
-	 *            the generic type of the return type
-	 * @param jsonString
-	 *            the json string
-	 * @param clazz
-	 *            the clazz of the generic type
+	 * @param <T>        the generic type of the return type
+	 * @param jsonString the json string
+	 * @param clazz      the clazz of the generic type
 	 * @return the object
 	 */
 	public static <T> T toObject(final String jsonString, final Class<T> clazz)
@@ -116,14 +102,10 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java object.
 	 *
-	 * @param <T>
-	 *            the generic type of the return type
-	 * @param jsonString
-	 *            the json string
-	 * @param clazz
-	 *            the clazz of the generic type
-	 * @param gson
-	 *            the gson object
+	 * @param <T>        the generic type of the return type
+	 * @param jsonString the json string
+	 * @param clazz      the clazz of the generic type
+	 * @param gson       the gson object
 	 * @return the object
 	 */
 	public static <T> T toObject(final String jsonString, final Class<T> clazz, final Gson gson)
@@ -137,14 +119,10 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java object {@link Collection}
 	 *
-	 * @param <T>
-	 *            the generic type of the return type
-	 * @param jsonString
-	 *            the json string
-	 * @param collectionClass
-	 *            the collection class
-	 * @param elementClass
-	 *            the element class
+	 * @param <T>             the generic type of the return type
+	 * @param jsonString      the json string
+	 * @param collectionClass the collection class
+	 * @param elementClass    the element class
 	 * @return the list with the java objects.
 	 */
 	public static <T> Collection<T> toObjectCollection(final String jsonString,
@@ -161,16 +139,11 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java object {@link Collection}
 	 *
-	 * @param <T>
-	 *            the generic type of the return type
-	 * @param jsonString
-	 *            the json string
-	 * @param collectionClass
-	 *            the collection class
-	 * @param elementClass
-	 *            the element class
-	 * @param gson
-	 *            the gson object
+	 * @param <T>             the generic type of the return type
+	 * @param jsonString      the json string
+	 * @param collectionClass the collection class
+	 * @param elementClass    the element class
+	 * @param gson            the gson object
 	 * @return the list with the java objects
 	 */
 	public static <T> Collection<T> toObjectCollection(final String jsonString,
@@ -187,12 +160,9 @@ public final class JsonStringToObjectExtensions
 	/**
 	 * Transforms the given json string into a java object {@link List}
 	 *
-	 * @param <T>
-	 *            the generic type of the return type
-	 * @param jsonString
-	 *            the json string
-	 * @param elementClass
-	 *            the element class of the generic type
+	 * @param <T>          the generic type of the return type
+	 * @param jsonString   the json string
+	 * @param elementClass the element class of the generic type
 	 * @return the list with the java objects
 	 */
 	public static <T> List<T> toObjectList(final String jsonString, final Class<T> elementClass)

@@ -7,6 +7,7 @@ Version 1.2-SNAPSHOT
 ADDED: 
 
 - new abstract class for the interface ExclusionStrategy created
+- new generic class for the interface ExclusionStrategy created
 
 Version 1.1
 -------------

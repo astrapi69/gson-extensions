@@ -15,8 +15,11 @@ public abstract class AbstractExclusionStrategy implements ExclusionStrategy
 
 	@Override public boolean shouldSkipField(FieldAttributes field)
 	{
-		return field.getAnnotation(getAnnotationClass()) != null;
+		Class<? extends Annotation> annotationClass = getAnnotationClass();
+		Annotation annotation = field.getAnnotation(annotationClass);
+		boolean isAnnotated = annotation != null;
+		return isAnnotated;
 	}
-	
+
 	public abstract Class<? extends Annotation> getAnnotationClass();
 }

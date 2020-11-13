@@ -50,15 +50,11 @@ public final class JsonFileToObjectExtensions
 	/**
 	 * Transforms the given json file into a java object
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param jsonFile
-	 *            the json file
-	 * @param clazz
-	 *            the class
+	 * @param <T>      the generic type
+	 * @param jsonFile the json file
+	 * @param clazz    the class
 	 * @return the java object
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	public static <T> T toObject(final File jsonFile, final Class<T> clazz) throws IOException
 	{
@@ -68,17 +64,12 @@ public final class JsonFileToObjectExtensions
 	/**
 	 * Transforms the given json file into a java object.
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param jsonFile
-	 *            the json file
-	 * @param clazz
-	 *            the class
-	 * @param gson
-	 *            the gson object
+	 * @param <T>      the generic type
+	 * @param jsonFile the json file
+	 * @param clazz    the class
+	 * @param gson     the gson object
 	 * @return the java object
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	public static <T> T toObject(final File jsonFile, final Class<T> clazz, final Gson gson)
 		throws IOException
@@ -92,15 +83,11 @@ public final class JsonFileToObjectExtensions
 	/**
 	 * Transforms the given json file into a java List object
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param jsonListFile
-	 *            the json file with an array
-	 * @param clazz
-	 *            the class
+	 * @param <T>          the generic type
+	 * @param jsonListFile the json file with an array
+	 * @param clazz        the class
 	 * @return the list
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	public static <T> List<T> toObjectList(final File jsonListFile, final Class<T> clazz)
 		throws IOException
@@ -113,17 +100,12 @@ public final class JsonFileToObjectExtensions
 	/**
 	 * Transforms the given json file into a java List object
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param jsonListFile
-	 *            the json file with an array
-	 * @param clazz
-	 *            the class
-	 * @param gson
-	 *            the gson object
+	 * @param <T>          the generic type
+	 * @param jsonListFile the json file with an array
+	 * @param clazz        the class
+	 * @param gson         the gson object
 	 * @return the list
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	public static <T> List<T> toObjectList(final File jsonListFile, final Class<T> clazz,
 		final Gson gson) throws IOException

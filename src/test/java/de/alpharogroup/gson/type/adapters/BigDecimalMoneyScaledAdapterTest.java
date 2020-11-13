@@ -65,8 +65,7 @@ public class BigDecimalMoneyScaledAdapterTest
 	/**
 	 * Test method for {@link BigDecimalMoneyScaledAdapter#write(JsonWriter, BigDecimal)}
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
+	 * @throws IOException Signals that an I/O exception has occurred
 	 */
 	@Test public void testWrite() throws IOException
 	{
