@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![Build Status](https://travis-ci.org/astrapi69/gson-extensions.svg?branch=master)](https://travis-ci.org/astrapi69/gson-extensions)
+[![Build Status](https://api.travis-ci.com/astrapi69/gson-extensions.svg?branch=master)](https://travis-ci.com/github/astrapi69/gson-extensions)
 [![Coverage Status](https://codecov.io/gh/astrapi69/gson-extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/gson-extensions)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/gson-extensions.svg?style=flat)](https://github.com/astrapi69/gson-extensions/issues)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/gson-extensions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/gson-extensions)
-[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/gson-extensions.svg)](http://www.javadoc.io/doc/de.alpharogroup/gson-extensions)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions)
+[![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/gson-extensions.svg)](http://www.javadoc.io/doc/io.github.astrapi69/gson-extensions)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 </div>
@@ -26,7 +26,7 @@ The source code comes under the liberal MIT License, making gson-extensions grea
 ## Maven dependency
 
 Maven dependency is now on sonatype.
-Check out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~gson-extensions~~~) for latest snapshots and releases.
+Check out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~io.github.astrapi69~gson-extensions~~~) for latest snapshots and releases.
 
 Add the following maven dependency to your project `pom.xml` if you want to import the core functionality of gson-extensions:
 
@@ -35,7 +35,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- gson-extensions version -->
-		<gson-extensions.version>1.2</gson-extensions.version>
+		<gson-extensions.version>1.3</gson-extensions.version>
 			...
 	</properties>
 			...
@@ -43,7 +43,7 @@ Than you can add the dependency to your dependencies:
 			...
             <!-- gson-extensions DEPENDENCY -->
 			<dependency>
-				<groupId>de.alpharogroup</groupId>
+				<groupId>io.github.astrapi69</groupId>
 				<artifactId>gson-extensions</artifactId>
 				<version>${gson-extensions.version}</version>
 			</dependency>
@@ -59,7 +59,7 @@ to your project `build.gradle` if you want to import the core functionality of g
 ```
 define version in file gradle.properties
 
-gsonExtensionsVersion=1.2
+gsonExtensionsVersion=1.3
 ```
 
 or in build.gradle ext area
@@ -67,7 +67,7 @@ or in build.gradle ext area
 ```
 ext {
 			...
-    gsonExtensionsVersion = "1.2"
+    gsonExtensionsVersion = "1.3"
 			...
 }
 ```
@@ -77,7 +77,7 @@ and than add the dependency to the dependencies area
 ```
 dependencies {
 			...
-implementation("de.alpharogroup:gson-extensions:$gsonExtensionsVersion")
+implementation("io.github.astrapi69:gson-extensions:$gsonExtensionsVersion")
 			...
 }
 ```
@@ -169,13 +169,13 @@ Do not hesitate to contact the gson-extensions developers with your questions, c
 
 |**Travis CI**|
 |     :---:      |
-|[![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)](https://coveralls.io/github/astrapi69/gson-extensions?branch=develop)|
-|Special thanks to [Travis CI](https://travis-ci.org) for providing a free continuous integration service for open source projects|
+|[![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)](https://travis-ci.com)|
+|Special thanks to [Travis CI](https://travis-ci.com) for providing a free continuous integration service for open source projects|
 |     <img width=1000/>     |
 
 |**Nexus Sonatype repositories**|
 |     :---:      |
-|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/de.alpharogroup/gson-extensions.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~gson-extensions~~~)|
+|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/io.github.astrapi69/gson-extensions.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~io.github.astrapi69~gson-extensions~~~)|
 |Special thanks to [sonatype repository](https://www.sonatype.com) for providing a free maven repository service for open source projects|
 |     <img width=1000/>     |
 
@@ -187,7 +187,7 @@ Do not hesitate to contact the gson-extensions developers with your questions, c
 
 |**javadoc.io**|
 |     :---:      |
-|[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/gson-extensions.svg)](http://www.javadoc.io/doc/de.alpharogroup/gson-extensions)|
+|[![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/gson-extensions.svg)](http://www.javadoc.io/doc/io.github.astrapi69/gson-extensions)|
 |Special thanks to [javadoc.io](http://www.javadoc.io) for providing a free javadoc documentation for open source projects|
 |     <img width=1000/>     |
 
