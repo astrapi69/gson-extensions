@@ -1,6 +1,6 @@
 # Overview
 
-<div align="center">
+<div style="text-align: center">
 
 [![Build Status](https://api.travis-ci.com/astrapi69/gson-extensions.svg?branch=master)](https://travis-ci.com/github/astrapi69/gson-extensions)
 [![Coverage Status](https://codecov.io/gh/astrapi69/gson-extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/gson-extensions)
@@ -13,7 +13,17 @@
 
 Useful extensions methods and utilities for transform json string to java object and back to json string with gson library
 
-If you like this project put a ⭐ and donate
+
+# Support this project
+
+> Please support this project by simply putting a Github <!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/astrapi69/gson-extensions" data-icon="octicon-star" aria-label="Star astrapi69/gson-extensions on GitHub">Star ⭐</a>
+>
+> Share this library with friends on Twitter and everywhere else you can
+>
+> If you love this project [![donation](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
+>
+> or for more donation options go the [donations section](#Donations)
 
 ## Note
 
@@ -137,7 +147,7 @@ alt="Donation Monero Wallet" width="250"/>
 or over flattr:
 
 <a href="https://flattr.com/submit/auto?fid=r7vp62&url=https%3A%2F%2Fgithub.com%2Fastrapi69%2Fgson-extensions" target="_blank">
-<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border: none" />
 </a>
 
 ## Semantic Versioning

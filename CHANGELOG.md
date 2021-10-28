@@ -4,6 +4,16 @@
 Version 1.4-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update gradle to new version 7.2
+- update of dependency gson to new version 2.8.8
+- update of dependency file-worker to new version 5.10
+- update of test dependency silly-collections to new version 18
+- update of test dependency test-objects to new version 5.5
+- update of test dependency crypt-api to new version 7.6.1
+- update of test dependency crypt-data to new version 7.8
+ 
 Version 1.3
 -------------
 

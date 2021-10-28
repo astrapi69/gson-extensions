@@ -28,20 +28,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation("com.google.code.gson:gson:$gsonVersion")
-    implementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
-
-    testImplementation("io.github.astrapi69:silly-collections:$sillyCollectionsVersion")
-    testImplementation("io.github.astrapi69:silly-beans:$sillyBeansVersion")
-    testImplementation("io.github.astrapi69:test-objects:$testObjectsVersion")
-    testImplementation("org.meanbean:meanbean:$meanbeanVersion")
-    testImplementation("org.testng:testng:$testngVersion")
-
-    testImplementation("io.github.astrapi69:crypt-api:$cryptApiVersion")
-    testImplementation("io.github.astrapi69:crypt-data:$cryptDataVersion")
-}
-
 task sourcesJar(type: Jar) {
     archiveClassifier.set("sources")
     from(sourceSets.main.allJava)
@@ -196,3 +182,17 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+dependencies {
+    implementation("com.google.code.gson:gson:$gsonVersion")
+    implementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
+
+    testImplementation("io.github.astrapi69:silly-collections:$sillyCollectionsVersion")
+    testImplementation("io.github.astrapi69:silly-beans:$sillyBeansVersion")
+    testImplementation("io.github.astrapi69:test-objects:$testObjectsVersion")
+    testImplementation("org.meanbean:meanbean:$meanbeanVersion")
+    testImplementation("org.testng:testng:$testngVersion")
+
+    testImplementation("io.github.astrapi69:crypt-api:$cryptApiVersion")
+    testImplementation("io.github.astrapi69:crypt-data:$cryptDataVersion")
+}

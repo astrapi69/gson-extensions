@@ -24,7 +24,6 @@
  */
 package io.github.astrapi69.gson;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -32,7 +31,7 @@ import java.util.Objects;
 import com.google.gson.Gson;
 
 import io.github.astrapi69.gson.factory.GsonFactory;
-import io.github.astrapi69.write.WriteFileExtensions;
+import io.github.astrapi69.file.write.WriteFileExtensions;
 
 /**
  * The class {@link ObjectToJsonFileExtensions} converts java objects to json file objects.
