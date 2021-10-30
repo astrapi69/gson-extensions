@@ -8,6 +8,10 @@ ADDED:
 
 -new class JsonToPropertiesExtensions that transforms a json file or json string to a java properties object
 
+CHANGED:
+
+- update of dependency gson to new version 2.8.9
+
 Version 1.4
 -------------
 
