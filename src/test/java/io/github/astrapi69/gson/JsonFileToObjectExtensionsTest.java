@@ -35,7 +35,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.astrapi69.collections.list.ListFactory;
-import io.github.astrapi69.search.PathFinder;
+import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.test.objects.Employee;
 import io.github.astrapi69.test.objects.Person;
 import io.github.astrapi69.test.objects.enums.Gender;

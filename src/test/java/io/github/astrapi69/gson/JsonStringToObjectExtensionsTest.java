@@ -40,7 +40,7 @@ import io.github.astrapi69.collections.CollectionExtensions;
 import io.github.astrapi69.collections.list.ListFactory;
 import io.github.astrapi69.collections.map.MapFactory;
 import io.github.astrapi69.collections.set.SetFactory;
-import io.github.astrapi69.search.PathFinder;
+import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.test.objects.Employee;
 import io.github.astrapi69.test.objects.Person;
 import io.github.astrapi69.test.objects.enums.Gender;

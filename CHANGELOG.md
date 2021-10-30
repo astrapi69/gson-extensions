@@ -4,6 +4,10 @@
 Version 1.5-SNAPSHOT
 -------------
 
+ADDED:
+
+-new class JsonToPropertiesExtensions that transforms a json file or json string to a java properties object
+
 Version 1.4
 -------------
 

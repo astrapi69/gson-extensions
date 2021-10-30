@@ -39,9 +39,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.gson.JsonFileToObjectExtensions;
 import io.github.astrapi69.gson.Signin;
-import io.github.astrapi69.search.PathFinder;
 
 /**
  * The unit test class for the class {@link BigDecimalMoneyScaledAdapter}
