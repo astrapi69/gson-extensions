@@ -49,6 +49,8 @@ public class JsonToPropertiesExtensions
 	 * @param jsonFile
 	 *            the json file
 	 * @return the generated java properties object
+	 * @throws FileNotFoundException
+	 *             is thrown if the given file is not found
 	 */
 	public static Properties toProperties(final File jsonFile) throws FileNotFoundException
 	{

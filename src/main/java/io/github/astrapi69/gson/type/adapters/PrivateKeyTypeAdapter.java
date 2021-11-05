@@ -24,24 +24,20 @@
  */
 package io.github.astrapi69.gson.type.adapters;
 
+import java.io.IOException;
+import java.security.PrivateKey;
+
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.security.PrivateKey;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class PrivateKeyTypeAdapter extends TypeAdapter<PrivateKey>
 {
 	@Override
 	public void write(JsonWriter out, PrivateKey value) throws IOException
 	{
-		//out.value(value == null ? null : value);
+		// out.value(value == null ? null : value);
 	}
 
 	@Override

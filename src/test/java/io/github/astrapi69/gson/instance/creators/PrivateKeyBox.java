@@ -26,11 +26,13 @@ package io.github.astrapi69.gson.instance.creators;
 
 import java.security.PrivateKey;
 
-public class PrivateKeyBox {
+public class PrivateKeyBox
+{
 
-    PrivateKey privateKey;
+	PrivateKey privateKey;
 
-    public PrivateKeyBox(PrivateKey privateKey) {
-        this.privateKey = privateKey;
-    }
+	public PrivateKeyBox(PrivateKey privateKey)
+	{
+		this.privateKey = privateKey;
+	}
 }

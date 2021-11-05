@@ -107,9 +107,9 @@ public class TestPerson
 			return false;
 		final Object this$nickname = this.getNickname();
 		final Object other$nickname = other.getNickname();
-		if (this$nickname == null ? other$nickname != null : !this$nickname.equals(other$nickname))
-			return false;
-		return true;
+		return this$nickname == null
+			? other$nickname == null
+			: this$nickname.equals(other$nickname);
 	}
 
 	public String getAbout()
