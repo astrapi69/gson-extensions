@@ -1,7 +1,7 @@
 ## Change log
 ----------------------
 
-Version 1.5-SNAPSHOT
+Version 1.5
 -------------
 
 ADDED:
@@ -11,6 +11,7 @@ ADDED:
 CHANGED:
 
 - update of dependency gson to new version 2.8.9
+- update of dependency file-worker to new version 8
 
 Version 1.4
 -------------

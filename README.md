@@ -45,7 +45,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- gson-extensions version -->
-		<gson-extensions.version>1.4</gson-extensions.version>
+		<gson-extensions.version>1.5</gson-extensions.version>
 			...
 	</properties>
 			...
@@ -68,7 +68,7 @@ to your project `build.gradle` if you want to import the core functionality of g
 
 define version in file gradle.properties
 ```
-gsonExtensionsVersion=1.4
+gsonExtensionsVersion=1.5
 ```
 
 or in build.gradle ext area
@@ -76,7 +76,7 @@ or in build.gradle ext area
 ```
 ext {
 			...
-    gsonExtensionsVersion = "1.4"
+    gsonExtensionsVersion = "1.5"
 			...
 }
 ```
