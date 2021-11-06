@@ -27,7 +27,7 @@ package io.github.astrapi69.gson.instance.creators;
 import java.lang.reflect.Type;
 import java.security.PrivateKey;
 
-public class PrivateKeyBoxInstanceCreator extends GenericInstanceCreator<PrivateKeyBox, PrivateKey>
+public class PrivateKeyBoxInstanceCreator extends GenericBoxInstanceCreator<PrivateKeyBox, PrivateKey>
 {
 
 

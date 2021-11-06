@@ -24,19 +24,20 @@
  */
 package io.github.astrapi69.gson.instance.creators;
 
-import com.google.gson.InstanceCreator;
+import java.lang.reflect.Type;
+import java.security.PrivateKey;
 
-public abstract class GenericInstanceCreator<E> implements InstanceCreator<E>
+public class PrivateKeyInstanceCreator extends GenericInstanceCreator<PrivateKey>
 {
 
-	E value;
 
-	public GenericInstanceCreator(E value)
+	public PrivateKeyInstanceCreator(PrivateKey value)
 	{
-		this.value = value;
+		super(value);
 	}
 
-	public E getValue() {
-		return value;
+	@Override
+	public PrivateKey createInstance(Type type) {
+		return getValue();
 	}
 }

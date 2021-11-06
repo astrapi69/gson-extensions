@@ -36,9 +36,15 @@ import com.google.gson.GsonBuilder;
 import io.github.astrapi69.crypto.algorithm.KeyPairGeneratorAlgorithm;
 import io.github.astrapi69.crypto.factories.KeyPairFactory;
 import io.github.astrapi69.crypto.key.KeySize;
+import org.testng.annotations.Test;
 
-public class GenericInstanceCreatorTest
-{
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
+import static org.testng.Assert.*;
+
+public class GenericInstanceCreatorTest {
 
 	@Test
 	void testGenericInstanceCreator() throws NoSuchAlgorithmException, NoSuchProviderException
@@ -48,7 +54,7 @@ public class GenericInstanceCreatorTest
 			KeySize.KEYSIZE_2048);
 		PrivateKeyBox box = new PrivateKeyBox(keyPair.getPrivate());
 		gsonBuilder.registerTypeAdapter(PrivateKeyBox.class,
-			new PrivateKeyBoxInstanceCreator(keyPair.getPrivate()));
+			new PrivateKeyInstanceCreator(keyPair.getPrivate()));
 		Gson customGson = gsonBuilder.create();
 		String json = customGson.toJson(box);
 		System.out.println(json);

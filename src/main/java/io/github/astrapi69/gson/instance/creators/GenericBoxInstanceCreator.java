@@ -26,17 +26,13 @@ package io.github.astrapi69.gson.instance.creators;
 
 import com.google.gson.InstanceCreator;
 
-public abstract class GenericInstanceCreator<E> implements InstanceCreator<E>
+public abstract class GenericBoxInstanceCreator<T, E> implements InstanceCreator<T>
 {
 
 	E value;
 
-	public GenericInstanceCreator(E value)
+	public GenericBoxInstanceCreator(E value)
 	{
 		this.value = value;
-	}
-
-	public E getValue() {
-		return value;
 	}
 }
