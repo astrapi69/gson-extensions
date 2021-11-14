@@ -79,6 +79,17 @@ public class JsonToPropertiesExtensionsTest
 
 		actual = JsonToPropertiesExtensions.toProperties(jsonLongFile);
 
+		expected = new SortedProperties();
+		expected.put("myapp.menu.edit", "Translation edit");
+		expected.put("foo.title", "Translation foo");
+		expected.put("foo.menu.new", "Translation new");
+		expected.put("myapp.menu.popup.copy", "Copy");
+		expected.put("myapp.title", "Translation app");
+		expected.put("foo.menu.edit", "Translation edit");
+		expected.put("myapp.text", "Translation app for test with ngx-translate");
+		expected.put("foo.text", "Translation foo for test with ngx-translate");
+		expected.put("foo.menu.popup.copy", "Copy");
+		expected.put("myapp.menu.new", "Translation new");
 		assertEquals(actual, expected);
 	}
 
