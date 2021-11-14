@@ -29,11 +29,11 @@ import static org.testng.Assert.assertEquals;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import io.github.astrapi69.collections.properties.SortedProperties;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 
@@ -45,6 +45,7 @@ public class JsonToPropertiesExtensionsTest
 
 	File jsonDir;
 	File jsonFile;
+	File jsonLongFile;
 	String jsonString;
 
 	@BeforeMethod
@@ -52,6 +53,7 @@ public class JsonToPropertiesExtensionsTest
 	{
 		jsonDir = new File(PathFinder.getSrcTestResourcesDir(), "json");
 		jsonFile = new File(jsonDir, "en.json");
+		jsonLongFile = new File(jsonDir, "en-long.json");
 		jsonString = ReadFileExtensions.readFromFile(jsonFile);
 	}
 
@@ -64,15 +66,19 @@ public class JsonToPropertiesExtensionsTest
 	@Test
 	public void testToPropertiesFromJsonFile() throws FileNotFoundException
 	{
-		Properties actual;
-		Properties expected;
+		SortedProperties actual;
+		SortedProperties expected;
 		// new scenario...
-		expected = new Properties();
+		expected = new SortedProperties();
 		expected.put("myapp.menu.new", "Translation new");
 		expected.put("myapp.title", "Translation app");
 		expected.put("myapp.menu.edit", "Translation edit");
 		expected.put("myapp.text", "Translation app for test with ngx-translate");
 		actual = JsonToPropertiesExtensions.toProperties(jsonFile);
+		assertEquals(actual, expected);
+
+		actual = JsonToPropertiesExtensions.toProperties(jsonLongFile);
+
 		assertEquals(actual, expected);
 	}
 
@@ -82,10 +88,10 @@ public class JsonToPropertiesExtensionsTest
 	@Test
 	public void testToPropertiesFromJsonString()
 	{
-		Properties actual;
-		Properties expected;
+		SortedProperties actual;
+		SortedProperties expected;
 		// new scenario...
-		expected = new Properties();
+		expected = new SortedProperties();
 		expected.put("myapp.menu.new", "Translation new");
 		expected.put("myapp.title", "Translation app");
 		expected.put("myapp.menu.edit", "Translation edit");

@@ -186,8 +186,8 @@ check.dependsOn jacocoTestReport
 dependencies {
     implementation("com.google.code.gson:gson:$gsonVersion")
     implementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
+    implementation("io.github.astrapi69:silly-collections:$sillyCollectionsVersion")
 
-    testImplementation("io.github.astrapi69:silly-collections:$sillyCollectionsVersion")
     testImplementation("io.github.astrapi69:silly-beans:$sillyBeansVersion")
     testImplementation("io.github.astrapi69:test-objects:$testObjectsVersion")
     testImplementation("org.meanbean:meanbean:$meanbeanVersion")

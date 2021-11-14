@@ -4,6 +4,10 @@
 Version 1.6-SNAPSHOT
 -------------
 
+CHANGED:
+
+- moved test implementation dependency silly-collection to implementation dependency
+
 Version 1.5
 -------------
 

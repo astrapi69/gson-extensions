@@ -27,6 +27,7 @@ package io.github.astrapi69.gson;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Enumeration;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
@@ -35,6 +36,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import io.github.astrapi69.collections.properties.SortedProperties;
 
 /**
  * The class {@link JsonToPropertiesExtensions} converts json strings or json objects to java
@@ -52,13 +55,20 @@ public class JsonToPropertiesExtensions
 	 * @throws FileNotFoundException
 	 *             is thrown if the given file is not found
 	 */
-	public static Properties toProperties(final File jsonFile) throws FileNotFoundException
+	public static SortedProperties toProperties(final File jsonFile) throws FileNotFoundException
 	{
 		Objects.requireNonNull(jsonFile);
-		Properties properties = new Properties();
+		SortedProperties properties = SortedProperties.of(new Properties());
 		JsonObject root = JsonParser.parseReader(new FileReader(jsonFile)).getAsJsonObject();
 		addPropertiesFromJsonObject(root, null, properties);
-		return properties;
+		Enumeration<Object> keys = properties.keys();
+		SortedProperties sortedProperties = new SortedProperties();
+		while (keys.hasMoreElements())
+		{
+			Object key = keys.nextElement();
+			sortedProperties.put(key, properties.get(key));
+		}
+		return sortedProperties;
 	}
 
 	/**
@@ -68,10 +78,10 @@ public class JsonToPropertiesExtensions
 	 *            the json string
 	 * @return the generated java properties object
 	 */
-	public static Properties toProperties(final String jsonString)
+	public static SortedProperties toProperties(final String jsonString)
 	{
 		Objects.requireNonNull(jsonString);
-		Properties properties = new Properties();
+		SortedProperties properties = SortedProperties.of(new Properties());
 		JsonObject root = JsonParser.parseString(jsonString).getAsJsonObject();
 		addPropertiesFromJsonObject(root, null, properties);
 		return properties;
