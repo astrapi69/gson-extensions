@@ -42,28 +42,28 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 
 Than you can add the dependency to your dependencies:
 
-	<properties>
-			...
-		<!-- gson-extensions version -->
-		<gson-extensions.version>1.5</gson-extensions.version>
-			...
-	</properties>
-			...
-		<dependencies>
-			...
+    <properties>
+            ...
+        <!-- gson-extensions version -->
+        <gson-extensions.version>1.5</gson-extensions.version>
+            ...
+    </properties>
+            ...
+        <dependencies>
+            ...
             <!-- gson-extensions DEPENDENCY -->
-			<dependency>
-				<groupId>io.github.astrapi69</groupId>
-				<artifactId>gson-extensions</artifactId>
-				<version>${gson-extensions.version}</version>
-			</dependency>
-			...
-		</dependencies>
+            <dependency>
+                <groupId>io.github.astrapi69</groupId>
+                <artifactId>gson-extensions</artifactId>
+                <version>${gson-extensions.version}</version>
+            </dependency>
+            ...
+        </dependencies>
 
-			
+
 ## gradle dependency
 
-You can first define the version in the ext section and add than the following gradle dependency 
+You can first define the version in the ext section and add than the following gradle dependency
 to your project `build.gradle` if you want to import the core functionality of gson-extensions:
 
 define version in file gradle.properties
@@ -75,19 +75,19 @@ or in build.gradle ext area
 
 ```
 ext {
-			...
+            ...
     gsonExtensionsVersion = "1.5"
-			...
+            ...
 }
 ```
 
 and than add the dependency to the dependencies area
- 
+
 ```
 dependencies {
-			...
+            ...
     implementation("io.github.astrapi69:gson-extensions:$gsonExtensionsVersion")
-			...
+            ...
 }
 ```
 
@@ -158,7 +158,7 @@ Release version numbers will be incremented in the following format:
 `<major>.<minor>.<patch>`
 
 For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
-		
+
 ## Want to Help and improve it? ###
 
 The source code for gson-extensions are on GitHub. Please feel free to fork and send pull requests!
@@ -199,5 +199,3 @@ Do not hesitate to contact the gson-extensions developers with your questions, c
 |[![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/gson-extensions.svg)](http://www.javadoc.io/doc/io.github.astrapi69/gson-extensions)|
 |Special thanks to [javadoc.io](http://www.javadoc.io) for providing a free javadoc documentation for open source projects|
 |     <img width=1000/>     |
-
-

@@ -4,8 +4,21 @@
 Version 1.6-SNAPSHOT
 -------------
 
+ADDED:
+
+- new gradle plugin org.ajoberstar.grgit:grgit-gradle in version 4.1.1
+- new gradle plugin spotless in version 6.3.0
+
 CHANGED:
 
+- update gradle to new version 7.4
+- update gradle-plugin dependency of com.github.ben-manes.versions.gradle.plugin to new version 0.42.0
+- update of dependency gson to new version 2.9.0
+- update of dependency file-worker to new version 8.2
+- update of test dependency test-objects to new version 5.7
+- update of test dependency crypt-api to new version 7.7
+- update of test dependency crypt-data to new version 7.11.1
+- update of test dependency testng to new version 7.5
 - moved test implementation dependency silly-collection to implementation dependency
 
 Version 1.5
@@ -32,7 +45,7 @@ CHANGED:
 - update of test dependency test-objects to new version 5.5
 - update of test dependency crypt-api to new version 7.6.1
 - update of test dependency crypt-data to new version 7.8
- 
+
 Version 1.3
 -------------
 
@@ -50,7 +63,7 @@ CHANGED:
 Version 1.2
 -------------
 
-ADDED: 
+ADDED:
 
 - new abstract class for the interface ExclusionStrategy created
 - new generic class for the interface ExclusionStrategy created
@@ -65,7 +78,7 @@ CHANGED:
 Version 1.1
 -------------
 
-ADDED: 
+ADDED:
 
 - new TypeAdapter class BigDecimalMoneyScaledAdapter for BigDecimal that is indented for money values created
 - new methods with gson object argument created
@@ -79,7 +92,7 @@ CHANGED:
 Version 1
 -------------
 
-ADDED: 
+ADDED:
 
 - new CHANGELOG.md file created
 - moved relevant classes from xml-extensions project

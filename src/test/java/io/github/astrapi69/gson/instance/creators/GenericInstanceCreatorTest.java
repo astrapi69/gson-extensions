@@ -34,7 +34,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import io.github.astrapi69.crypto.algorithm.KeyPairGeneratorAlgorithm;
-import io.github.astrapi69.crypto.factories.KeyPairFactory;
+import io.github.astrapi69.crypto.factory.KeyPairFactory;
 import io.github.astrapi69.crypto.key.KeySize;
 
 public class GenericInstanceCreatorTest
