@@ -33,6 +33,29 @@ No animals were harmed in the making of this library.
 
 The source code comes under the liberal MIT License, making gson-extensions great for all types of applications.
 
+
+## gradle dependency
+
+You can first define the version in the ext section and add than the following gradle dependency
+to your project `build.gradle` if you want to import the core functionality of gson-extensions:
+
+define version in file gradle.properties
+```
+gsonExtensionsVersion=1.6
+```
+
+or in build.gradle ext area
+
+```
+    gsonExtensionsVersion = "1.6"
+```
+
+and than add the dependency to the dependencies area
+
+```
+    implementation("io.github.astrapi69:gson-extensions:$gsonExtensionsVersion")
+```
+
 ## Maven dependency
 
 Maven dependency is now on sonatype.
@@ -45,7 +68,7 @@ Than you can add the dependency to your dependencies:
     <properties>
             ...
         <!-- gson-extensions version -->
-        <gson-extensions.version>1.5</gson-extensions.version>
+        <gson-extensions.version>1.6</gson-extensions.version>
             ...
     </properties>
             ...
@@ -59,37 +82,6 @@ Than you can add the dependency to your dependencies:
             </dependency>
             ...
         </dependencies>
-
-
-## gradle dependency
-
-You can first define the version in the ext section and add than the following gradle dependency
-to your project `build.gradle` if you want to import the core functionality of gson-extensions:
-
-define version in file gradle.properties
-```
-gsonExtensionsVersion=1.5
-```
-
-or in build.gradle ext area
-
-```
-ext {
-            ...
-    gsonExtensionsVersion = "1.5"
-            ...
-}
-```
-
-and than add the dependency to the dependencies area
-
-```
-dependencies {
-            ...
-    implementation("io.github.astrapi69:gson-extensions:$gsonExtensionsVersion")
-            ...
-}
-```
 
 # Donations
 
