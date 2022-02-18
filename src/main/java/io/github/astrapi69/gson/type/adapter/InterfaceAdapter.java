@@ -35,8 +35,8 @@ import com.google.gson.JsonSerializer;
 
 public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>
 {
-	InterfaceSerializer<T> serializer = new InterfaceSerializer<>();
-	InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
+	private final InterfaceSerializer<T> serializer = new InterfaceSerializer<>();
+	private final InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
 
 	@Override
 	public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context)

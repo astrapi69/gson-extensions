@@ -6,6 +6,9 @@ Version 1.6-SNAPSHOT
 
 ADDED:
 
+- new generic type adapter class for interfaces created
+- new generic json serializer class for interfaces created
+- new generic json deserializer class for interfaces created
 - new gradle plugin org.ajoberstar.grgit:grgit-gradle in version 4.1.1
 - new gradle plugin spotless in version 6.3.0
 
@@ -15,7 +18,7 @@ CHANGED:
 - update gradle-plugin dependency of com.github.ben-manes.versions.gradle.plugin to new version 0.42.0
 - update of dependency gson to new version 2.9.0
 - update of dependency file-worker to new version 8.2
-- update of test dependency test-objects to new version 5.7
+- update of test dependency test-objects to new version 6
 - update of test dependency crypt-api to new version 7.7
 - update of test dependency crypt-data to new version 7.11.1
 - update of test dependency testng to new version 7.5
