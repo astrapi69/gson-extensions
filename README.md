@@ -11,8 +11,8 @@
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 </div>
 
-Useful extensions methods and utilities for transform json string to java object and back to json string with gson library
-
+Useful extensions methods and utilities for transform json string to java object and back to json string with gson library.
+You can find the official documentation from gson [here](https://github.com/google/gson/blob/master/UserGuide.md)
 
 # Support this project
 
@@ -32,7 +32,6 @@ No animals were harmed in the making of this library.
 ## License
 
 The source code comes under the liberal MIT License, making gson-extensions great for all types of applications.
-
 
 ## gradle dependency
 
