@@ -33,7 +33,7 @@ import com.google.gson.Gson;
 
 import io.github.astrapi69.gson.ObjectToJsonExtensions;
 import io.github.astrapi69.gson.factory.GsonFactory;
-import io.github.astrapi69.test.objects.enums.Gender;
+import io.github.astrapi69.test.object.enumtype.Gender;
 
 public class AbstractExclusionStrategyTest
 {

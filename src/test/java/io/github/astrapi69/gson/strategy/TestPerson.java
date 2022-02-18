@@ -24,7 +24,7 @@
  */
 package io.github.astrapi69.gson.strategy;
 
-import io.github.astrapi69.test.objects.enums.Gender;
+import io.github.astrapi69.test.object.enumtype.Gender;
 
 /**
  * The class {@link TestPerson} is a class intended for use in unit tests.

@@ -22,17 +22,44 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.gson.instance.creators;
+package io.github.astrapi69.gson.type.adapter;
 
-import java.security.PrivateKey;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Locale;
 
-public class PrivateKeyBox
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
+
+public class BigDecimalMoneyScaledAdapter extends TypeAdapter<BigDecimal>
 {
-
-	PrivateKey privateKey;
-
-	public PrivateKeyBox(PrivateKey privateKey)
+	@Override
+	public void write(JsonWriter out, BigDecimal value) throws IOException
 	{
-		this.privateKey = privateKey;
+		out.value(value == null ? null : value.setScale(2, RoundingMode.DOWN));
+	}
+
+	@Override
+	public BigDecimal read(JsonReader in) throws IOException
+	{
+		if (in.peek() == JsonToken.NULL)
+		{
+			in.nextNull();
+			return null;
+		}
+		return deserializeToBigDecimal(in.nextString());
+	}
+
+	private synchronized BigDecimal deserializeToBigDecimal(String json)
+	{
+		BigDecimal bigDecimal = new BigDecimal(json);
+		NumberFormat nf = NumberFormat.getInstance(Locale.US);
+		nf.setMinimumFractionDigits(2);
+		nf.setMaximumFractionDigits(2);
+		return new BigDecimal(nf.format(bigDecimal));
 	}
 }

@@ -22,37 +22,33 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.gson.type.adapters;
+package io.github.astrapi69.gson.type.adapter;
 
-import java.io.IOException;
-import java.security.PrivateKey;
+import java.lang.reflect.Type;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import com.google.gson.stream.JsonWriter;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
-public class PrivateKeyTypeAdapter extends TypeAdapter<PrivateKey>
+public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>
 {
+	InterfaceSerializer<T> serializer = new InterfaceSerializer<>();
+	InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
+
 	@Override
-	public void write(JsonWriter out, PrivateKey value) throws IOException
+	public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context)
 	{
-		// out.value(value == null ? null : value);
+		return serializer.serialize(object, interfaceType, context);
 	}
 
 	@Override
-	public PrivateKey read(JsonReader in) throws IOException
+	public T deserialize(JsonElement jsonElement, Type interfaceType,
+		JsonDeserializationContext context) throws JsonParseException
 	{
-		if (in.peek() == JsonToken.NULL)
-		{
-			in.nextNull();
-			return null;
-		}
-		return deserialize(in.nextString());
+		return deserializer.deserialize(jsonElement, interfaceType, context);
 	}
 
-	private synchronized PrivateKey deserialize(String json)
-	{
-		return null;
-	}
 }

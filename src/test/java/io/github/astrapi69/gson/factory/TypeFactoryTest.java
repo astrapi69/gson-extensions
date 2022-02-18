@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 import com.google.gson.stream.JsonReader;
 
 import io.github.astrapi69.file.search.PathFinder;
-import io.github.astrapi69.test.objects.Employee;
+import io.github.astrapi69.test.object.Employee;
 
 /**
  * The unit test class for the class {@link TypeFactory}
