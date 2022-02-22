@@ -22,53 +22,28 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.gson.type.adapter;
+package io.github.astrapi69.gson.serializer;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
-public class InterfaceDeserializer<T> implements JsonDeserializer<T>
+public class InterfaceSerializer<T> implements JsonSerializer<T>
 {
-
 	public static final String PROPERTY_TYPE = "type";
 	public static final String PROPERTY_DATA = "data";
 
 	@Override
-	public T deserialize(JsonElement jsonElement, Type interfaceType,
-		JsonDeserializationContext context) throws JsonParseException
+	public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context)
 	{
-		final JsonObject jsonObject = (JsonObject)jsonElement;
-		final JsonElement typeName = get(jsonObject, PROPERTY_TYPE);
-		final JsonElement data = get(jsonObject, PROPERTY_DATA);
-		final Type actualType = typeForName(typeName);
-		return context.deserialize(data, actualType);
-	}
-
-	private Type typeForName(final JsonElement jsonElement)
-	{
-		try
-		{
-			return Class.forName(jsonElement.getAsString());
-		}
-		catch (ClassNotFoundException e)
-		{
-			throw new JsonParseException(e);
-		}
-	}
-
-	private JsonElement get(final JsonObject jsonObject, String memberName)
-	{
-		final JsonElement jsonElement = jsonObject.get(memberName);
-		if (jsonElement == null)
-		{
-			throw new JsonParseException("no '" + memberName
-				+ "' member found in what was expected to be an interface wrapper");
-		}
-		return jsonElement;
+		final JsonObject jsonObject = new JsonObject();
+		String className = object.getClass().getName();
+		jsonObject.addProperty(PROPERTY_TYPE, className);
+		JsonElement serialize = context.serialize(object);
+		jsonObject.add(PROPERTY_DATA, serialize);
+		return jsonObject;
 	}
 }

@@ -32,6 +32,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import io.github.astrapi69.gson.deserializer.InterfaceDeserializer;
+import io.github.astrapi69.gson.serializer.InterfaceSerializer;
 
 public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>
 {
