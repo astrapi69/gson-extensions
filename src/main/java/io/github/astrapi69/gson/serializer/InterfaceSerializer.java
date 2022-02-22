@@ -37,13 +37,17 @@ public class InterfaceSerializer<T> implements JsonSerializer<T>
 	public static final String PROPERTY_DATA = "data";
 
 	@Override
-	public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context)
+	public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context)
 	{
 		final JsonObject jsonObject = new JsonObject();
-		String className = object.getClass().getName();
+		String className = getClassName(src, typeOfSrc);
 		jsonObject.addProperty(PROPERTY_TYPE, className);
-		JsonElement serialize = context.serialize(object);
+		JsonElement serialize = context.serialize(src);
 		jsonObject.add(PROPERTY_DATA, serialize);
 		return jsonObject;
+	}
+
+	public String getClassName(T src, Type typeOfSrc) {
+		return src.getClass().getName();
 	}
 }
