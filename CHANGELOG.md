@@ -9,6 +9,10 @@ ADDED:
 - new class GenericClassFieldsExclusionStrategy with a class and one set of field names that have to be excluded
 - new class GenericMapClassFieldsExclusionStrategy with a map that defines the exclusion
 
+CHANGED:
+
+- update gradle to new version 7.4.1
+
 Version 1.6
 -------------
 

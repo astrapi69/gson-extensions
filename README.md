@@ -2,13 +2,16 @@
 
 <div style="text-align: center">
 
-[![Build Status](https://api.travis-ci.com/astrapi69/gson-extensions.svg?branch=master)](https://travis-ci.com/github/astrapi69/gson-extensions)
+[![Java CI with Gradle](https://github.com/astrapi69/gson-extensions/actions/workflows/gradle.yml/badge.svg)](https://github.com/astrapi69/gson-extensions/actions/workflows/gradle.yml)
 [![Coverage Status](https://codecov.io/gh/astrapi69/gson-extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/gson-extensions)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/gson-extensions.svg?style=flat)](https://github.com/astrapi69/gson-extensions/issues)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions)
 [![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/gson-extensions.svg)](http://www.javadoc.io/doc/io.github.astrapi69/gson-extensions)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
+[![Hits Of Code](https://hitsofcode.com/github/astrapi69/gson-extensions?branch=develop)](https://hitsofcode.com/github/astrapi69/gson-extensions/view?branch=develop)
+[![Lines Of Code](https://tokei.rs/b1/github/astrapi69/gson-extensions)](https://github.com/astrapi69/gson-extensions)
+
 </div>
 
 Useful extensions methods and utilities for transform json string to java object and back to json string with gson library.
@@ -166,12 +169,6 @@ Do not hesitate to contact the gson-extensions developers with your questions, c
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/gson-extensions/issues).
 
 ## Credits
-
-|**Travis CI**|
-|     :---:      |
-|[![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)](https://travis-ci.com)|
-|Special thanks to [Travis CI](https://travis-ci.com) for providing a free continuous integration service for open source projects|
-|     <img width=1000/>     |
 
 |**Nexus Sonatype repositories**|
 |     :---:      |
