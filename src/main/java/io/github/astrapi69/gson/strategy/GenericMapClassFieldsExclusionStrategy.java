@@ -24,13 +24,46 @@
  */
 package io.github.astrapi69.gson.strategy;
 
-import java.lang.annotation.Annotation;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
-public abstract class AbstractExclusionStrategy implements ExclusionStrategy
+public class GenericMapClassFieldsExclusionStrategy implements ExclusionStrategy
 {
+	Map<Class<?>, Set<String>> excludeFieldsDefinition;
+
+	public GenericMapClassFieldsExclusionStrategy(
+		Map<Class<?>, Set<String>> excludeFieldsDefinition)
+	{
+		Objects.nonNull(excludeFieldsDefinition);
+		this.excludeFieldsDefinition = excludeFieldsDefinition;
+	}
+
+	@Override
+	public boolean shouldSkipField(FieldAttributes field)
+	{
+		for (Map.Entry<Class<?>, Set<String>> entry : excludeFieldsDefinition.entrySet())
+		{
+			Class<?> beanClass = entry.getKey();
+			if (beanClass == null)
+			{
+				continue;
+			}
+			Set<String> excludeFieldNames = entry.getValue();
+			if (excludeFieldNames == null || excludeFieldNames.isEmpty())
+			{
+				continue;
+			}
+			if (ExclusionStrategyExtensions.shouldSkip(field, beanClass, excludeFieldNames))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public boolean shouldSkipClass(Class<?> clazz)
@@ -38,13 +71,4 @@ public abstract class AbstractExclusionStrategy implements ExclusionStrategy
 		return false;
 	}
 
-	@Override
-	public boolean shouldSkipField(FieldAttributes field)
-	{
-		Class<? extends Annotation> annotationClass = getAnnotationClass();
-		Annotation annotation = field.getAnnotation(annotationClass);
-		return annotation != null;
-	}
-
-	public abstract Class<? extends Annotation> getAnnotationClass();
 }

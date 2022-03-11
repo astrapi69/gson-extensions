@@ -24,37 +24,36 @@
  */
 package io.github.astrapi69.gson.strategy;
 
-import static org.testng.AssertJUnit.assertEquals;
+import java.util.Objects;
+import java.util.Set;
 
-import org.testng.annotations.Test;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 
-import com.google.gson.Gson;
-
-import io.github.astrapi69.gson.ObjectToJsonExtensions;
-import io.github.astrapi69.gson.factory.GsonFactory;
-import io.github.astrapi69.test.object.enumtype.Gender;
-
-public class GenericExclusionStrategyTest
+public class GenericClassFieldsExclusionStrategy<T> implements ExclusionStrategy
 {
+	private final Class<T> beanClass;
+	private final Set<String> excludeFieldNames;
 
-	@Test
-	public void testGenericExclusionStrategy()
+	public GenericClassFieldsExclusionStrategy(final Class<T> beanClass,
+		final Set<String> excludeFieldNames)
 	{
-		String expected;
-		String actual;
-		TestPerson testPerson;
-		Gson gson;
-
-		testPerson = new TestPerson();
-		testPerson.setAbout("a woman");
-		testPerson.setGender(Gender.FEMALE);
-		testPerson.setMarried(false);
-		testPerson.setName("Afrodite");
-		testPerson.setNickname("gorgeous");
-
-		gson = GsonFactory.newGsonBuilder(new GenericExclusionStrategy<>(FooExclusion.class));
-		actual = ObjectToJsonExtensions.toJson(testPerson, gson);
-		expected = "{\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Afrodite\"}";
-		assertEquals(actual, expected);
+		Objects.nonNull(beanClass);
+		Objects.nonNull(excludeFieldNames);
+		this.beanClass = beanClass;
+		this.excludeFieldNames = excludeFieldNames;
 	}
+
+	@Override
+	public boolean shouldSkipField(FieldAttributes field)
+	{
+		return ExclusionStrategyExtensions.shouldSkip(field, beanClass, excludeFieldNames);
+	}
+
+	@Override
+	public boolean shouldSkipClass(Class<?> clazz)
+	{
+		return false;
+	}
+
 }

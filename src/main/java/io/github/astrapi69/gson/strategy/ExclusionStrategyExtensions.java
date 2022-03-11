@@ -24,27 +24,30 @@
  */
 package io.github.astrapi69.gson.strategy;
 
-import java.lang.annotation.Annotation;
+import java.util.Set;
 
-import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
-public abstract class AbstractExclusionStrategy implements ExclusionStrategy
+public final class ExclusionStrategyExtensions
 {
 
-	@Override
-	public boolean shouldSkipClass(Class<?> clazz)
+	private ExclusionStrategyExtensions()
 	{
+	}
+
+	public static <T> boolean shouldSkip(FieldAttributes field, Class<T> beanClass,
+		Set<String> excludeFieldNames)
+	{
+		for (String excludeFieldName : excludeFieldNames)
+		{
+			String fieldName = field.getName();
+			Class<?> declaringClass = field.getDeclaringClass();
+			boolean sameClass = declaringClass.equals(beanClass);
+			if (sameClass && fieldName.equals(excludeFieldName))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
-
-	@Override
-	public boolean shouldSkipField(FieldAttributes field)
-	{
-		Class<? extends Annotation> annotationClass = getAnnotationClass();
-		Annotation annotation = field.getAnnotation(annotationClass);
-		return annotation != null;
-	}
-
-	public abstract Class<? extends Annotation> getAnnotationClass();
 }

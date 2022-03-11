@@ -24,27 +24,38 @@
  */
 package io.github.astrapi69.gson.strategy;
 
-import java.lang.annotation.Annotation;
+import static org.testng.AssertJUnit.assertEquals;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
+import org.testng.annotations.Test;
 
-public abstract class AbstractExclusionStrategy implements ExclusionStrategy
+import com.google.gson.Gson;
+
+import io.github.astrapi69.gson.ObjectToJsonExtensions;
+import io.github.astrapi69.gson.factory.GsonFactory;
+import io.github.astrapi69.test.object.enumtype.Gender;
+
+public class GenericAnnotationClassExclusionStrategyTest
 {
 
-	@Override
-	public boolean shouldSkipClass(Class<?> clazz)
+	@Test
+	public void testGenericAnnotationClassExclusionStrategy()
 	{
-		return false;
-	}
+		String expected;
+		String actual;
+		TestPerson testPerson;
+		Gson gson;
 
-	@Override
-	public boolean shouldSkipField(FieldAttributes field)
-	{
-		Class<? extends Annotation> annotationClass = getAnnotationClass();
-		Annotation annotation = field.getAnnotation(annotationClass);
-		return annotation != null;
-	}
+		testPerson = new TestPerson();
+		testPerson.setAbout("a woman");
+		testPerson.setGender(Gender.FEMALE);
+		testPerson.setMarried(false);
+		testPerson.setName("Afrodite");
+		testPerson.setNickname("gorgeous");
 
-	public abstract Class<? extends Annotation> getAnnotationClass();
+		gson = GsonFactory
+			.newGsonBuilder(new GenericAnnotationClassExclusionStrategy<>(FooExclusion.class));
+		actual = ObjectToJsonExtensions.toJson(testPerson, gson);
+		expected = "{\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Afrodite\"}";
+		assertEquals(actual, expected);
+	}
 }

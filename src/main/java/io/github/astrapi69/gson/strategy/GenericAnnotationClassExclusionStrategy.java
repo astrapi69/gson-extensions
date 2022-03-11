@@ -30,14 +30,16 @@ import java.util.Objects;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
-public class GenericExclusionStrategy<T extends Annotation> implements ExclusionStrategy
+public class GenericAnnotationClassExclusionStrategy<T extends Annotation>
+	implements
+		ExclusionStrategy
 {
-	private final Class<T> annotation;
+	private final Class<T> annotationClass;
 
-	public GenericExclusionStrategy(Class<T> annotation)
+	public GenericAnnotationClassExclusionStrategy(Class<T> annotationClass)
 	{
-		Objects.nonNull(annotation);
-		this.annotation = annotation;
+		Objects.nonNull(annotationClass);
+		this.annotationClass = annotationClass;
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class GenericExclusionStrategy<T extends Annotation> implements Exclusion
 	@Override
 	public boolean shouldSkipField(FieldAttributes field)
 	{
-		return field.getAnnotation(this.annotation) != null;
+		return field.getAnnotation(this.annotationClass) != null;
 	}
 
 }

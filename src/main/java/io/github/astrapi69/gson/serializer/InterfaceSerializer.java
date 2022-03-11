@@ -47,7 +47,8 @@ public class InterfaceSerializer<T> implements JsonSerializer<T>
 		return jsonObject;
 	}
 
-	public String getClassName(T src, Type typeOfSrc) {
+	public String getClassName(T src, Type typeOfSrc)
+	{
 		return src.getClass().getName();
 	}
 }
