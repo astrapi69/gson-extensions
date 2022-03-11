@@ -4,7 +4,9 @@
 Version 1.8-SNAPSHOT
 -------------
 
+ADDED:
 
+- new factory class GsonBuilderFactory for GsonBuilder
 
 Version 1.7
 -------------
