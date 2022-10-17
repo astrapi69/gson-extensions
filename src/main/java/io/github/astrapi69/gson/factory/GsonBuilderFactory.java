@@ -21,6 +21,9 @@ public class GsonBuilderFactory
 	 *
 	 * @param exclusionStrategy
 	 *            the exclusion strategy
+	 * @param serialization
+	 *            the serialization flag
+	 *
 	 * @return the new {@link GsonBuilder} object
 	 */
 	public static GsonBuilder newGsonBuilder(ExclusionStrategy exclusionStrategy,
