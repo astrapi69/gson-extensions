@@ -28,13 +28,15 @@ import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import io.github.astrapi69.collections.list.ListFactory;
+import io.github.astrapi69.collection.list.ListFactory;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.test.object.Employee;
 import io.github.astrapi69.test.object.Person;
@@ -70,6 +72,7 @@ public class JsonFileToObjectExtensionsTest
 		Employee actual;
 		Employee expected;
 		actual = JsonFileToObjectExtensions.toObject(jsonFile, Employee.class);
+		actual.setSubOrdinates(new HashSet<>());
 		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
 			.nickname("beast").married(true).about("Ha ha ha...").build()).id("23").build();
 		assertEquals(expected, actual);
@@ -88,6 +91,8 @@ public class JsonFileToObjectExtensionsTest
 		List<Employee> expected;
 
 		actual = JsonFileToObjectExtensions.toObjectList(jsonListFile, Employee.class);
+
+		actual.forEach(employee -> employee.setSubOrdinates(new HashSet<>()));
 		expected = ListFactory.newArrayList();
 
 		expected

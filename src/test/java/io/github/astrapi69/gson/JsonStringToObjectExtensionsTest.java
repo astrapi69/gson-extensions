@@ -27,6 +27,7 @@ package io.github.astrapi69.gson;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,10 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import io.github.astrapi69.collections.CollectionExtensions;
-import io.github.astrapi69.collections.list.ListFactory;
-import io.github.astrapi69.collections.map.MapFactory;
-import io.github.astrapi69.collections.set.SetFactory;
+import io.github.astrapi69.collection.CollectionExtensions;
+import io.github.astrapi69.collection.list.ListFactory;
+import io.github.astrapi69.collection.map.MapFactory;
+import io.github.astrapi69.collection.set.SetFactory;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.test.object.Employee;
 import io.github.astrapi69.test.object.Person;
@@ -113,6 +114,7 @@ public class JsonStringToObjectExtensionsTest
 			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
 		jsonString = "{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}";
 		actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
+		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
 
@@ -202,6 +204,7 @@ public class JsonStringToObjectExtensionsTest
 			.build();
 		final String jsonString = "{\"id\":\"23\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		final Employee actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
+		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
 

@@ -36,8 +36,8 @@ import java.util.Objects;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import io.github.astrapi69.collections.list.ListFactory;
-import io.github.astrapi69.collections.map.MapFactory;
+import io.github.astrapi69.collection.list.ListFactory;
+import io.github.astrapi69.collection.map.MapFactory;
 import io.github.astrapi69.test.object.Employee;
 import io.github.astrapi69.test.object.Person;
 import io.github.astrapi69.test.object.enumtype.Gender;
@@ -72,11 +72,12 @@ public class ObjectToJsonExtensionsTest
 	{
 		String expected;
 		String actual;
-		final Employee employee = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").married(true).about("Ha ha ha...").nickname("beast").build()).id("23")
-			.build();
+		final Employee employee = Employee
+			.builder().subOrdinates(new ArrayList<>()).person(Person.builder().gender(Gender.FEMALE)
+				.name("Anna").married(true).about("Ha ha ha...").nickname("beast").build())
+			.id("23").build();
 		// new scenario: try to convert a Employee object to json
-		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}}";
+		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}";
 		actual = ObjectToJsonExtensions.toJson(employee);
 		assertEquals(expected, actual);
 		// new scenario: try to convert a integer map to json
@@ -111,7 +112,7 @@ public class ObjectToJsonExtensionsTest
 		integerEmployeeMap.put(1, employee1);
 
 
-		expected = "{\"1\":{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}}}";
+		expected = "{\"1\":{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}}";
 		actual = ObjectToJsonExtensions.toJson(integerEmployeeMap);
 		assertEquals(actual, expected);
 
@@ -147,7 +148,7 @@ public class ObjectToJsonExtensionsTest
 				.id("25").build());
 		actual = ObjectToJsonExtensions.toJson(employees);
 
-		expected = "[{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}},{\"id\":\"24\",\"person\":{\"about\":\"fine person\",\"gender\":\"MALE\",\"married\":false,\"name\":\"Andreas\",\"nickname\":\"cute\"}},{\"id\":\"25\",\"person\":{\"about\":\"Im hot\",\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Tatjana\",\"nickname\":\"beautiful\"}}]";
+		expected = "[{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]},{\"id\":\"24\",\"person\":{\"about\":\"fine person\",\"gender\":\"MALE\",\"married\":false,\"name\":\"Andreas\",\"nickname\":\"cute\"},\"subOrdinates\":[]},{\"id\":\"25\",\"person\":{\"about\":\"Im hot\",\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Tatjana\",\"nickname\":\"beautiful\"},\"subOrdinates\":[]}]";
 		assertEquals(expected, actual);
 
 		employees = new ArrayList<>();
