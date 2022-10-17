@@ -43,13 +43,13 @@ to your project `build.gradle` if you want to import the core functionality of g
 
 define version in file gradle.properties
 ```
-gsonExtensionsVersion=1.7
+gsonExtensionsVersion=2
 ```
 
 or in build.gradle ext area
 
 ```
-    gsonExtensionsVersion = "1.7"
+    gsonExtensionsVersion = "2"
 ```
 
 and than add the dependency to the dependencies area
@@ -70,7 +70,7 @@ Than you can add the dependency to your dependencies:
     <properties>
             ...
         <!-- gson-extensions version -->
-        <gson-extensions.version>1.7</gson-extensions.version>
+        <gson-extensions.version>2</gson-extensions.version>
             ...
     </properties>
             ...
