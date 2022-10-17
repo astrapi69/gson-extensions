@@ -37,7 +37,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import io.github.astrapi69.collections.properties.SortedProperties;
+import io.github.astrapi69.collection.properties.SortedProperties;
 
 /**
  * The class {@link JsonToPropertiesExtensions} converts json strings or json objects to java

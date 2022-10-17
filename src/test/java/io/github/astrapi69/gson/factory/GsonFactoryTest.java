@@ -51,12 +51,12 @@ public class GsonFactoryTest
 	}
 
 	/**
-	 * Test method for {@link GsonFactory#newGsonBuilder()}
+	 * Test method for {@link GsonBuilderFactory#newGsonBuilder()}
 	 */
 	@Test
 	public void testNewGsonBuilder()
 	{
-		GsonBuilder gson = GsonFactory.newGsonBuilder();
+		GsonBuilder gson = GsonBuilderFactory.newGsonBuilder();
 		assertNotNull(gson);
 	}
 

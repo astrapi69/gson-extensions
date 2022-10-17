@@ -1,6 +1,23 @@
 ## Change log
 ----------------------
 
+Version 2
+-------------
+
+ADDED:
+
+- new factory class GsonBuilderFactory for GsonBuilder
+
+CHANGED:
+
+- update of JDK to newer version 11
+- update of gradle version to 7.5.1
+- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 6.11.0
+- update of gradle-plugin dependency com.github.ben-manes.versions.gradle.plugin to new version 0.43.0
+- update of dependency silly-collection to new minor version 20.1
+- update of test dependency file-worker module version to 11.4
+- update of test dependency test-object to new version 7.1
+
 Version 1.7
 -------------
 

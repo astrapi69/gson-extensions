@@ -27,6 +27,7 @@ package io.github.astrapi69.gson.type.adapter;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
+import io.github.astrapi69.gson.factory.GsonBuilderFactory;
 import org.testng.annotations.Test;
 
 import com.google.gson.Gson;
@@ -76,7 +77,7 @@ public class InterfaceAdapterTest
 		Forbidden expected;
 		String json;
 		Gson gson;
-		gson = GsonFactory.newGsonBuilder()
+		gson = GsonBuilderFactory.newGsonBuilder()
 			.registerTypeAdapter(Animal.class, new InterfaceAdapter<Animal>()).create();
 
 		expected = Forbidden.builder().animal(Dog.builder().build()).build();
@@ -96,7 +97,7 @@ public class InterfaceAdapterTest
 
 		expected = ShapeStore.builder().shape(Circle.builder().radius(0.23D).build())
 			.shape(Rectangle.builder().height(2.d).width(2.d).build()).build();
-		gson = GsonFactory.newGsonBuilder()
+		gson = GsonBuilderFactory.newGsonBuilder()
 			.registerTypeAdapter(Shape.class, new InterfaceAdapter<Shape>()).create();
 		json = gson.toJson(expected);
 		gson.fromJson(json, ShapeStore.class);

@@ -32,8 +32,8 @@ import java.util.Map;
 
 import org.testng.annotations.Test;
 
-import io.github.astrapi69.collections.list.ListFactory;
-import io.github.astrapi69.collections.map.MapFactory;
+import io.github.astrapi69.collection.list.ListFactory;
+import io.github.astrapi69.collection.map.MapFactory;
 import io.github.astrapi69.file.delete.DeleteFileExtensions;
 import io.github.astrapi69.file.read.ReadFileExtensions;
 import io.github.astrapi69.file.search.PathFinder;
@@ -57,7 +57,7 @@ public class ObjectToJsonFileExtensionsTest
 		employee = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
 			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
 		// new scenario: try to convert a Employee object to json
-		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}}";
+		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}";
 		jsonFile = new File(PathFinder.getSrcTestResourcesDir(), "tmp.json");
 		ObjectToJsonFileExtensions.toJsonFile(employee, jsonFile);
 		actual = ReadFileExtensions.readFromFile(jsonFile);
@@ -84,7 +84,7 @@ public class ObjectToJsonFileExtensionsTest
 		employee = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
 			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
 		// new scenario: try to convert a Employee object to json
-		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"}}";
+		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}";
 		jsonFile = new File(PathFinder.getSrcTestResourcesDir(), "tmp.json");
 		ObjectToJsonFileExtensions.toJsonFile(employee, jsonFile, GsonFactory.DEFAULT_GSON);
 		actual = ReadFileExtensions.readFromFile(jsonFile);

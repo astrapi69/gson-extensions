@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 
 import com.google.gson.Gson;
 
-import io.github.astrapi69.collections.set.SetFactory;
+import io.github.astrapi69.collection.set.SetFactory;
 import io.github.astrapi69.gson.ObjectToJsonExtensions;
 import io.github.astrapi69.gson.factory.GsonFactory;
 import io.github.astrapi69.test.object.Person;

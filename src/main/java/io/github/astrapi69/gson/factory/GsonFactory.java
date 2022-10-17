@@ -39,23 +39,13 @@ public class GsonFactory
 	public static final Gson DEFAULT_GSON = GsonFactory.newGson();
 
 	/**
-	 * Factory method for create a new {@link GsonBuilder}
-	 *
-	 * @return the new {@link GsonBuilder} object
-	 */
-	public static GsonBuilder newGsonBuilder()
-	{
-		return new GsonBuilder();
-	}
-
-	/**
 	 * Factory method for create a new {@link Gson}
 	 *
 	 * @return the new {@link Gson} object
 	 */
 	public static Gson newGson()
 	{
-		return newGsonBuilder().create();
+		return GsonBuilderFactory.newGsonBuilder().create();
 	}
 
 	/**
@@ -67,7 +57,7 @@ public class GsonFactory
 	 */
 	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy)
 	{
-		return newGsonBuilder().addSerializationExclusionStrategy(exclusionStrategy).create();
+		return GsonBuilderFactory.newGsonBuilder(exclusionStrategy, true).create();
 	}
 
 	/**
@@ -81,7 +71,6 @@ public class GsonFactory
 	 */
 	public static Gson newGsonBuilder(ExclusionStrategy exclusionStrategy, String datePattern)
 	{
-		return newGsonBuilder().addSerializationExclusionStrategy(exclusionStrategy)
-			.setDateFormat(datePattern).create();
+		return GsonBuilderFactory.newGsonBuilder(exclusionStrategy, datePattern).create();
 	}
 }
