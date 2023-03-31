@@ -58,9 +58,7 @@ public class JsonToPropertiesExtensions
 	public static SortedProperties toProperties(final File jsonFile) throws FileNotFoundException
 	{
 		Objects.requireNonNull(jsonFile);
-		SortedProperties properties = SortedProperties.of(new Properties());
-		JsonObject root = JsonParser.parseReader(new FileReader(jsonFile)).getAsJsonObject();
-		addPropertiesFromJsonObject(root, null, properties);
+		SortedProperties properties = prepare(jsonFile);
 		Enumeration<Object> keys = properties.keys();
 		SortedProperties sortedProperties = new SortedProperties();
 		while (keys.hasMoreElements())
@@ -69,6 +67,24 @@ public class JsonToPropertiesExtensions
 			sortedProperties.put(key, properties.get(key));
 		}
 		return sortedProperties;
+	}
+
+	/**
+	 * Prepare and return the sorted properties from the given json file
+	 *
+	 * @param jsonFile
+	 *            the json file
+	 * @return the generated java properties object
+	 * @throws FileNotFoundException
+	 *             is thrown if the given file is not found
+	 */
+	public static SortedProperties prepare(final File jsonFile) throws FileNotFoundException
+	{
+		Objects.requireNonNull(jsonFile);
+		SortedProperties properties = SortedProperties.of(new Properties());
+		JsonObject root = JsonParser.parseReader(new FileReader(jsonFile)).getAsJsonObject();
+		addPropertiesFromJsonObject(root, null, properties);
+		return properties;
 	}
 
 	/**
