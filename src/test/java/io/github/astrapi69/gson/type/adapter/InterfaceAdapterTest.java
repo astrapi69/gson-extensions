@@ -27,11 +27,11 @@ package io.github.astrapi69.gson.type.adapter;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
-import io.github.astrapi69.gson.factory.GsonBuilderFactory;
 import org.testng.annotations.Test;
 
 import com.google.gson.Gson;
 
+import io.github.astrapi69.gson.factory.GsonBuilderFactory;
 import io.github.astrapi69.gson.factory.GsonFactory;
 import io.github.astrapi69.test.object.type.hierarchy.animal.Animal;
 import io.github.astrapi69.test.object.type.hierarchy.animal.Dog;
