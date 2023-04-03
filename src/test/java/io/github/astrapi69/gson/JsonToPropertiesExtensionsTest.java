@@ -47,6 +47,7 @@ public class JsonToPropertiesExtensionsTest
 	File jsonFile;
 	File jsonLongFile;
 	String jsonString;
+	String jsonLongString;
 
 	@BeforeMethod
 	protected void setUp() throws IOException
@@ -55,6 +56,7 @@ public class JsonToPropertiesExtensionsTest
 		jsonFile = new File(jsonDir, "en.json");
 		jsonLongFile = new File(jsonDir, "en-long.json");
 		jsonString = ReadFileExtensions.readFromFile(jsonFile);
+		jsonLongString = ReadFileExtensions.readFromFile(jsonLongFile);
 	}
 
 	/**
@@ -80,16 +82,16 @@ public class JsonToPropertiesExtensionsTest
 		actual = JsonToPropertiesExtensions.toProperties(jsonLongFile);
 
 		expected = new SortedProperties();
-		expected.put("myapp.menu.edit", "Translation edit");
-		expected.put("foo.title", "Translation foo");
-		expected.put("foo.menu.new", "Translation new");
-		expected.put("myapp.menu.popup.copy", "Copy");
 		expected.put("myapp.title", "Translation app");
-		expected.put("foo.menu.edit", "Translation edit");
 		expected.put("myapp.text", "Translation app for test with ngx-translate");
-		expected.put("foo.text", "Translation foo for test with ngx-translate");
-		expected.put("foo.menu.popup.copy", "Copy");
 		expected.put("myapp.menu.new", "Translation new");
+		expected.put("myapp.menu.edit", "Translation edit");
+		expected.put("myapp.menu.popup.copy", "Copy");
+		expected.put("foo.title", "Translation foo");
+		expected.put("foo.text", "Translation foo for test with ngx-translate");
+		expected.put("foo.menu.new", "Translation new");
+		expected.put("foo.menu.edit", "Translation edit");
+		expected.put("foo.menu.popup.copy", "Copy");
 		assertEquals(actual, expected);
 	}
 
@@ -108,6 +110,20 @@ public class JsonToPropertiesExtensionsTest
 		expected.put("myapp.menu.edit", "Translation edit");
 		expected.put("myapp.text", "Translation app for test with ngx-translate");
 		actual = JsonToPropertiesExtensions.toProperties(jsonString);
+		assertEquals(actual, expected);
+		// new scenario...
+		expected = new SortedProperties();
+		expected.put("myapp.title", "Translation app");
+		expected.put("myapp.text", "Translation app for test with ngx-translate");
+		expected.put("myapp.menu.new", "Translation new");
+		expected.put("myapp.menu.edit", "Translation edit");
+		expected.put("myapp.menu.popup.copy", "Copy");
+		expected.put("foo.title", "Translation foo");
+		expected.put("foo.text", "Translation foo for test with ngx-translate");
+		expected.put("foo.menu.new", "Translation new");
+		expected.put("foo.menu.edit", "Translation edit");
+		expected.put("foo.menu.popup.copy", "Copy");
+		actual = JsonToPropertiesExtensions.toProperties(jsonLongString);
 		assertEquals(actual, expected);
 	}
 
