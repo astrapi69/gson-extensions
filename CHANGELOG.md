@@ -1,6 +1,21 @@
 ## Change log
 ----------------------
 
+Version 2.1
+-------------
+
+CHANGED:
+
+- update of gradle version to 8.0.2
+- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 6.17.0
+- update of gradle-plugin dependency com.github.ben-manes.versions.gradle.plugin to new version 0.46.0
+- update of dependency gson to new version 2.10.1
+- update of dependency file-worker to new version 11.6
+- update of dependency silly-collection to new minor version 21
+- update of test dependency test-object to new version 7.2
+- update of test dependency testng to new version 7.7.1
+- bugfix of process of arrays in conversion from json to properties
+
 Version 2
 -------------
 
@@ -17,6 +32,7 @@ CHANGED:
 - update of dependency silly-collection to new minor version 20.1
 - update of test dependency file-worker module version to 11.4
 - update of test dependency test-object to new version 7.1
+- update of test dependency crypt-api to new version 8.4
 
 Version 1.7
 -------------

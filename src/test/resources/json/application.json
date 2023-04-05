@@ -1,0 +1,33 @@
+{
+  "name" : "yaml-to-prop-to-yaml",
+  "environment" : "dev",
+  "app" : {
+    "name" : "xml-extensions",
+    "dir" : "${user.home}/.${app.name}",
+    "db-name" : "bundles",
+    "db-host" : "localhost",
+    "db-port" : 5432,
+    "db-url-prefix" : "jdbc:postgresql://",
+    "db-username" : "postgres",
+    "db-password" : "postgres",
+    "public-paths" : [ "/v1/jwt/authenticate", "/v1/jwt/ispublic", "/v1/auth/signin" ]
+  },
+  "spring" : {
+    "datasource" : {
+      "username" : "postgres",
+      "password" : "postgres",
+      "url" : "${app.db-url-prefix}${app.db-host}:${app.db-port}/${app.db-name}"
+    },
+    "jpa" : {
+      "properties" : {
+        "hibernate" : {
+          "jdbc" : {
+            "lob" : {
+              "non_contextual_creation" : true
+            }
+          }
+        }
+      }
+    }
+  }
+}

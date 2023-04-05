@@ -34,8 +34,10 @@ import java.util.Set;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 
 import io.github.astrapi69.collection.properties.SortedProperties;
 
@@ -58,9 +60,7 @@ public class JsonToPropertiesExtensions
 	public static SortedProperties toProperties(final File jsonFile) throws FileNotFoundException
 	{
 		Objects.requireNonNull(jsonFile);
-		SortedProperties properties = SortedProperties.of(new Properties());
-		JsonObject root = JsonParser.parseReader(new FileReader(jsonFile)).getAsJsonObject();
-		addPropertiesFromJsonObject(root, null, properties);
+		SortedProperties properties = prepare(jsonFile);
 		Enumeration<Object> keys = properties.keys();
 		SortedProperties sortedProperties = new SortedProperties();
 		while (keys.hasMoreElements())
@@ -69,6 +69,24 @@ public class JsonToPropertiesExtensions
 			sortedProperties.put(key, properties.get(key));
 		}
 		return sortedProperties;
+	}
+
+	/**
+	 * Prepare and return the sorted properties from the given json file
+	 *
+	 * @param jsonFile
+	 *            the json file
+	 * @return the generated java properties object
+	 * @throws FileNotFoundException
+	 *             is thrown if the given file is not found
+	 */
+	public static SortedProperties prepare(final File jsonFile) throws FileNotFoundException
+	{
+		Objects.requireNonNull(jsonFile);
+		SortedProperties properties = SortedProperties.of(new Properties());
+		JsonObject root = JsonParser.parseReader(new FileReader(jsonFile)).getAsJsonObject();
+		addPropertiesFromJsonObject(root, null, properties);
+		return properties;
 	}
 
 	/**
@@ -93,24 +111,56 @@ public class JsonToPropertiesExtensions
 		Set<String> jsonKeys = jsonObject.keySet();
 		for (String key : jsonKeys)
 		{
-			Object val = jsonObject.get(key);
+			JsonElement jsonElement = jsonObject.get(key);
 			String fullKey = parentKey == null || parentKey.length() == 0
 				? key
 				: parentKey + "." + key;
-			if (val instanceof JsonArray)
-			{
-				JsonArray array = (JsonArray)val;
-				addPropertiesFromJsonArray(array, fullKey, properties);
-			}
-			else if (val instanceof JsonObject)
-			{
-				JsonObject jsonOb = (JsonObject)val;
-				addPropertiesFromJsonObject(jsonOb, fullKey, properties);
-			}
-			else
-			{
-				properties.put(fullKey, ((JsonElement)val).getAsString());
-			}
+			addPropertiesFromJsonElement(jsonElement, fullKey, properties);
+		}
+	}
+
+	private static void addPropertiesFromJsonElement(JsonElement jsonElement, String parentKey,
+		Properties properties)
+	{
+		if (jsonElement instanceof JsonArray)
+		{
+			JsonArray jsonArray = (JsonArray)jsonElement;
+			addPropertiesFromJsonArray(jsonArray, parentKey, properties);
+		}
+		else if (jsonElement instanceof JsonObject)
+		{
+			JsonObject jsonObject = (JsonObject)jsonElement;
+			addPropertiesFromJsonObject(jsonObject, parentKey, properties);
+		}
+		else if (jsonElement instanceof JsonPrimitive)
+		{
+			JsonPrimitive jsonPrimitive = (JsonPrimitive)jsonElement;
+			addPropertiesFromJsonPrimitive(jsonPrimitive, parentKey, properties);
+		}
+		else if (jsonElement instanceof JsonNull)
+		{
+			JsonNull jsonNull = (JsonNull)jsonElement;
+			addPropertiesFromJsonNull(jsonNull, parentKey, properties);
+		}
+	}
+
+	private static void addPropertiesFromJsonNull(JsonNull jsonNull, String parentKey,
+		Properties properties)
+	{
+		properties.put(parentKey, jsonNull.toString());
+	}
+
+	private static void addPropertiesFromJsonPrimitive(JsonPrimitive jsonPrimitive,
+		String parentKey, Properties properties)
+	{
+		final String property = properties.getProperty(parentKey);
+		if (property != null)
+		{
+			properties.put(parentKey, property + "," + jsonPrimitive.getAsString());
+		}
+		else
+		{
+			properties.put(parentKey, jsonPrimitive.getAsString());
 		}
 	}
 
@@ -125,12 +175,8 @@ public class JsonToPropertiesExtensions
 		{
 			for (int i = 0; i < array.size(); i++)
 			{
-				Object jsonElement = array.get(i);
-				if (jsonElement instanceof JsonObject)
-				{
-					JsonObject jsonObject = (JsonObject)jsonElement;
-					addPropertiesFromJsonObject(jsonObject, parentKey, properties);
-				}
+				JsonElement jsonElement = array.get(i);
+				addPropertiesFromJsonElement(jsonElement, parentKey, properties);
 			}
 		}
 	}
