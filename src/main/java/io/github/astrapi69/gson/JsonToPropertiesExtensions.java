@@ -156,7 +156,17 @@ public class JsonToPropertiesExtensions
 		final String property = properties.getProperty(parentKey);
 		if (property != null)
 		{
-			properties.put(parentKey, property + "," + jsonPrimitive.getAsString());
+			String propertyValue;
+			if (property.startsWith("[") && property.endsWith("]"))
+			{
+				propertyValue = property.substring(1, property.length() - 1);
+			}
+			else
+			{
+				propertyValue = property;
+			}
+			properties.put(parentKey,
+				"[" + propertyValue + ", " + jsonPrimitive.getAsString() + "]");
 		}
 		else
 		{

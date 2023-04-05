@@ -4,7 +4,9 @@
 Version 2.2-SNAPSHOT
 -------------
 
+ADDED:
 
+- new algorithm for process json arrays conversion to properties list
 
 Version 2.1
 -------------
