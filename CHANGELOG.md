@@ -8,6 +8,7 @@ ADDED:
 
 - new algorithm for process json arrays conversion to properties list
 - new json serializer for properties objects
+- new class PropertiesToJsonExtensions that transforms java properties object to a json string 
 
 Version 2.1
 -------------
