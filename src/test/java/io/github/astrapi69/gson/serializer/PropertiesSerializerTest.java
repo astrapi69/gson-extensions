@@ -24,19 +24,17 @@
  */
 package io.github.astrapi69.gson.serializer;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.Properties;
 
 import org.testng.annotations.Test;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import io.github.astrapi69.collection.properties.PropertiesExtensions;
 import io.github.astrapi69.file.search.PathFinder;
-import io.github.astrapi69.gson.factory.TypeFactory;
+import io.github.astrapi69.gson.PropertiesToJsonExtensions;
 
 public class PropertiesSerializerTest
 {
@@ -47,15 +45,14 @@ public class PropertiesSerializerTest
 	@Test
 	public void testSerialize() throws IOException
 	{
+		String expected;
+		String actual;
 		propertiesDir = new File(PathFinder.getSrcTestResourcesDir(), "properties");
 		applicationPropertiesFile = new File(propertiesDir, "application.properties");
 		Properties properties = PropertiesExtensions.loadProperties(applicationPropertiesFile);
 
-		final Type propertiesType = TypeFactory.newType(Properties.class);
-		Gson gson = new GsonBuilder()
-			.registerTypeAdapter(propertiesType, new PropertiesSerializer()).create();
-
-		String json = gson.toJson(properties, propertiesType);
-		System.out.println(json);
+		actual = PropertiesToJsonExtensions.toJson(properties);
+		expected = "{\"app\":{\"public-paths\":\"[/v1/jwt/authenticate, /v1/jwt/ispublic, /v1/auth/signin]\",\"db-name\":\"bundles\",\"db-port\":\"5432\",\"db-host\":\"localhost\",\"db-url-prefix\":\"jdbc:postgresql://\",\"db-password\":\"postgres\",\"db-username\":\"postgres\",\"dir\":\"${user.home}/.${app.name}\",\"name\":\"xml-extensions\"},\"spring\":{\"jpa\":{\"properties\":{\"hibernate\":{\"jdbc\":{\"lob\":{\"non_contextual_creation\":\"true\"}}}}},\"datasource\":{\"password\":\"postgres\",\"username\":\"postgres\",\"url\":\"${app.db-url-prefix}${app.db-host}:${app.db-port}/${app.db-name}\"}},\"environment\":\"dev\",\"name\":\"yaml-to-prop-to-yaml\"}";
+		assertEquals(expected, actual);
 	}
 }

@@ -24,21 +24,20 @@
  */
 package io.github.astrapi69.gson;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import io.github.astrapi69.gson.factory.GsonBuilderFactory;
-import io.github.astrapi69.gson.factory.GsonFactory;
-import io.github.astrapi69.gson.factory.TypeFactory;
-import io.github.astrapi69.gson.serializer.PropertiesSerializer;
-
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import io.github.astrapi69.gson.factory.GsonBuilderFactory;
+import io.github.astrapi69.gson.factory.TypeFactory;
+import io.github.astrapi69.gson.serializer.PropertiesSerializer;
+
 /**
- * The class {@link PropertiesToJsonExtensions} converts java
- * properties object to json strings or json objects
+ * The class {@link PropertiesToJsonExtensions} converts java properties object to json strings or
+ * json objects
  */
 public class PropertiesToJsonExtensions
 {
