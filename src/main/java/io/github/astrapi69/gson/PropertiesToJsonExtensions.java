@@ -22,40 +22,41 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.gson.serializer;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Properties;
-
-import org.testng.annotations.Test;
+package io.github.astrapi69.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import io.github.astrapi69.collection.properties.PropertiesExtensions;
-import io.github.astrapi69.file.search.PathFinder;
+import io.github.astrapi69.gson.factory.GsonBuilderFactory;
+import io.github.astrapi69.gson.factory.GsonFactory;
 import io.github.astrapi69.gson.factory.TypeFactory;
+import io.github.astrapi69.gson.serializer.PropertiesSerializer;
 
-public class PropertiesSerializerTest
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
+
+/**
+ * The class {@link PropertiesToJsonExtensions} converts java
+ * properties object to json strings or json objects
+ */
+public class PropertiesToJsonExtensions
 {
 
-	File propertiesDir;
-	File applicationPropertiesFile;
-
-	@Test
-	public void testSerialize() throws IOException
+	/**
+	 * Creates from the given {@link Properties} a json string
+	 *
+	 * @param properties
+	 *            the properties to transform
+	 * @return the json string
+	 */
+	public static String toJson(final Properties properties)
 	{
-		propertiesDir = new File(PathFinder.getSrcTestResourcesDir(), "properties");
-		applicationPropertiesFile = new File(propertiesDir, "application.properties");
-		Properties properties = PropertiesExtensions.loadProperties(applicationPropertiesFile);
-
+		Objects.requireNonNull(properties);
 		final Type propertiesType = TypeFactory.newType(Properties.class);
-		Gson gson = new GsonBuilder()
-			.registerTypeAdapter(propertiesType, new PropertiesSerializer()).create();
-
-		String json = gson.toJson(properties, propertiesType);
-		System.out.println(json);
+		GsonBuilder gsonBuilder = GsonBuilderFactory.newGsonBuilder();
+		gsonBuilder.registerTypeAdapter(propertiesType, new PropertiesSerializer());
+		Gson gson = gsonBuilder.create();
+		return gson.toJson(properties, propertiesType);
 	}
 }
