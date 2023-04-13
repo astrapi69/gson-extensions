@@ -37,28 +37,6 @@ import com.google.gson.JsonSerializer;
 public class PropertiesSerializer implements JsonSerializer<Properties>
 {
 
-	@Override
-	public JsonElement serialize(final Properties properties, final Type typeOfSrc,
-		final JsonSerializationContext context)
-	{
-		final JsonObject resultJson = new JsonObject();
-		Set<Object> keySet = properties.keySet();
-		for (final Object key : keySet)
-		{
-			String propertiesKey = (String)key;
-			try
-			{
-				newFromPropertyKey(resultJson, propertiesKey,
-					properties.getProperty(propertiesKey));
-			}
-			catch (final IOException e)
-			{
-				System.out.println("Bundle map serialization exception: " + e);
-			}
-		}
-		return resultJson;
-	}
-
 	public static JsonObject newFromPropertyKey(final JsonObject jsonObject, final String key,
 		final String value) throws IOException
 	{
@@ -107,6 +85,28 @@ public class PropertiesSerializer implements JsonSerializer<Properties>
 		{
 			return new JsonObject();
 		}
+	}
+
+	@Override
+	public JsonElement serialize(final Properties properties, final Type typeOfSrc,
+		final JsonSerializationContext context)
+	{
+		final JsonObject resultJson = new JsonObject();
+		Set<Object> keySet = properties.keySet();
+		for (final Object key : keySet)
+		{
+			String propertiesKey = (String)key;
+			try
+			{
+				newFromPropertyKey(resultJson, propertiesKey,
+					properties.getProperty(propertiesKey));
+			}
+			catch (final IOException e)
+			{
+				System.out.println("Bundle map serialization exception: " + e);
+			}
+		}
+		return resultJson;
 	}
 
 }
