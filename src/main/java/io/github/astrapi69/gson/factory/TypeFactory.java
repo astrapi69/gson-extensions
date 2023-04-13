@@ -127,4 +127,19 @@ public final class TypeFactory
 	{
 		return newMapTypeToken(Map.class, keyType, valueType);
 	}
+
+	/**
+	 * Factory method for create a new {@link Type} for convert json objects from the given
+	 * {@link Class} object
+	 *
+	 * @param <T>
+	 *            the generic type of values
+	 * @param type
+	 *            the type class
+	 * @return the new {@link Type} object
+	 */
+	public static <T> Type newType(Class<T> type)
+	{
+		return TypeToken.get(type).getType();
+	}
 }

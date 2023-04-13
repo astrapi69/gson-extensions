@@ -36,13 +36,13 @@ public class BooleanDeserializer implements JsonDeserializer<Boolean>
 {
 
 	@Override
-	public Boolean deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-		throws JsonParseException
+	public Boolean deserialize(JsonElement jsonElement, Type typeOfT,
+		JsonDeserializationContext context) throws JsonParseException
 	{
-		return ((JsonPrimitive)json).isBoolean()
-			? json.getAsBoolean()
-			: ((JsonPrimitive)json).isString()
-				? json.getAsString().equals("true")
-				: json.getAsInt() != 0;
+		return ((JsonPrimitive)jsonElement).isBoolean()
+			? jsonElement.getAsBoolean()
+			: ((JsonPrimitive)jsonElement).isString()
+				? jsonElement.getAsString().equals("true")
+				: jsonElement.getAsInt() != 0;
 	}
 }

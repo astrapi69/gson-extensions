@@ -7,6 +7,7 @@ Version 2.2-SNAPSHOT
 ADDED:
 
 - new algorithm for process json arrays conversion to properties list
+- new json serializer for properties objects
 
 Version 2.1
 -------------
