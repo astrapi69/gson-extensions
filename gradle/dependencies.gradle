@@ -6,7 +6,7 @@ dependencies {
 
     testImplementation("io.github.astrapi69:silly-bean:$sillyBeanVersion")
     testImplementation("io.github.astrapi69:test-object:$testObjectVersion")
-    testImplementation("org.meanbean:meanbean:$meanbeanVersion")
+    testImplementation("com.github.meanbeanlib:meanbean:$meanbeanVersion")
     testImplementation("org.testng:testng:$testngVersion")
 
     testImplementation("io.github.astrapi69:crypt-api:$cryptApiVersion")
