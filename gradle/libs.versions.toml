@@ -1,18 +1,18 @@
 [versions]
-crypt-api-version = "8.4"
-crypt-data-version = "8.2"
-file-worker-version = "11.6"
+crypt-api-version = "9"
+crypt-data-version = "9"
+file-worker-version = "17.2"
 gradle-plugin-grgit-version = "5.2.2"
 gradle-plugin-license-version = "0.16.1"
 gradle-plugin-spotless-version = "7.0.0.BETA1"
 gradle-plugin-version-catalog-update-version = "0.8.4"
 gradle-plugin-versions-version = "0.51.0"
-gson-version = "2.10.1"
+gson-version = "2.11.0"
 meanbean-version = "2.0.3"
 silly-bean-version = "2"
-silly-collection-version = "21"
-test-object-version = "7.2"
-testng-version = "7.7.1"
+silly-collection-version = "27.1"
+test-object-version = "8.2"
+testng-version = "7.10.2"
 
 [libraries]
 crypt-api = { module = "io.github.astrapi69:crypt-api", version.ref = "crypt-api-version" }
