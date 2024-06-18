@@ -40,7 +40,7 @@ import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.gson.factory.GsonFactory;
 import io.github.astrapi69.test.object.Employee;
 import io.github.astrapi69.test.object.Person;
-import io.github.astrapi69.test.object.enumtype.Gender;
+import io.github.astrapi69.test.object.enumeration.Gender;
 
 public class ObjectToJsonFileExtensionsTest
 {
@@ -60,13 +60,13 @@ public class ObjectToJsonFileExtensionsTest
 		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}";
 		jsonFile = new File(PathFinder.getSrcTestResourcesDir(), "tmp.json");
 		ObjectToJsonFileExtensions.toJsonFile(employee, jsonFile);
-		actual = ReadFileExtensions.readFromFile(jsonFile);
+		actual = ReadFileExtensions.fromFile(jsonFile);
 		assertEquals(expected, actual);
 		// new scenario: try to convert a integer map to json
 		numberCounterMap = MapFactory.newCounterMap(ListFactory.newRangeList(1, 5));
 		expected = "{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0}";
 		ObjectToJsonFileExtensions.toJsonFile(numberCounterMap, jsonFile);
-		actual = ReadFileExtensions.readFromFile(jsonFile);
+		actual = ReadFileExtensions.fromFile(jsonFile);
 		assertEquals(expected, actual);
 		// clean up
 		DeleteFileExtensions.delete(jsonFile);
@@ -87,13 +87,13 @@ public class ObjectToJsonFileExtensionsTest
 		expected = "{\"id\":\"23\",\"person\":{\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\",\"married\":true,\"name\":\"Anna\",\"nickname\":\"beast\"},\"subOrdinates\":[]}";
 		jsonFile = new File(PathFinder.getSrcTestResourcesDir(), "tmp.json");
 		ObjectToJsonFileExtensions.toJsonFile(employee, jsonFile, GsonFactory.DEFAULT_GSON);
-		actual = ReadFileExtensions.readFromFile(jsonFile);
+		actual = ReadFileExtensions.fromFile(jsonFile);
 		assertEquals(expected, actual);
 		// new scenario: try to convert a integer map to json
 		numberCounterMap = MapFactory.newCounterMap(ListFactory.newRangeList(1, 5));
 		expected = "{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0}";
 		ObjectToJsonFileExtensions.toJsonFile(numberCounterMap, jsonFile, GsonFactory.DEFAULT_GSON);
-		actual = ReadFileExtensions.readFromFile(jsonFile);
+		actual = ReadFileExtensions.fromFile(jsonFile);
 		assertEquals(expected, actual);
 		// clean up
 		DeleteFileExtensions.delete(jsonFile);
