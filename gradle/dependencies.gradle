@@ -1,12 +1,5 @@
 dependencies {
-
-    implementation libs.gson
-    implementation libs.file.worker
-    implementation libs.silly.collection
-
-    testImplementation libs.silly.bean
-    testImplementation libs.crypt.api
-    testImplementation libs.crypt.data
     // Note: use of bundles...
+    implementation libs.bundles.core.dependencies
     testImplementation libs.bundles.unit.testing
 }

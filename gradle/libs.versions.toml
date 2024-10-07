@@ -1,17 +1,17 @@
 [versions]
 crypt-api-version = "9.3"
-crypt-data-version = "9.4"
-file-worker-version = "17.3"
-gradle-plugin-grgit-version = "5.2.2"
+crypt-data-version = "9.7"
+file-worker-version = "17.4"
+gradle-plugin-grgit-version = "5.3.0"
 gradle-plugin-license-version = "0.16.1"
-gradle-plugin-spotless-version = "7.0.0.BETA1"
+gradle-plugin-spotless-version = "7.0.0.BETA2"
 gradle-plugin-version-catalog-update-version = "0.8.4"
 gradle-plugin-versions-version = "0.51.0"
 gson-version = "2.11.0"
 meanbean-version = "2.0.3"
-silly-bean-version = "2"
-silly-collection-version = "27.1"
-test-object-version = "8.2"
+silly-bean-version = "3.0"
+silly-collection-version = "28"
+test-object-version = "9"
 testng-version = "7.10.2"
 
 [libraries]
@@ -26,8 +26,18 @@ test-object = { module = "io.github.astrapi69:test-object", version.ref = "test-
 testng = { module = "org.testng:testng", version.ref = "testng-version" }
 
 [bundles]
+# Bundle of the core dependencies
+core-dependencies = [
+    "file-worker",
+    "gson",
+    "silly-collection",
+]
+# Dependencies required for unit testing
 unit-testing = [
+    "crypt-api",
+    "crypt-data",
     "meanbean",
+    "silly-bean",
     "test-object",
     "testng",
 ]

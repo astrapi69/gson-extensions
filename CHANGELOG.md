@@ -10,14 +10,15 @@ ADDED:
 
 CHANGED:
 
-- update of gradle version to 8.9
+- rename of module to new name 'io.github.astrapisixtynine.gson.extensions'
+- update of gradle version to 8.10.2
 - update of gradle-plugin dependency com.github.ben-manes.versions.gradle.plugin to new version 0.51.0
-- update of gradle-plugin dependency 'org.ajoberstar.grgit:grgit-gradle' to new version 5.2.2
-- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 7.0.0.BETA1
-- update of dependency file-worker to new version 17.3
-- update of dependency silly-collection to new minor version 27.1
+- update of gradle-plugin dependency 'org.ajoberstar.grgit:grgit-gradle' to new version 5.3.0
+- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 7.0.0.BETA2
+- update of dependency file-worker to new version 17.4
+- update of dependency silly-collection to new minor version 28
 - update of test dependency crypt-api to new version 9.3
-- update of test dependency crypt-data to new version 9.4
+- update of test dependency crypt-data to new version 9.7
 - update of test dependency 'com.github.meanbeanlib:meanbean' to new version 3.0.0-M9
 - update of test dependency testng to new version 7.10.2
 
