@@ -36,17 +36,33 @@ import com.google.gson.JsonSerializer;
 import io.github.astrapi69.gson.deserializer.InterfaceDeserializer;
 import io.github.astrapi69.gson.serializer.InterfaceSerializer;
 
+/**
+ * An adapter class for serializing and deserializing objects that implement a specific interface
+ * using Gson. This class leverages separate {@link InterfaceSerializer} and
+ * {@link InterfaceDeserializer} instances for handling serialization and deserialization tasks
+ * respectively.
+ *
+ * @param <T>
+ *            The type of the object to be serialized and deserialized. This type should be an
+ *            interface.
+ */
 public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>
 {
 	private final InterfaceSerializer<T> serializer = new InterfaceSerializer<>();
 	private final InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context)
 	{
 		return serializer.serialize(object, interfaceType, context);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public T deserialize(JsonElement jsonElement, Type interfaceType,
 		JsonDeserializationContext context) throws JsonParseException

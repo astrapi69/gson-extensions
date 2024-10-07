@@ -31,10 +31,27 @@ import java.util.Set;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
+/**
+ * The class {@code GenericMapClassFieldsExclusionStrategy} provides a custom
+ * {@link ExclusionStrategy} that excludes fields from Gson serialization or deserialization based
+ * on a map of class types and field names
+ *
+ * The map defines which classes and their corresponding field names should be excluded during
+ * serialization or deserialization
+ */
 public class GenericMapClassFieldsExclusionStrategy implements ExclusionStrategy
 {
 	Map<Class<?>, Set<String>> excludeFieldsDefinition;
 
+	/**
+	 * Instantiates a new {@code GenericMapClassFieldsExclusionStrategy} with the provided map of
+	 * class types and field names
+	 *
+	 * @param excludeFieldsDefinition
+	 *            a map where the key is a class and the value is a set of field names to exclude
+	 * @throws NullPointerException
+	 *             if {@code excludeFieldsDefinition} is null
+	 */
 	public GenericMapClassFieldsExclusionStrategy(
 		Map<Class<?>, Set<String>> excludeFieldsDefinition)
 	{
@@ -42,6 +59,14 @@ public class GenericMapClassFieldsExclusionStrategy implements ExclusionStrategy
 		this.excludeFieldsDefinition = excludeFieldsDefinition;
 	}
 
+	/**
+	 * {@inheritDoc} This implementation iterates over the map to check if the given field belongs
+	 * to a class and matches one of the field names to be excluded
+	 *
+	 * @param field
+	 *            the {@link FieldAttributes} object representing the field
+	 * @return true if the field should be excluded, otherwise false
+	 */
 	@Override
 	public boolean shouldSkipField(FieldAttributes field)
 	{
@@ -65,10 +90,16 @@ public class GenericMapClassFieldsExclusionStrategy implements ExclusionStrategy
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc} This implementation does not exclude any classes, so it always returns false
+	 *
+	 * @param clazz
+	 *            the class to check for exclusion
+	 * @return false, indicating no class is excluded
+	 */
 	@Override
 	public boolean shouldSkipClass(Class<?> clazz)
 	{
 		return false;
 	}
-
 }

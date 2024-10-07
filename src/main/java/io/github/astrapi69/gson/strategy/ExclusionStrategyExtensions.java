@@ -28,13 +28,36 @@ import java.util.Set;
 
 import com.google.gson.FieldAttributes;
 
+/**
+ * The class {@code ExclusionStrategyExtensions} provides utility methods for determining whether
+ * fields should be excluded from Gson serialization or deserialization based on field names and
+ * their declaring class
+ */
 public final class ExclusionStrategyExtensions
 {
 
+	/**
+	 * Private constructor to prevent instantiation
+	 */
 	private ExclusionStrategyExtensions()
 	{
 	}
 
+	/**
+	 * Determines if a field should be excluded from Gson serialization or deserialization based on
+	 * the provided field attributes, the class to which the field belongs, and a set of field names
+	 * to exclude
+	 *
+	 * @param <T>
+	 *            the type of the bean class
+	 * @param field
+	 *            the {@link FieldAttributes} object representing the field
+	 * @param beanClass
+	 *            the class of the bean containing the field
+	 * @param excludeFieldNames
+	 *            the set of field names to exclude
+	 * @return true if the field should be excluded, otherwise false
+	 */
 	public static <T> boolean shouldSkip(FieldAttributes field, Class<T> beanClass,
 		Set<String> excludeFieldNames)
 	{

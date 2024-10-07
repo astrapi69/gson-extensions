@@ -35,14 +35,40 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+/**
+ * The class {@code BigDecimalMoneyScaledAdapter} is a custom {@link TypeAdapter} for serializing
+ * and deserializing {@link BigDecimal} values with a specific scale (two decimal places) It ensures
+ * that BigDecimal values are serialized with two digits of precision after the decimal point
+ */
 public class BigDecimalMoneyScaledAdapter extends TypeAdapter<BigDecimal>
 {
+	/**
+	 * {@inheritDoc} This implementation serializes the {@link BigDecimal} value to JSON with a
+	 * scale of two decimal places If the value is null, it writes a null JSON value
+	 *
+	 * @param out
+	 *            the {@link JsonWriter} to write to
+	 * @param value
+	 *            the {@link BigDecimal} value to be serialized
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred
+	 */
 	@Override
 	public void write(JsonWriter out, BigDecimal value) throws IOException
 	{
 		out.value(value == null ? null : value.setScale(2, RoundingMode.DOWN));
 	}
 
+	/**
+	 * {@inheritDoc} This implementation deserializes a {@link BigDecimal} from a JSON string,
+	 * ensuring it has two decimal places If the JSON token is null, it returns null
+	 *
+	 * @param in
+	 *            the {@link JsonReader} to read from
+	 * @return the deserialized {@link BigDecimal} object, or null if the JSON token is null
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred
+	 */
 	@Override
 	public BigDecimal read(JsonReader in) throws IOException
 	{
@@ -54,6 +80,15 @@ public class BigDecimalMoneyScaledAdapter extends TypeAdapter<BigDecimal>
 		return deserializeToBigDecimal(in.nextString());
 	}
 
+	/**
+	 * Deserializes a string value into a {@link BigDecimal}, ensuring the value has two decimal
+	 * places This method uses {@link NumberFormat} to ensure proper formatting with two decimal
+	 * places
+	 *
+	 * @param json
+	 *            the JSON string representation of the {@link BigDecimal} value
+	 * @return the deserialized {@link BigDecimal} with two decimal places
+	 */
 	private synchronized BigDecimal deserializeToBigDecimal(String json)
 	{
 		BigDecimal bigDecimal = new BigDecimal(json);

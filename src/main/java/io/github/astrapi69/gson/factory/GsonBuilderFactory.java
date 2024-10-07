@@ -25,8 +25,12 @@
 package io.github.astrapi69.gson.factory;
 
 import com.google.gson.ExclusionStrategy;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * The factory class {@link GsonBuilderFactory} for creating {@link GsonBuilder} objects
+ */
 public class GsonBuilderFactory
 {
 

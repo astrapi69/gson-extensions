@@ -34,9 +34,29 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * The class {@code PropertiesSerializer} is a custom {@link JsonSerializer} that handles the
+ * serialization of {@link Properties} objects into a structured JSON format, where properties with
+ * nested keys (containing periods) are converted into nested JSON objects
+ */
 public class PropertiesSerializer implements JsonSerializer<Properties>
 {
 
+	/**
+	 * Creates a new {@link JsonObject} from a property key-value pair. If the key contains a
+	 * period, it is treated as a nested key, and the resulting JSON object will have a nested
+	 * structure
+	 *
+	 * @param jsonObject
+	 *            the JSON object to which the property will be added
+	 * @param key
+	 *            the property key
+	 * @param value
+	 *            the property value
+	 * @return the updated JSON object with the new property
+	 * @throws IOException
+	 *             if an I/O error occurs during property addition
+	 */
 	public static JsonObject newFromPropertyKey(final JsonObject jsonObject, final String key,
 		final String value) throws IOException
 	{
@@ -58,12 +78,30 @@ public class PropertiesSerializer implements JsonSerializer<Properties>
 		return jsonObject;
 	}
 
+	/**
+	 * Retrieves the prefix from a full key, which is the part before the first period
+	 *
+	 * @param fullKey
+	 *            the full property key
+	 * @return the prefix of the key or the full key if no period is present
+	 */
 	private static String getKeyPrefix(final String fullKey)
 	{
 		final String[] keyArray = fullKey.split("\\.");
 		return (keyArray.length != 0) ? keyArray[0] : fullKey;
 	}
 
+	/**
+	 * Retrieves or creates a child {@link JsonObject} for the given key from the parent JSON object
+	 *
+	 * @param parent
+	 *            the parent JSON object
+	 * @param key
+	 *            the key for which the JSON object is retrieved or created
+	 * @return the child {@link JsonObject} associated with the key
+	 * @throws IllegalArgumentException
+	 *             if the key is already associated with a non-JSON object
+	 */
 	private static JsonObject getJsonObject(final JsonObject parent, final String key)
 	{
 		if (parent == null)
@@ -87,6 +125,19 @@ public class PropertiesSerializer implements JsonSerializer<Properties>
 		}
 	}
 
+	/**
+	 * {@inheritDoc} This implementation serializes a {@link Properties} object by converting each
+	 * key-value pair into a JSON structure, with support for nested keys based on the presence of
+	 * periods in the property keys
+	 *
+	 * @param properties
+	 *            the {@link Properties} object to serialize
+	 * @param typeOfSrc
+	 *            the type of the source object
+	 * @param context
+	 *            the serialization context
+	 * @return the serialized {@link JsonElement} representing the properties
+	 */
 	@Override
 	public JsonElement serialize(final Properties properties, final Type typeOfSrc,
 		final JsonSerializationContext context)

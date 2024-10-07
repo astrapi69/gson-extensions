@@ -29,15 +29,31 @@ import java.lang.annotation.Annotation;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
+/**
+ * The abstract class {@code AbstractExclusionStrategy} provides a base implementation of the
+ * {@link ExclusionStrategy} interface, allowing for custom field exclusion strategies based on
+ * annotations.
+ */
 public abstract class AbstractExclusionStrategy implements ExclusionStrategy
 {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean shouldSkipClass(Class<?> clazz)
 	{
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc} This implementation checks if the field has the annotation class returned by
+	 * {@link #getAnnotationClass()}
+	 *
+	 * @param field
+	 *            the field attributes to check
+	 * @return true if the field has the specified annotation, otherwise false
+	 */
 	@Override
 	public boolean shouldSkipField(FieldAttributes field)
 	{
@@ -46,5 +62,10 @@ public abstract class AbstractExclusionStrategy implements ExclusionStrategy
 		return annotation != null;
 	}
 
+	/**
+	 * Gets the annotation class used to determine if a field should be skipped
+	 *
+	 * @return the annotation class to look for
+	 */
 	public abstract Class<? extends Annotation> getAnnotationClass();
 }
