@@ -22,40 +22,40 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.gson.strategy;
+package io.github.astrapi69.gson;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-import org.testng.annotations.Test;
+import java.lang.reflect.Type;
+import java.util.Objects;
+import java.util.Properties;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import io.github.astrapi69.gson.ObjectToJsonExtensions;
-import io.github.astrapi69.gson.factory.GsonFactory;
-import io.github.astrapi69.test.object.enumeration.Gender;
+import io.github.astrapi69.gson.factory.GsonBuilderFactory;
+import io.github.astrapi69.gson.factory.TypeFactory;
+import io.github.astrapi69.gson.serializer.PropertiesSerializer;
 
-public class GenericAnnotationClassExclusionStrategyTest
+/**
+ * The class {@link PropertiesToJsonExtensions} converts java properties object to json strings or
+ * json objects
+ */
+public class PropertiesToJsonExtensions
 {
 
-	@Test
-	public void testGenericAnnotationClassExclusionStrategy()
+	/**
+	 * Creates from the given {@link Properties} a json string
+	 *
+	 * @param properties
+	 *            the properties to transform
+	 * @return the json string
+	 */
+	public static String toJson(final Properties properties)
 	{
-		String expected;
-		String actual;
-		TestPerson testPerson;
-		Gson gson;
-
-		testPerson = new TestPerson();
-		testPerson.setAbout("a woman");
-		testPerson.setGender(Gender.FEMALE);
-		testPerson.setMarried(false);
-		testPerson.setName("Afrodite");
-		testPerson.setNickname("gorgeous");
-
-		gson = GsonFactory
-			.newGsonBuilder(new GenericAnnotationClassExclusionStrategy<>(FooExclusion.class));
-		actual = ObjectToJsonExtensions.toJson(testPerson, gson);
-		expected = "{\"gender\":\"FEMALE\",\"married\":false,\"name\":\"Afrodite\"}";
-		assertEquals(actual, expected);
+		Objects.requireNonNull(properties);
+		final Type propertiesType = TypeFactory.newType(Properties.class);
+		GsonBuilder gsonBuilder = GsonBuilderFactory.newGsonBuilder();
+		gsonBuilder.registerTypeAdapter(propertiesType, new PropertiesSerializer());
+		Gson gson = gsonBuilder.create();
+		return gson.toJson(properties, propertiesType);
 	}
 }

@@ -38,18 +38,21 @@ The source code comes under the liberal MIT License, making gson-extensions grea
 
 ## gradle dependency
 
+Replace the variable ${latestVersion} with the current latest
+version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/gson-extensions)
+
 You can first define the version in the ext section and add than the following gradle dependency
 to your project `build.gradle` if you want to import the core functionality of gson-extensions:
 
 define version in file gradle.properties
 ```
-gsonExtensionsVersion=2.1
+gsonExtensionsVersion=${latestVersion}
 ```
 
 or in build.gradle ext area
 
 ```
-    gsonExtensionsVersion = "2.1"
+    gsonExtensionsVersion = "${latestVersion}"
 ```
 
 and than add the dependency to the dependencies area
@@ -57,6 +60,24 @@ and than add the dependency to the dependencies area
 ```
     implementation("io.github.astrapi69:gson-extensions:$gsonExtensionsVersion")
 ```
+
+# with new libs.versions.toml file
+
+If you use the new libs.versions.toml file for new automatic catalog versions update
+
+```
+[versions]
+gson-extensions-version=${latestVersion}
+
+[libraries]
+gson-extensions = { module = "io.github.astrapi69:gson-extensions", version.ref = "gson-extensions-version" }
+```
+then add the dependency to the dependencies area
+
+```
+    implementation libs.gson.extensions
+```
+
 
 ## Maven dependency
 
@@ -70,7 +91,7 @@ Than you can add the dependency to your dependencies:
     <properties>
             ...
         <!-- gson-extensions version -->
-        <gson-extensions.version>2.1</gson-extensions.version>
+        <gson-extensions.version>3</gson-extensions.version>
             ...
     </properties>
             ...

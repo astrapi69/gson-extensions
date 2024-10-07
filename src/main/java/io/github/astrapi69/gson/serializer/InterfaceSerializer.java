@@ -31,11 +31,41 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * The class {@code InterfaceSerializer} is a custom {@link JsonSerializer} that handles the
+ * serialization of interface types by including the actual implementation class information in the
+ * JSON structure
+ *
+ * @param <T>
+ *            the type of the object to be serialized
+ */
 public class InterfaceSerializer<T> implements JsonSerializer<T>
 {
+	/**
+	 * The constant {@code PROPERTY_TYPE} represents the key used to store the type of an object in
+	 * the serialized JSON structure
+	 */
 	public static final String PROPERTY_TYPE = "type";
+
+	/**
+	 * The constant {@code PROPERTY_DATA} represents the key used to store the data of an object in
+	 * the serialized JSON structure
+	 */
 	public static final String PROPERTY_DATA = "data";
 
+
+	/**
+	 * {@inheritDoc} This implementation serializes an object by adding the actual class name and
+	 * the serialized data to the JSON structure
+	 *
+	 * @param src
+	 *            the source object to serialize
+	 * @param typeOfSrc
+	 *            the actual type of the source object
+	 * @param context
+	 *            the serialization context
+	 * @return the serialized {@link JsonElement} containing the type and data properties
+	 */
 	@Override
 	public JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context)
 	{
@@ -47,6 +77,15 @@ public class InterfaceSerializer<T> implements JsonSerializer<T>
 		return jsonObject;
 	}
 
+	/**
+	 * Retrieves the class name of the source object for inclusion in the JSON structure
+	 *
+	 * @param src
+	 *            the source object to get the class name from
+	 * @param typeOfSrc
+	 *            the actual type of the source object
+	 * @return the class name of the source object
+	 */
 	public String getClassName(T src, Type typeOfSrc)
 	{
 		return src.getClass().getName();

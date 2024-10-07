@@ -1,6 +1,53 @@
 ## Change log
 ----------------------
 
+Version 3.1
+-------------
+
+ADDED:
+
+- new libs.versions.toml file for new automatic catalog versions update
+
+CHANGED:
+
+- rename of module to new name 'io.github.astrapisixtynine.gson.extensions'
+- update of gradle version to 8.10.2
+- update of gradle-plugin dependency com.github.ben-manes.versions.gradle.plugin to new version 0.51.0
+- update of gradle-plugin dependency 'org.ajoberstar.grgit:grgit-gradle' to new version 5.3.0
+- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 7.0.0.BETA2
+- update of dependency file-worker to new version 17.4
+- update of dependency silly-collection to new minor version 28
+- update of test dependency crypt-api to new version 9.3
+- update of test dependency crypt-data to new version 9.7
+- update of test dependency 'com.github.meanbeanlib:meanbean' to new version 3.0.0-M9
+- update of test dependency testng to new version 7.10.2
+
+Version 3
+-------------
+
+ADDED:
+
+- new module-info.java file that turns this library to a java module
+- new algorithm for process json arrays conversion to properties list
+- new json serializer for properties objects
+- new class PropertiesToJsonExtensions that transforms java properties object to a json string
+- new libs.versions.toml file for new automatic catalog versions update
+
+CHANGED:
+
+- update of JDK to newer version 17
+- update of gradle version to 8.4
+- update of gradle-plugin dependency com.github.ben-manes.versions.gradle.plugin to new version 0.49.0
+- update of gradle-plugin dependency 'org.ajoberstar.grgit:grgit-gradle' to new version 5.2.1
+- update of gradle plugin dependency com.diffplug.spotless:spotless-plugin-gradle to new version 6.22.0
+- update of dependency file-worker to new version 17.1
+- update of dependency silly-collection to new minor version 27
+- update of test dependency test-object to new version 8.2
+- update of test dependency crypt-api to new version 8.7
+- update of test dependency crypt-data to new version 8.5
+- update of test dependency 'com.github.meanbeanlib:meanbean' to new version 3.0.0-M9
+- update of test dependency testng to new version 7.8.0
+
 Version 2.1
 -------------
 

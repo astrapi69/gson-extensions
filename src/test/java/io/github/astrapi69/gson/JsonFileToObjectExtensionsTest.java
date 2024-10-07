@@ -28,7 +28,6 @@ import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,7 +39,7 @@ import io.github.astrapi69.collection.list.ListFactory;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.test.object.Employee;
 import io.github.astrapi69.test.object.Person;
-import io.github.astrapi69.test.object.enumtype.Gender;
+import io.github.astrapi69.test.object.enumeration.Gender;
 
 /**
  * The unit test class for the class {@link JsonFileToObjectExtensions}

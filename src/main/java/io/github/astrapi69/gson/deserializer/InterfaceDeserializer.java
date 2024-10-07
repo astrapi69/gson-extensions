@@ -32,12 +32,43 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+/**
+ * The class {@code InterfaceDeserializer} is a custom {@link JsonDeserializer} that handles the
+ * deserialization of interface types by extracting the actual implementation class from the JSON
+ * data
+ *
+ * @param <T>
+ *            the type of the object to be deserialized
+ */
 public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 {
-
+	/**
+	 * The constant {@code PROPERTY_TYPE} represents the key used to store the type of an object in
+	 * the serialized JSON structure
+	 */
 	public static final String PROPERTY_TYPE = "type";
+
+	/**
+	 * The constant {@code PROPERTY_DATA} represents the key used to store the data of an object in
+	 * the serialized JSON structure
+	 */
 	public static final String PROPERTY_DATA = "data";
 
+
+	/**
+	 * {@inheritDoc} This implementation deserializes an object based on the provided interface
+	 * type, determining the actual implementation class from the JSON structure
+	 *
+	 * @param jsonElement
+	 *            the JSON element to deserialize
+	 * @param interfaceType
+	 *            the interface type to deserialize to
+	 * @param context
+	 *            the deserialization context
+	 * @return the deserialized object of the actual implementation type
+	 * @throws JsonParseException
+	 *             if there is an error during deserialization
+	 */
 	@Override
 	public T deserialize(JsonElement jsonElement, Type interfaceType,
 		JsonDeserializationContext context) throws JsonParseException
@@ -49,6 +80,15 @@ public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 		return context.deserialize(data, actualType);
 	}
 
+	/**
+	 * Retrieves the class {@link Type} for the given type name in the JSON data
+	 *
+	 * @param jsonElement
+	 *            the JSON element containing the type name
+	 * @return the {@link Type} corresponding to the type name
+	 * @throws JsonParseException
+	 *             if the class cannot be found
+	 */
 	private Type typeForName(final JsonElement jsonElement)
 	{
 		try
@@ -61,6 +101,17 @@ public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 		}
 	}
 
+	/**
+	 * Retrieves a JSON element by member name from the given JSON object
+	 *
+	 * @param jsonObject
+	 *            the JSON object to retrieve from
+	 * @param memberName
+	 *            the name of the member to retrieve
+	 * @return the {@link JsonElement} associated with the member name
+	 * @throws JsonParseException
+	 *             if the member is not found
+	 */
 	private JsonElement get(final JsonObject jsonObject, String memberName)
 	{
 		final JsonElement jsonElement = jsonObject.get(memberName);

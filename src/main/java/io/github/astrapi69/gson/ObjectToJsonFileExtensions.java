@@ -30,7 +30,7 @@ import java.util.Objects;
 
 import com.google.gson.Gson;
 
-import io.github.astrapi69.file.write.WriteFileExtensions;
+import io.github.astrapi69.file.write.StoreFileExtensions;
 import io.github.astrapi69.gson.factory.GsonFactory;
 
 /**
@@ -81,7 +81,7 @@ public final class ObjectToJsonFileExtensions
 	{
 		Objects.requireNonNull(object);
 		Objects.requireNonNull(gson);
-		WriteFileExtensions.string2File(resultFile, ObjectToJsonExtensions.toJson(object, gson));
+		StoreFileExtensions.toFile(resultFile, ObjectToJsonExtensions.toJson(object, gson));
 	}
 
 }
