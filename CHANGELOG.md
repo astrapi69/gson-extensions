@@ -1,10 +1,18 @@
 ## Change log
 ----------------------
 
-Version 3.2-SNAPSHOT
+Version 4.0-SNAPSHOT
 -------------
 
+BREAKING:
+
+- Java 25 is the minimum, up from 17: the family builds, tests and releases on JDK 25
+  (astrapi69/mystic-crypt#234), so this release is 4.0 instead of 3.2 (#12)
+
 CHANGED:
+
+- built with Gradle 9.7.0; the grgit and hierynomus license plugins are gone: a release is tagged
+  through git, and spotless writes the license header from `src/main/resources/license-header.txt` (#12)
 
 - releases go to Maven Central through the Central Portal, as in the rest of the family: the
   `com.gradleup.nmcp` plugin uploads, the maintainer releases each deployment in the Portal, and a
