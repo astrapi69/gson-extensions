@@ -22,7 +22,7 @@ module io.github.astrapisixtynine.gson.extensions
 {
 	requires com.google.gson;
 	requires io.github.astrapisixtynine.silly.collection;
-	requires file.worker;
+	requires io.github.astrapisixtynine.file.worker;
 
 	exports io.github.astrapi69.gson;
 	exports io.github.astrapi69.gson.deserializer;
