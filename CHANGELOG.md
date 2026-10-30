@@ -1,7 +1,7 @@
 ## Change log
 ----------------------
 
-Version 4.0-SNAPSHOT
+Version 4.0
 -------------
 
 BREAKING:
@@ -13,17 +13,19 @@ CHANGED:
 
 - built with Gradle 9.7.0; the grgit and hierynomus license plugins are gone: a release is tagged
   through git, and spotless writes the license header from `src/main/resources/license-header.txt` (#12)
-
 - releases go to Maven Central through the Central Portal, as in the rest of the family: the
   `com.gradleup.nmcp` plugin uploads, the maintainer releases each deployment in the Portal, and a
   `RELEASE-*` tag runs the new `publish.yml`, which signs with the signing subkey that the secret
   `GPG_KEY_ID` names. The OSSRH staging endpoint this project published to is shut down; its
   settings are gone, among them the switch that held the checksums to md5 and sha1, and snapshots
   resolve from the Central Portal's snapshot repository (#4)
+- an upload to the Central Portal leaves only from CI, and a release only from its `RELEASE-*` tag; a local
+  build that runs an upload task stops with a message saying so (#10, #14)
+- the `gradle/` directory is no longer ignored, so the split build scripts are version controlled (#8)
 - dependencies are raised by `versionCatalogUpdate`, stable versions only (#6): file-worker 17.4 -> 19.1,
   which brings commons-beanutils 1.11.0 and closes the high alert on the runtime class path, gson 2.15.0,
   silly-collection 28.2, test-object 9.1, testng 7.12.0, and the plugins spotless 8.10.4, nmcp 1.6.2,
-  grgit 5.3.3, version-catalog-update 1.1.2, versions 0.66.0. `module-info.java` requires file-worker by
+  version-catalog-update 1.1.2, versions 0.66.0. `module-info.java` requires file-worker by
   its new module name, `io.github.astrapisixtynine.file.worker`. crypt-api and crypt-data are gone from
   the test dependencies: no test used them, and their current releases need Java 25
 
