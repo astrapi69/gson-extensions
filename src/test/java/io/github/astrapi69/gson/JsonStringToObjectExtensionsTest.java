@@ -24,12 +24,10 @@
  */
 package io.github.astrapi69.gson;
 
-import static org.testng.Assert.assertNotEquals;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNull;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -112,13 +110,12 @@ public class JsonStringToObjectExtensionsTest
 		Employee expected;
 		String jsonString;
 
-		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
+		expected = new Employee("23", Person.builder().gender(Gender.FEMALE).name("Anna")
+			.married(true).about("Ha ha ha...").nickname("beast").build(), null);
 		jsonString = "{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}";
 		actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
 		// the input names no subOrdinates, so the deserialized employee keeps it null (#27)
 		assertNull(actual.getSubOrdinates());
-		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
 
@@ -143,23 +140,20 @@ public class JsonStringToObjectExtensionsTest
 
 		jsonList = (Set<Employee>)JsonStringToObjectExtensions.toObjectCollection(jsonString,
 			LinkedHashSet.class, Employee.class);
-		firstExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").nickname("beast").married(true).about("Ha ha ha...").build()).id("23")
-			.build();
-		secondExpected = Employee.builder().person(Person.builder().gender(Gender.MALE)
-			.name("Andreas").nickname("cute").married(false).about("fine person").build()).id("24")
-			.build();
-		thirdExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Tatjana").nickname("beautiful").married(false).about("Im hot").build()).id("25")
-			.build();
+		// the input names no subOrdinates, so the deserialized employees keep it null, where the
+		// builder would give an empty set
+		firstExpected = new Employee("23", Person.builder().gender(Gender.FEMALE).name("Anna")
+			.nickname("beast").married(true).about("Ha ha ha...").build(), null);
+		secondExpected = new Employee("24", Person.builder().gender(Gender.MALE).name("Andreas")
+			.nickname("cute").married(false).about("fine person").build(), null);
+		thirdExpected = new Employee("25", Person.builder().gender(Gender.FEMALE).name("Tatjana")
+			.nickname("beautiful").married(false).about("Im hot").build(), null);
 		objectList = SetFactory.newLinkedHashSet(firstExpected, secondExpected, thirdExpected);
 
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
 		expected = true;
 		assertEquals(expected, actual);
-		// the deserialized employees keep subOrdinates null, the expected ones from the builder
-		// have an empty set, so today they differ (#27)
-		assertNotEquals(jsonList, objectList);
+		assertEquals(objectList, jsonList);
 	}
 
 	/**
@@ -182,23 +176,20 @@ public class JsonStringToObjectExtensionsTest
 			+ "{\"person\":{\"name\":\"Tatjana\",\"nickname\":\"beautiful\",\"gender\":\"FEMALE\",\"about\":\"Im hot\",\"married\":false},\"id\":\"25\"}]";
 
 		jsonList = JsonStringToObjectExtensions.toObjectList(jsonString, Employee.class);
-		firstExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").nickname("beast").married(true).about("Ha ha ha...").build()).id("23")
-			.build();
-		secondExpected = Employee.builder().person(Person.builder().gender(Gender.MALE)
-			.name("Andreas").nickname("cute").married(false).about("fine person").build()).id("24")
-			.build();
-		thirdExpected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Tatjana").nickname("beautiful").married(false).about("Im hot").build()).id("25")
-			.build();
+		// the input names no subOrdinates, so the deserialized employees keep it null, where the
+		// builder would give an empty set
+		firstExpected = new Employee("23", Person.builder().gender(Gender.FEMALE).name("Anna")
+			.nickname("beast").married(true).about("Ha ha ha...").build(), null);
+		secondExpected = new Employee("24", Person.builder().gender(Gender.MALE).name("Andreas")
+			.nickname("cute").married(false).about("fine person").build(), null);
+		thirdExpected = new Employee("25", Person.builder().gender(Gender.FEMALE).name("Tatjana")
+			.nickname("beautiful").married(false).about("Im hot").build(), null);
 		objectList = ListFactory.newArrayList(firstExpected, secondExpected, thirdExpected);
 
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
 		expected = true;
 		assertEquals(expected, actual);
-		// the deserialized employees keep subOrdinates null, the expected ones from the builder
-		// have an empty set, so today they differ (#27)
-		assertNotEquals(jsonList, objectList);
+		assertEquals(objectList, jsonList);
 	}
 
 	/**
@@ -208,14 +199,12 @@ public class JsonStringToObjectExtensionsTest
 	@Test
 	public void testToObjectWithModules()
 	{
-		final Employee expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE)
-			.name("Anna").married(true).about("Ha ha ha...").nickname("beast").build()).id("23")
-			.build();
+		final Employee expected = new Employee("23", Person.builder().gender(Gender.FEMALE)
+			.name("Anna").married(true).about("Ha ha ha...").nickname("beast").build(), null);
 		final String jsonString = "{\"id\":\"23\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		final Employee actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
 		// the input names no subOrdinates, so the deserialized employee keeps it null (#27)
 		assertNull(actual.getSubOrdinates());
-		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
 
