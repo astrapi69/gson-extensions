@@ -25,6 +25,7 @@
 package io.github.astrapi69.gson;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,6 +72,8 @@ public class JsonFileToObjectExtensionsTest
 		Employee actual;
 		Employee expected;
 		actual = JsonFileToObjectExtensions.toObject(jsonFile, Employee.class);
+		// the file names no subOrdinates, so the deserialized employee keeps it null (#27)
+		assertNull(actual.getSubOrdinates());
 		actual.setSubOrdinates(new HashSet<>());
 		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
 			.nickname("beast").married(true).about("Ha ha ha...").build()).id("23").build();
@@ -91,6 +94,8 @@ public class JsonFileToObjectExtensionsTest
 
 		actual = JsonFileToObjectExtensions.toObjectList(jsonListFile, Employee.class);
 
+		// the file names no subOrdinates, so the deserialized employees keep it null (#27)
+		actual.forEach(employee -> assertNull(employee.getSubOrdinates()));
 		actual.forEach(employee -> employee.setSubOrdinates(new HashSet<>()));
 		expected = ListFactory.newArrayList();
 

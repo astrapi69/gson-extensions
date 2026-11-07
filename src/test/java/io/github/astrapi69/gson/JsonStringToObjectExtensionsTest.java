@@ -24,7 +24,9 @@
  */
 package io.github.astrapi69.gson;
 
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 import java.io.File;
 import java.util.HashSet;
@@ -114,6 +116,8 @@ public class JsonStringToObjectExtensionsTest
 			.married(true).about("Ha ha ha...").nickname("beast").build()).id("23").build();
 		jsonString = "{\"person\":{\"name\":\"Anna\",\"nickname\":\"beast\",\"gender\":\"FEMALE\",\"about\":\"Ha ha ha...\",\"married\":true},\"id\":\"23\"}";
 		actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
+		// the input names no subOrdinates, so the deserialized employee keeps it null (#27)
+		assertNull(actual.getSubOrdinates());
 		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
@@ -153,6 +157,9 @@ public class JsonStringToObjectExtensionsTest
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
 		expected = true;
 		assertEquals(expected, actual);
+		// the deserialized employees keep subOrdinates null, the expected ones from the builder
+		// have an empty set, so today they differ (#27)
+		assertNotEquals(jsonList, objectList);
 	}
 
 	/**
@@ -189,7 +196,9 @@ public class JsonStringToObjectExtensionsTest
 		actual = CollectionExtensions.isEqualCollection(jsonList, objectList);
 		expected = true;
 		assertEquals(expected, actual);
-
+		// the deserialized employees keep subOrdinates null, the expected ones from the builder
+		// have an empty set, so today they differ (#27)
+		assertNotEquals(jsonList, objectList);
 	}
 
 	/**
@@ -204,6 +213,8 @@ public class JsonStringToObjectExtensionsTest
 			.build();
 		final String jsonString = "{\"id\":\"23\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		final Employee actual = JsonStringToObjectExtensions.toObject(jsonString, Employee.class);
+		// the input names no subOrdinates, so the deserialized employee keeps it null (#27)
+		assertNull(actual.getSubOrdinates());
 		actual.setSubOrdinates(new HashSet<>());
 		assertEquals(expected, actual);
 	}
