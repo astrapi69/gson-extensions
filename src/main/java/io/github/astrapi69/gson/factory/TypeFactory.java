@@ -37,6 +37,13 @@ import com.google.gson.reflect.TypeToken;
 public final class TypeFactory
 {
 	/**
+	 * Creates a new {@link TypeFactory} object; its methods are static, so it needs none
+	 */
+	public TypeFactory()
+	{
+	}
+
+	/**
 	 * Factory method for create a new {@link Type} for convert {@link List} objects
 	 *
 	 * @param <T>

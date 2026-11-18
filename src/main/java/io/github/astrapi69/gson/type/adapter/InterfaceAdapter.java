@@ -52,6 +52,14 @@ public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeseria
 	private final InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
 
 	/**
+	 * Creates a new {@link InterfaceAdapter} with its own {@link InterfaceSerializer} and
+	 * {@link InterfaceDeserializer}
+	 */
+	public InterfaceAdapter()
+	{
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

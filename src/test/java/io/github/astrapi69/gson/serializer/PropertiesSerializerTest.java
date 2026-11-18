@@ -30,12 +30,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import io.github.astrapi69.collection.properties.PropertiesExtensions;
 import io.github.astrapi69.file.search.PathFinder;
 import io.github.astrapi69.gson.PropertiesToJsonExtensions;
 
+/**
+ * The unit test class for the class {@link PropertiesSerializer}, through
+ * {@link PropertiesToJsonExtensions}, which uses it
+ */
 public class PropertiesSerializerTest
 {
 
@@ -54,5 +59,15 @@ public class PropertiesSerializerTest
 		actual = PropertiesToJsonExtensions.toJson(properties);
 		expected = "{\"app\":{\"public-paths\":\"[/v1/jwt/authenticate, /v1/jwt/ispublic, /v1/auth/signin]\",\"db-name\":\"bundles\",\"db-port\":\"5432\",\"db-host\":\"localhost\",\"db-url-prefix\":\"jdbc:postgresql://\",\"db-password\":\"postgres\",\"db-username\":\"postgres\",\"dir\":\"${user.home}/.${app.name}\",\"name\":\"xml-extensions\"},\"spring\":{\"jpa\":{\"properties\":{\"hibernate\":{\"jdbc\":{\"lob\":{\"non_contextual_creation\":\"true\"}}}}},\"datasource\":{\"password\":\"postgres\",\"username\":\"postgres\",\"url\":\"${app.db-url-prefix}${app.db-host}:${app.db-port}/${app.db-name}\"}},\"environment\":\"dev\",\"name\":\"yaml-to-prop-to-yaml\"}";
 		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link PropertiesToJsonExtensions}
+	 */
+	@Test
+	public void testPropertiesToJsonExtensionsWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(PropertiesToJsonExtensions.class);
 	}
 }

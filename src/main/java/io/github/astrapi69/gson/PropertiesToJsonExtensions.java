@@ -43,6 +43,14 @@ public class PropertiesToJsonExtensions
 {
 
 	/**
+	 * Creates a new {@link PropertiesToJsonExtensions} object; its methods are static, so it needs
+	 * none
+	 */
+	public PropertiesToJsonExtensions()
+	{
+	}
+
+	/**
 	 * Creates from the given {@link Properties} a json string
 	 *
 	 * @param properties

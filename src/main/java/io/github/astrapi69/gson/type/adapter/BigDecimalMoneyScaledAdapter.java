@@ -43,6 +43,13 @@ import com.google.gson.stream.JsonWriter;
 public class BigDecimalMoneyScaledAdapter extends TypeAdapter<BigDecimal>
 {
 	/**
+	 * Creates a new {@link BigDecimalMoneyScaledAdapter}
+	 */
+	public BigDecimalMoneyScaledAdapter()
+	{
+	}
+
+	/**
 	 * {@inheritDoc} This implementation serializes the {@link BigDecimal} value to JSON with a
 	 * scale of two decimal places If the value is null, it writes a null JSON value
 	 *
