@@ -49,6 +49,14 @@ public class JsonToPropertiesExtensions
 {
 
 	/**
+	 * Creates a new {@link JsonToPropertiesExtensions} object; its methods are static, so it needs
+	 * none
+	 */
+	public JsonToPropertiesExtensions()
+	{
+	}
+
+	/**
 	 * Transforms the given json file into a java properties object
 	 *
 	 * @param jsonFile

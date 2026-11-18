@@ -35,6 +35,13 @@ public class GsonBuilderFactory
 {
 
 	/**
+	 * Creates a new {@link GsonBuilderFactory} object; its methods are static, so it needs none
+	 */
+	public GsonBuilderFactory()
+	{
+	}
+
+	/**
 	 * Factory method for create a new {@link GsonBuilder}
 	 *
 	 * @return the new {@link GsonBuilder} object

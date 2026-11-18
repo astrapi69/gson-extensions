@@ -56,6 +56,13 @@ public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 
 
 	/**
+	 * Creates a new {@link InterfaceDeserializer}
+	 */
+	public InterfaceDeserializer()
+	{
+	}
+
+	/**
 	 * {@inheritDoc} This implementation deserializes an object based on the provided interface
 	 * type, determining the actual implementation class from the JSON structure
 	 *

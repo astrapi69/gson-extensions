@@ -38,6 +38,13 @@ public class GsonFactory
 	public static final Gson DEFAULT_GSON = GsonFactory.newGson();
 
 	/**
+	 * Creates a new {@link GsonFactory} object; its methods are static, so it needs none
+	 */
+	public GsonFactory()
+	{
+	}
+
+	/**
 	 * Factory method for create a new {@link Gson}
 	 *
 	 * @return the new {@link Gson} object

@@ -55,6 +55,13 @@ public class InterfaceSerializer<T> implements JsonSerializer<T>
 
 
 	/**
+	 * Creates a new {@link InterfaceSerializer}
+	 */
+	public InterfaceSerializer()
+	{
+	}
+
+	/**
 	 * {@inheritDoc} This implementation serializes an object by adding the actual class name and
 	 * the serialized data to the JSON structure
 	 *
