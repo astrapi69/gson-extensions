@@ -122,6 +122,32 @@ Release version numbers will be incremented in the following format:
 
 For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
 
+## Releasing
+
+What a release consists of, in the order it is run:
+
+1. **One pull request** with the CHANGELOG entry and `projectVersion` without `-SNAPSHOT`
+   (`docs: changelog for X.Y, and the version that carries it`), the full build green on it, the
+   release gate on its tree (the tests, javadoc without a warning, class files of Java 25, no
+   `-SNAPSHOT` in the resolved dependencies, a build against an empty local Maven repository with
+   `-Dmaven.repo.local=<an empty directory>`), and `scripts/check-reproducible.sh` on the JDK
+   `.sdkmanrc` names reporting the five artifacts identical.
+2. **Tag the merge commit** with `./gradlew tagRelease`, which names it `RELEASE-X.Y`, and push the
+   tag. `publish.yml` uploads to the Central Portal, where the maintainer releases it. A pushed tag is
+   never moved or deleted; a failed run is fixed on the branch and re-run.
+3. **Verify on Central**: the jar, pom, `.module`, `-sources.jar` and `-javadoc.jar`, their sha1, and
+   `gpg --verify` on the `.asc`.
+4. **GitHub release** from the CHANGELOG entry.
+5. **`master` follows the release** by a merge of the tag: on `master`,
+   `git merge --no-ff "RELEASE-X.Y^{commit}" -m "Merge tag RELEASE-X.Y into master"`. Before
+   `master` is pushed, `git diff RELEASE-X.Y master` has to be empty; if it is not, nothing is
+   pushed. Never a force push: `master` is always the latest release, nothing else.
+6. **Open the next cycle**: `projectVersion` to the next `-SNAPSHOT`.
+7. **Bump drafts in the consumers** (RL-127): in every repository of the family that declares
+   gson-extensions, a draft pull request that raises it to the release and shows the build before and
+   after it, so that a break shows the day the release appears; each is merged by RL-065, a runtime
+   major in a session of its own.
+
 ## Want to Help and improve it? ###
 
 The source code for gson-extensions are on GitHub. Please feel free to fork and send pull requests!
