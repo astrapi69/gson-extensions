@@ -1,10 +1,10 @@
 [versions]
 file-worker-version = "21.1"
 gradle-plugin-nmcp-version = "1.6.2"
-gradle-plugin-spotless-version = "8.10.4"
+gradle-plugin-spotless-version = "8.11.0"
 gradle-plugin-test-results-complete-version = "1.0"
 gradle-plugin-version-catalog-update-version = "1.1.2"
-gradle-plugin-versions-version = "0.66.0"
+gradle-plugin-versions-version = "0.67.0"
 gson-version = "2.15.0"
 meanbean-version = "2.0.3"
 silly-bean-version = "3.0"
