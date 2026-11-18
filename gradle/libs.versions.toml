@@ -7,7 +7,6 @@ gradle-plugin-version-catalog-update-version = "1.1.2"
 gradle-plugin-versions-version = "0.67.0"
 gson-version = "2.15.0"
 meanbean-version = "2.0.3"
-silly-bean-version = "3.0"
 silly-collection-version = "30.0"
 test-object-version = "9.1"
 testng-version = "7.12.0"
@@ -16,7 +15,6 @@ testng-version = "7.12.0"
 file-worker = { module = "io.github.astrapi69:file-worker", version.ref = "file-worker-version" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson-version" }
 meanbean = { module = "org.meanbean:meanbean", version.ref = "meanbean-version" }
-silly-bean = { module = "io.github.astrapi69:silly-bean", version.ref = "silly-bean-version" }
 silly-collection = { module = "io.github.astrapi69:silly-collection", version.ref = "silly-collection-version" }
 test-object = { module = "io.github.astrapi69:test-object", version.ref = "test-object-version" }
 testng = { module = "org.testng:testng", version.ref = "testng-version" }
@@ -31,7 +29,6 @@ core-dependencies = [
 # Dependencies required for unit testing
 unit-testing = [
     "meanbean",
-    "silly-bean",
     "test-object",
     "testng",
 ]
