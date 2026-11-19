@@ -1,6 +1,22 @@
 ## Change log
 ----------------------
 
+Version 4.2
+-------------
+
+FIXED:
+
+- `InterfaceDeserializer` and `InterfaceAdapter` load the class that the `type` member of the JSON names without
+  initializing it and refuse, with a `JsonParseException`, a class that is not assignable to the type that is read, and
+  a `type` member that is not a string; up to 4.1 they loaded and initialized any class the JSON named (since 1.6). The
+  new constructors `InterfaceDeserializer(Set)` and `InterfaceAdapter(Set)` take the classes the JSON may name; a name
+  outside the set is refused without loading a class
+
+DEPRECATED:
+
+- the constructors `InterfaceDeserializer()` and `InterfaceAdapter()` are deprecated for removal: they let the JSON
+  choose among all classes of the class path that implement the type. Use the constructor that takes the allowed classes
+
 Version 4.1
 -------------
 
