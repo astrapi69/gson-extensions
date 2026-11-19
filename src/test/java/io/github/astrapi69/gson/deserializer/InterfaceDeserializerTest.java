@@ -24,13 +24,174 @@
  */
 package io.github.astrapi69.gson.deserializer;
 
+import java.lang.reflect.Type;
+import java.util.Set;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+
+/**
+ * Test class for {@link InterfaceDeserializer}
+ */
 public class InterfaceDeserializerTest
 {
+
+	/** A type to be read through the deserializer */
+	public interface Marker
+	{
+	}
+
+	/** A class that implements {@link Marker} */
+	public static class MarkerImpl implements Marker
+	{
+		/** A value */
+		private String value;
+	}
+
+	/**
+	 * The flag that the static initializer of {@link UnrelatedWithStaticInit} sets; it lives in the
+	 * outer class, because reading a static field of a class would initialize that class
+	 */
+	private static volatile boolean unrelatedInitialized = false;
+
+	/**
+	 * A class that does not implement {@link Marker}; its static initializer sets a flag, so that a
+	 * test can see whether the class was initialized
+	 */
+	public static class UnrelatedWithStaticInit
+	{
+		static
+		{
+			unrelatedInitialized = true;
+		}
+		/** A value */
+		private String value;
+	}
+
+	/** The flag that the static initializer of {@link OtherMarkerImpl} sets */
+	private static volatile boolean otherInitialized = false;
+
+	/** A second class that implements {@link Marker}, not part of the allowlist of the tests */
+	public static class OtherMarkerImpl implements Marker
+	{
+		static
+		{
+			otherInitialized = true;
+		}
+		/** A value */
+		private String value;
+	}
+
+	@SuppressWarnings("removal")
+	private static Gson newGson()
+	{
+		return new GsonBuilder().registerTypeAdapter(Marker.class, new InterfaceDeserializer<>())
+			.create();
+	}
+
+	private static Gson newGson(Set<Class<? extends Marker>> allowedClasses)
+	{
+		return new GsonBuilder()
+			.registerTypeAdapter(Marker.class, new InterfaceDeserializer<>(allowedClasses))
+			.create();
+	}
+
+	private static Object read(Gson gson, String json)
+	{
+		return gson.fromJson(json, (Type)Marker.class);
+	}
+
+	private static String json(Class<?> type)
+	{
+		return "{\"" + InterfaceDeserializer.PROPERTY_TYPE + "\":\"" + type.getName() + "\",\""
+			+ InterfaceDeserializer.PROPERTY_DATA + "\":{\"value\":\"x\"}}";
+	}
 
 	@Test
 	public void testDeserialize()
 	{
+		Object actual = read(newGson(), json(MarkerImpl.class));
+		Assert.assertTrue(actual instanceof MarkerImpl);
+	}
+
+	/**
+	 * A class named in the JSON that does not implement the target type is refused, and it is not
+	 * initialized
+	 */
+	@Test
+	public void testDeserializeRefusesClassThatDoesNotImplementTheTargetType()
+	{
+		Assert.assertFalse(unrelatedInitialized);
+		Assert.assertThrows(JsonParseException.class,
+			() -> read(newGson(), json(UnrelatedWithStaticInit.class)));
+		Assert.assertFalse(unrelatedInitialized);
+	}
+
+	@Test
+	public void testDeserializeUnknownClass()
+	{
+		Assert.assertThrows(JsonParseException.class,
+			() -> read(newGson(), "{\"type\":\"no.such.Clazz\",\"data\":{}}"));
+	}
+
+	@Test
+	public void testDeserializeTypeMemberMissing()
+	{
+		Assert.assertThrows(JsonParseException.class, () -> read(newGson(), "{\"data\":{}}"));
+	}
+
+	@Test
+	public void testDeserializeTypeMemberNull()
+	{
+		Assert.assertThrows(JsonParseException.class,
+			() -> read(newGson(), "{\"type\":null,\"data\":{}}"));
+	}
+
+	@Test
+	public void testDeserializeTypeMemberNotAString()
+	{
+		Assert.assertThrows(JsonParseException.class,
+			() -> read(newGson(), "{\"type\":42,\"data\":{}}"));
+		Assert.assertThrows(JsonParseException.class,
+			() -> read(newGson(), "{\"type\":{\"a\":1},\"data\":{}}"));
+	}
+
+	@Test
+	public void testDeserializeWithAllowlistAcceptsAllowedClass()
+	{
+		Object actual = read(newGson(Set.of(MarkerImpl.class)), json(MarkerImpl.class));
+		Assert.assertTrue(actual instanceof MarkerImpl);
+	}
+
+	/**
+	 * A class outside the allowlist is refused, although it implements the target type, and it is
+	 * not initialized
+	 */
+	@Test
+	public void testDeserializeWithAllowlistRefusesClassOutsideTheList()
+	{
+		Assert.assertFalse(otherInitialized);
+		JsonParseException e = Assert.expectThrows(JsonParseException.class,
+			() -> read(newGson(Set.of(MarkerImpl.class)), json(OtherMarkerImpl.class)));
+		Assert.assertTrue(e.getMessage().contains("not allowed"));
+		Assert.assertFalse(otherInitialized);
+	}
+
+	@Test
+	public void testDeserializeWithAllowlistRefusesUnknownName()
+	{
+		Assert.assertThrows(JsonParseException.class, () -> read(newGson(Set.of(MarkerImpl.class)),
+			"{\"type\":\"no.such.Clazz\",\"data\":{}}"));
+	}
+
+	@Test
+	public void testConstructorWithNullSet()
+	{
+		Assert.assertThrows(NullPointerException.class,
+			() -> new InterfaceDeserializer<Marker>(null));
 	}
 }

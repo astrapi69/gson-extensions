@@ -25,17 +25,27 @@
 package io.github.astrapi69.gson.deserializer;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * The class {@code InterfaceDeserializer} is a custom {@link JsonDeserializer} that handles the
  * deserialization of interface types by extracting the actual implementation class from the JSON
- * data
+ * data. The class named in the JSON is loaded without being initialized, and it is used only if it
+ * is assignable to the type that is read; with the constructor that takes a set of allowed classes
+ * only the classes of that set are used at all, and a name outside the set is refused without
+ * loading a class
  *
  * @param <T>
  *            the type of the object to be deserialized
@@ -56,10 +66,45 @@ public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 
 
 	/**
-	 * Creates a new {@link InterfaceDeserializer}
+	 * The allowed classes by their names, or {@code null} if every class that is assignable to the
+	 * type that is read may be used
 	 */
+	private final Map<String, Class<? extends T>> allowedClasses;
+
+	/**
+	 * Creates a new {@link InterfaceDeserializer} that uses every class that the JSON names and
+	 * that is assignable to the type that is read
+	 *
+	 * @deprecated since 4.2, for removal: it lets the JSON choose among all classes of the
+	 *             classpath that implement the type, use {@link #InterfaceDeserializer(Set)} with
+	 *             the allowed classes instead
+	 */
+	@Deprecated(since = "4.2", forRemoval = true)
 	public InterfaceDeserializer()
 	{
+		this.allowedClasses = null;
+	}
+
+	/**
+	 * Creates a new {@link InterfaceDeserializer} that uses only the given classes: a class name in
+	 * the JSON that is not the name of one of them is refused with a {@link JsonParseException}
+	 * without loading a class
+	 *
+	 * @param allowedClasses
+	 *            the classes that the JSON may name
+	 * @throws NullPointerException
+	 *             if the given set or one of its elements is {@code null}
+	 */
+	public InterfaceDeserializer(final Set<Class<? extends T>> allowedClasses)
+	{
+		Objects.requireNonNull(allowedClasses, "allowedClasses");
+		final Map<String, Class<? extends T>> byName = new LinkedHashMap<>();
+		for (final Class<? extends T> allowedClass : allowedClasses)
+		{
+			Objects.requireNonNull(allowedClass, "allowedClasses must not contain null");
+			byName.put(allowedClass.getName(), allowedClass);
+		}
+		this.allowedClasses = Collections.unmodifiableMap(byName);
 	}
 
 	/**
@@ -83,29 +128,59 @@ public class InterfaceDeserializer<T> implements JsonDeserializer<T>
 		final JsonObject jsonObject = (JsonObject)jsonElement;
 		final JsonElement typeName = get(jsonObject, PROPERTY_TYPE);
 		final JsonElement data = get(jsonObject, PROPERTY_DATA);
-		final Type actualType = typeForName(typeName);
+		final Type actualType = typeForName(typeName, interfaceType);
 		return context.deserialize(data, actualType);
 	}
 
 	/**
-	 * Retrieves the class {@link Type} for the given type name in the JSON data
+	 * Retrieves the class {@link Type} for the given type name in the JSON data; the class is
+	 * loaded without being initialized, with the class loader of this class, and it is returned
+	 * only if it is assignable to the raw type of the given target type
 	 *
 	 * @param jsonElement
 	 *            the JSON element containing the type name
+	 * @param targetType
+	 *            the type that is read
 	 * @return the {@link Type} corresponding to the type name
 	 * @throws JsonParseException
-	 *             if the class cannot be found
+	 *             if the type name is not a string, the class is not allowed, cannot be found or is
+	 *             not assignable to the target type
 	 */
-	private Type typeForName(final JsonElement jsonElement)
+	private Type typeForName(final JsonElement jsonElement, final Type targetType)
 	{
-		try
+		if (!jsonElement.isJsonPrimitive() || !((JsonPrimitive)jsonElement).isString())
 		{
-			return Class.forName(jsonElement.getAsString());
+			throw new JsonParseException("the '" + PROPERTY_TYPE + "' member must be a string");
 		}
-		catch (ClassNotFoundException e)
+		final String className = jsonElement.getAsString();
+		final Class<?> targetRawType = TypeToken.get(targetType).getRawType();
+		final Class<?> actualClass;
+		if (allowedClasses != null)
 		{
-			throw new JsonParseException(e);
+			actualClass = allowedClasses.get(className);
+			if (actualClass == null)
+			{
+				throw new JsonParseException("the class '" + className + "' is not allowed");
+			}
 		}
+		else
+		{
+			try
+			{
+				actualClass = Class.forName(className, false,
+					InterfaceDeserializer.class.getClassLoader());
+			}
+			catch (ClassNotFoundException | LinkageError e)
+			{
+				throw new JsonParseException(e);
+			}
+		}
+		if (!targetRawType.isAssignableFrom(actualClass))
+		{
+			throw new JsonParseException("the class '" + className + "' is not assignable to '"
+				+ targetRawType.getName() + "'");
+		}
+		return actualClass;
 	}
 
 	/**
