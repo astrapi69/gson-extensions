@@ -93,4 +93,14 @@ public class GsonFactoryTest
 		beanTester.testBean(GsonFactory.class);
 	}
 
+	/**
+	 * Test method for {@link GsonBuilderFactory}
+	 */
+	@Test
+	public void testGsonBuilderFactoryWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(GsonBuilderFactory.class);
+	}
+
 }

@@ -38,6 +38,13 @@ public abstract class AbstractExclusionStrategy implements ExclusionStrategy
 {
 
 	/**
+	 * Creates a new {@link AbstractExclusionStrategy}, for the subclasses
+	 */
+	public AbstractExclusionStrategy()
+	{
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

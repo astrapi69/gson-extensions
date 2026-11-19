@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -155,6 +156,16 @@ public class JsonToPropertiesExtensionsTest
 		expected.put("foo.menu.popup.copy", "Copy");
 		actual = JsonToPropertiesExtensions.toProperties(jsonLongString);
 		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link JsonToPropertiesExtensions}
+	 */
+	@Test
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(JsonToPropertiesExtensions.class);
 	}
 
 }

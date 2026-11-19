@@ -25,10 +25,10 @@
 package io.github.astrapi69.gson;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 
 import org.meanbean.test.BeanTester;
@@ -71,9 +71,10 @@ public class JsonFileToObjectExtensionsTest
 		Employee actual;
 		Employee expected;
 		actual = JsonFileToObjectExtensions.toObject(jsonFile, Employee.class);
-		actual.setSubOrdinates(new HashSet<>());
-		expected = Employee.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-			.nickname("beast").married(true).about("Ha ha ha...").build()).id("23").build();
+		// the file names no subOrdinates, so the deserialized employee keeps it null (#27)
+		assertNull(actual.getSubOrdinates());
+		expected = new Employee("23", Person.builder().gender(Gender.FEMALE).name("Anna")
+			.nickname("beast").married(true).about("Ha ha ha...").build(), null);
 		assertEquals(expected, actual);
 	}
 
@@ -91,26 +92,18 @@ public class JsonFileToObjectExtensionsTest
 
 		actual = JsonFileToObjectExtensions.toObjectList(jsonListFile, Employee.class);
 
-		actual.forEach(employee -> employee.setSubOrdinates(new HashSet<>()));
+		// the file names no subOrdinates, so the deserialized employees keep it null (#27)
+		actual.forEach(employee -> assertNull(employee.getSubOrdinates()));
 		expected = ListFactory.newArrayList();
 
-		expected
-			.add(Employee
-				.builder().person(Person.builder().gender(Gender.FEMALE).name("Anna")
-					.nickname("beast").married(true).about("Ha ha ha...").build())
-				.id("23").build());
+		expected.add(new Employee("23", Person.builder().gender(Gender.FEMALE).name("Anna")
+			.nickname("beast").married(true).about("Ha ha ha...").build(), null));
 
-		expected
-			.add(Employee
-				.builder().person(Person.builder().gender(Gender.MALE).name("Andreas")
-					.nickname("cute").married(false).about("fine person").build())
-				.id("24").build());
+		expected.add(new Employee("24", Person.builder().gender(Gender.MALE).name("Andreas")
+			.nickname("cute").married(false).about("fine person").build(), null));
 
-		expected
-			.add(Employee
-				.builder().person(Person.builder().gender(Gender.FEMALE).name("Tatjana")
-					.nickname("beautiful").married(false).about("Im hot").build())
-				.id("25").build());
+		expected.add(new Employee("25", Person.builder().gender(Gender.FEMALE).name("Tatjana")
+			.nickname("beautiful").married(false).about("Im hot").build(), null));
 
 		assertEquals(expected, actual);
 	}

@@ -43,6 +43,13 @@ public class PropertiesSerializer implements JsonSerializer<Properties>
 {
 
 	/**
+	 * Creates a new {@link PropertiesSerializer}
+	 */
+	public PropertiesSerializer()
+	{
+	}
+
+	/**
 	 * Creates a new {@link JsonObject} from a property key-value pair. If the key contains a
 	 * period, it is treated as a nested key, and the resulting JSON object will have a nested
 	 * structure
