@@ -25,6 +25,7 @@
 package io.github.astrapi69.gson.type.adapter;
 
 import java.lang.reflect.Type;
+import java.util.Set;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -49,14 +50,37 @@ import io.github.astrapi69.gson.serializer.InterfaceSerializer;
 public final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>
 {
 	private final InterfaceSerializer<T> serializer = new InterfaceSerializer<>();
-	private final InterfaceDeserializer<T> deserializer = new InterfaceDeserializer<>();
+	private final InterfaceDeserializer<T> deserializer;
 
 	/**
 	 * Creates a new {@link InterfaceAdapter} with its own {@link InterfaceSerializer} and
-	 * {@link InterfaceDeserializer}
+	 * {@link InterfaceDeserializer}, that uses every class that the JSON names and that is
+	 * assignable to the type that is read
+	 *
+	 * @deprecated since 4.2, for removal: it lets the JSON choose among all classes of the
+	 *             classpath that implement the type, use {@link #InterfaceAdapter(Set)} with the
+	 *             allowed classes instead
 	 */
+	@Deprecated(since = "4.2", forRemoval = true)
+	@SuppressWarnings("removal")
 	public InterfaceAdapter()
 	{
+		this.deserializer = new InterfaceDeserializer<>();
+	}
+
+	/**
+	 * Creates a new {@link InterfaceAdapter} with its own {@link InterfaceSerializer} and an
+	 * {@link InterfaceDeserializer} that uses only the given classes, see
+	 * {@link InterfaceDeserializer#InterfaceDeserializer(Set)}
+	 *
+	 * @param allowedClasses
+	 *            the classes that the JSON may name
+	 * @throws NullPointerException
+	 *             if the given set or one of its elements is {@code null}
+	 */
+	public InterfaceAdapter(final Set<Class<? extends T>> allowedClasses)
+	{
+		this.deserializer = new InterfaceDeserializer<>(allowedClasses);
 	}
 
 	/**

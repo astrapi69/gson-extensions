@@ -27,15 +27,20 @@ package io.github.astrapi69.gson.type.adapter;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
+import java.util.Set;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 
 import io.github.astrapi69.gson.factory.GsonBuilderFactory;
 import io.github.astrapi69.gson.factory.GsonFactory;
 import io.github.astrapi69.test.object.type.hierarchy.animal.Animal;
 import io.github.astrapi69.test.object.type.hierarchy.animal.Dog;
 import io.github.astrapi69.test.object.type.hierarchy.animal.Forbidden;
+import io.github.astrapi69.test.object.type.hierarchy.animal.Snake;
 import io.github.astrapi69.test.object.type.hierarchy.shape.Circle;
 import io.github.astrapi69.test.object.type.hierarchy.shape.Rectangle;
 import io.github.astrapi69.test.object.type.hierarchy.shape.Shape;
@@ -106,4 +111,26 @@ public class InterfaceAdapterTest
 		assertEquals(expected, actual);
 	}
 
+
+	@Test
+	public void testWithAllowlistAcceptsAllowedClass()
+	{
+		Forbidden expected = Forbidden.builder().animal(Dog.builder().build()).build();
+		Gson gson = GsonBuilderFactory.newGsonBuilder()
+			.registerTypeAdapter(Animal.class, new InterfaceAdapter<Animal>(Set.of(Dog.class)))
+			.create();
+		Forbidden actual = gson.fromJson(gson.toJson(expected), Forbidden.class);
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testWithAllowlistRefusesClassOutsideTheList()
+	{
+		Forbidden forbidden = Forbidden.builder().animal(Dog.builder().build()).build();
+		Gson gson = GsonBuilderFactory.newGsonBuilder()
+			.registerTypeAdapter(Animal.class, new InterfaceAdapter<Animal>(Set.of(Snake.class)))
+			.create();
+		String json = gson.toJson(forbidden);
+		Assert.assertThrows(JsonParseException.class, () -> gson.fromJson(json, Forbidden.class));
+	}
 }
